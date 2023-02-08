@@ -1,0 +1,218 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r setup}
+library(tidyverse)
+library(qiime2R)
+# knitr::opts_knit$set(root.dir = here::here())
+
+#Only run ONCE then comment out
+# if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+# devtools::install_github("jbisanz/qiime2R")
+#BiocManager::install("msa")
+library(ggpubr)
+library(patchwork)
+
+```
+
+```{r}
+tax_levels <- c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+
+Dylan_samples <- c("NIES-843", "WT-7806", "MUT-7806", "PCC-9701")
+
+merged_tax <- qiime2R::read_qza("./data/sequence_data/combined/silva_132_taxonomy.qza")$data |> 
+  as.data.frame() |> 
+  dplyr::rename(ASV = "Feature.ID",
+                taxonomy = "Taxon") |> 
+  separate(taxonomy, into = tax_levels, sep = "; [a-z]__",remove = FALSE) |> 
+  mutate(Domain = str_remove(Domain, "d__"))
+
+merged_seqs <- qiime2R::read_qza("./data/sequence_data/combined/raw_seqs.qza")$data %>% 
+  data.frame(ASV = labels(.), seq = .)
+
+#Will take a minute or two
+merged_table <- qiime2R::read_qza("./data/sequence_data/combined/raw_table.qza")$data |> 
+  as.data.frame() |> 
+  rownames_to_column("ASV") |> 
+  pivot_longer(-ASV, names_to = "sample", values_to = "abund") |> 
+  group_by(sample) |> 
+  mutate(rel_abund = abund / sum(abund)) |> 
+  left_join(merged_tax) |> 
+  left_join(merged_seqs)
+
+
+sample_info <- merged_table |> 
+  dplyr::select(sample) |> 
+  distinct() |> 
+  mutate(lab = case_when(
+    sample %in% Dylan_samples ~ "Denef",
+    TRUE ~ "unknown")) |> 
+  filter(lab == "Denef")
+
+merged_table_w_info <- merged_table |> 
+  left_join(sample_info)
+
+#Extract specific samples from merged run
+Denef_data <- merged_table_w_info |> 
+  dplyr::select(ASV:lab) |> 
+  filter(lab == "Denef", rel_abund > 0) |>
+  dplyr::select(ASV, sample,abund, taxonomy:Species) |>
+  pivot_wider(names_from = "sample", values_from = "abund",values_fill = 0)
+
+#Use full proper names for organisms
+Denef_data <- dplyr::rename(Denef_data,"PCC 7806 ΔmcyB" = "MUT-7806",
+         "PCC 7806" = "WT-7806",
+         "PCC 9701" = "PCC-9701")
+
+#Extract seed culture data
+seed_culture_data <- read_tsv("./data/sequence_data/geomicro_cultures_w_culture_label.tsv") |>
+  dplyr::select(ASV:lab, `LE19-196.1`, `LE17-020`) |>
+  dplyr::rename(`LE19-196.1\n (seed culture)` = `LE19-196.1`,
+         `LE17-020\n (seed culture)` = `LE17-020`) |>
+  pivot_longer(cols = c(`LE19-196.1\n (seed culture)`, `LE17-020\n (seed culture)`), names_to = "sample", values_to = "rel_abund") |>
+  filter(rel_abund > 0) |>
+  mutate(abund = round(rel_abund * 23585, digits = 0)) |> #rarefaction to lowest sequence number from isolate cultures.
+  dplyr::select(ASV, sample,abund, taxonomy:Species) |>
+  pivot_wider(names_from = "sample", values_from = "abund",values_fill = 0)
+  
+combined_data <- full_join(Denef_data, seed_culture_data) |>
+    mutate(across(matches("-|PCC"), ~ replace(.,is.na(.), 0)))
+
+
+rel_abund_denef <- merged_table_w_info |> 
+  dplyr::select(ASV:lab) |> 
+  filter(lab == "Denef", rel_abund > 0.001) |>
+  dplyr::select(ASV, sample,rel_abund, taxonomy:Species) |>
+  pivot_wider(names_from = "sample", values_from = "rel_abund",values_fill = 0)
+
+rel_abund_denef <- dplyr::rename(rel_abund_denef,"PCC 7806 \nΔmcyB" = "MUT-7806",
+         "PCC 7806" = "WT-7806",
+         "PCC 9701" = "PCC-9701")
+
+
+rel_abund_seed <- read_tsv("./data/sequence_data/geomicro_cultures_w_culture_label.tsv") |>
+  dplyr::select(ASV:lab, `LE19-196.1`, `LE17-020`) |>
+  dplyr::rename(`LE19-196.1\n (seed culture)` = `LE19-196.1`,
+         `LE17-020\n (seed culture)` = `LE17-020`) |>
+  pivot_longer(cols = c(`LE19-196.1\n (seed culture)`, `LE17-020\n (seed culture)`), names_to = "sample", values_to = "rel_abund") |>
+  filter(rel_abund > 0.001) |>
+  dplyr::select(ASV, sample,rel_abund, taxonomy:Species) |>
+  pivot_wider(names_from = "sample", values_from = "rel_abund",values_fill = 0)
+  
+rel_abund_combined <- full_join(rel_abund_denef, rel_abund_seed) |>
+    mutate(across(matches("-|PCC"), ~ replace(.,is.na(.), 0)),
+           Genus = case_when(is.na(Genus)~paste0(Family, " bacterium"),
+                             Order == "uncultured" ~ paste(Genus,Class, ' '),
+                             Family == "uncultured" ~paste(Genus, Class, ' '),
+                             Genus == "uncultured" ~ paste(Genus, Family, ' '),
+                             T ~ Genus)) |>
+  dplyr::select(ASV:Species, `LE17-020\n (seed culture)`, `LE19-196.1\n (seed culture)`, `PCC 7806 \nΔmcyB`, `PCC 7806`, `PCC 9701`, `NIES-843`)
+  
+```
+
+```{r nmds}
+mat <- combined_data |> 
+  dplyr::select(ASV,`PCC 7806 ΔmcyB`:`LE17-020\n (seed culture)`) |>
+  column_to_rownames("ASV")
+
+set.seed(777)
+
+dist <- mat %>% 
+  t() %>% 
+  vegan::vegdist(method = "bray")
+
+
+nmds <- dist %>% 
+  vegan::metaMDS()
+
+nmds_coords <- nmds$points %>% 
+  as.data.frame() %>% 
+  rownames_to_column("sample")
+
+nmds_bray <- nmds_coords %>% 
+  ggplot(aes(MDS1, MDS2)) +
+  geom_text(aes(label = sample, color = sample),show.legend = F) +
+  scale_color_manual(values = c("gray40","gray40", "cyan3","firebrick3","chartreuse3","darkgoldenrod3")) +
+  labs(color = NULL) +
+  xlim(-1.5,1.5) +
+  ylim(-0.01,0.01) +
+  theme_pubr()   
+
+
+png(filename = "./figures/nmds_bray_plot.png",
+    res = 300,
+    type = "cairo",
+    units = "in",
+    width = 6,
+    height = 6)
+nmds_bray
+dev.off()
+
+```
+```{r ggtree}
+
+library(ggtree)
+library(ggtreeExtra)
+
+#Subset fasta for sequences that are only in the samples of interest, then run through fasttree and reimport to R.
+# subsetted_seqs <- merged_seqs |>
+#   filter(ASV %in% rel_abund_combined$ASV)
+# 
+# seqinr::write.fasta(file.out = "subset.fasta", names = as.list(subsetted_seqs$ASV), sequences = as.list(subsetted_seqs$seq), as.string = F)
+
+tree <- read.tree('./data/sequence_data/subset.nwk')
+
+r <- ggtree(tree, layout = "rectangular", ladderize = T) %<+% rel_abund_combined +
+  geom_tiplab(aes(label = Genus),
+              align= F,
+              size = 3,
+              color = "black",
+              linesize=0.3
+              ) 
+
+
+abund_matrix <- rel_abund_combined |>
+  dplyr::select(-c(taxonomy:Species)) |>
+  column_to_rownames("ASV")
+
+final_tree <- gheatmap(r, abund_matrix, offset =0.1, width = 2, color = "gray70",
+         colnames = F, legend_title = "Relative Abundance \n(within column)",low = "white", high = "chartreuse3" ) +
+  theme_pubr() +
+  xlab("Branch Length") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.title.x = element_text(hjust = 0.15)) +
+    scale_x_ggtree() + 
+    scale_y_continuous(expand=c(0,1))
+
+png(filename = "./figures/16S_tree.png",
+    res = 450,
+    type = "cairo",
+    units = "in",
+    width = 12,
+    height = 6)
+final_tree
+dev.off()
+
+combo_plot <- (final_tree | nmds_bray) + plot_annotation(tag_levels = "A") + plot_layout(widths = c(4,1))
+
+
+png(filename = "./figures/figure1.png",
+    res = 450,
+    type = "cairo",
+    units = "in",
+    width = 16,
+    height = 6)
+combo_plot
+dev.off()
+
+```
+
+
+
+
+
+

@@ -1,0 +1,95 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("DECIPHER")
+```
+
+
+
+```{r}
+# load the DECIPHER library in R
+library(DECIPHER)
+library(tidyverse)
+
+# specify the path to the FASTA file (in quotes)
+fas <- "../results/ASVs.fasta"
+
+# load the sequences from the file
+seqs <- readDNAStringSet(fas) # or readRNAStringSet
+
+# remove any gaps (if needed)
+seqs <- RemoveGaps(seqs)
+
+# for help, see the IdTaxa help page (optional)
+?IdTaxa
+
+# load a training set object (trainingSet)
+# see http://DECIPHER.codes/Downloads.html
+load("../data/GTDB_r207-mod_April2022.RData")
+
+# classify the sequences
+ids <- IdTaxa(seqs,
+   trainingSet,
+   strand="both", # or "top" if same as trainingSet
+   threshold=60, # 60 (cautious) or 50 (sensible)
+   processors=8) # use all available processors
+
+ids_df <- data.table::rbindlist(ids,idcol = "ASV") %>% 
+  select(-confidence) %>% 
+  pivot_wider(names_from = "rank", values_from = "taxon") %>% 
+  write_rds("../data/silva_GTDB_tax_IDtaxa.rds")
+
+# look at the results
+print(ids)
+plot(ids)
+```
+
+
+
+
+```{r}
+# load the DECIPHER library in R
+library(DECIPHER)
+library(tidyverse)
+
+# specify the path to the FASTA file (in quotes)
+fas <- "./results/ASVs.fasta"
+
+# load the sequences from the file
+seqs <- readDNAStringSet(fas) # or readRNAStringSet
+
+# remove any gaps (if needed)
+seqs <- RemoveGaps(seqs)
+
+# for help, see the IdTaxa help page (optional)
+?IdTaxa
+
+# load a training set object (trainingSet)
+# see http://DECIPHER.codes/Downloads.html
+load("./data/SILVA_SSU_r138_2019.RData")
+
+# classify the sequences
+ids_Silva <- IdTaxa(seqs,
+   trainingSet,
+   strand="both", # or "top" if same as trainingSet
+   threshold=60, # 60 (cautious) or 50 (sensible)
+   processors=8) # use all available processors
+
+ids_df_Silva <- data.table::rbindlist(ids_Silva,idcol = "ASV") %>% 
+  select(-confidence) %>% 
+  pivot_wider(names_from = "rank", values_from = "taxon") %>% 
+  write_rds("./data/silva_asv_tax_IDtaxa.rds")
+
+# look at the results
+print(ids)
+plot(ids)
+```
+
+
+
+

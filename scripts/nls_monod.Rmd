@@ -1,0 +1,132 @@
+---
+title: "nls modeling monod function to N and P data"
+author: "Dylan Baker"
+date: "9/9/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#libraries and packages
+list.of.packages <- c(
+  "knitr",
+  "tidyverse"
+  ) 
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])] 
+
+if(length(new.packages)) install.packages(new.packages)
+
+knitr::opts_chunk$set(eval = TRUE, 
+                      echo = TRUE, 
+                      cache = TRUE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      warning = FALSE,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = TRUE)
+
+
+
+library(tidyverse)
+library(stats)
+library(glue)
+library(ggpubr)
+library(patchwork)
+library(kableExtra)
+
+source("functions.R")
+read_data_growthrates <- function(file_list) {
+  tryCatch({
+    read_csv(file_list) |>
+      #select(Well, Culture, State, growthrate, std_error, everything()) %>%
+      mutate(State = str_to_title(State),
+             is_edge_well = ifelse(str_detect(Well, "^A|^F|1$|8$"), "Y", "N"),
+             exp_date = str_extract(file_list, "([A-Z][a-z]+\\d{4})"),
+             pigment = ifelse(str_detect(file_list, "PC"), "PC", "chlA"))
+  }, error = function(e) {
+    print(paste0('An error occurred: ', e))
+  })
+}
+```
+
+```{r Import Growthrate Data}
+#Make a list of the paths of files so that R can import with read_csv
+
+
+grs <- list.files(path = "./data", pattern = "estimates_(N|P).csv",
+                        full.names = TRUE, ignore.case = TRUE)
+
+N <- grs |> 
+  map_df(~read_data_growthrates(.)) |>
+  filter(!is.na(N_ug_L), ! N_ug_L == 883) |>
+  select(Culture, State, N_ug_L, gr_PC_mean, growthrate_corrected, slope,p.value)
+  
+
+P <- grs |>
+  map_df(~read_data_growthrates(.)) |>
+  filter(!is.na(P_ug_L)) |>
+  select(Culture, State, P_ug_L, gr_PC_mean, growthrate_corrected, slope, p.value) |>
+  #Add actual values for P to be as accurate as possible
+  mutate(P_ug_L = case_when(P_ug_L == 1 ~ 1.133,
+                         P_ug_L ==  10 ~ 9.6175,
+                          P_ug_L == 19 ~ 18.713,
+                         P_ug_L ==  48 ~ 47.545,
+                         P_ug_L ==  100 ~ 100.029,
+                         P_ug_L ==  171 ~ 171.14,
+                         P_ug_L ==  310 ~ 309.5,
+                         P_ug_L ==  1551 ~ 1551.55,
+                         P_ug_L ==  3030 ~ 3029.95))
+  
+
+
+
+```
+
+```{r NLS}
+#Non-linear least squares regression of the monod function fitted to the Nitrogen and Phosphorus experimental datapoints. See functions.R for full implementation
+gnls_N <- get_nls_N(N)
+gnls_P <- get_nls_P(P)
+
+#Get all of the contrasts for μmax and ks across strain, grouped by Xenic or Axenic status
+pccax <- pccax(P)
+pccx <- pccx(P)
+nccax <- nccax(N)
+nccx <- nccx(N)
+
+all_contrasts <- rbind(pccax,pccx,nccax,nccx) |>
+  dplyr::rename("Contrast" = Form,
+                "Difference" = Estimate,
+                "Significance" = psig.adj,
+                "(SE)" = SE) |>
+  mutate(Parameter = case_when(str_detect(Contrast, "ks") ~ "K<sub>s</sub> μg•L<sup>-1</sup>",
+                               T ~ "μmax day<sup>-1</sup>"),
+         Contrast = str_replace_all(Contrast, c("MUT_7806" = "PCC 7806 ΔmcyB",
+                                                "WT_7806" = "PCC 7806",
+                                                "PCC_9701" = "PCC 9701",
+                                                "NIES_843" = "NIES-843",
+                                                'ks' = '',
+                                                'mumax' = '')),
+         Significance = case_when(Significance == "NS" ~ '',
+                                  T ~ Significance),
+         Difference = round(Difference, digits = 2),
+         `(SE)` = paste0('(',round(`(SE)`, digits = 2),')'))|>
+  unite(c(Difference, `(SE)`, Significance), remove = T, sep = ' ', col = "Difference (SE)" ) |>
+  dplyr::select(- c(`t-value`,`p-value`,`p.adj`)) |>
+  pivot_wider(values_from = "Difference (SE)", names_from = c("State","Element"))
+
+kbl(
+  all_contrasts,
+  escape = F,
+  align = c("l") ,
+  col.names = c("Contrast", "Parameter","Difference (SE) Axenic", "Difference (SE) Xenic", "Difference (SE) Axenic", "Difference (SE) Xenic")
+)  %>%
+  kable_styling("striped", full_width = T) %>%
+  add_header_above(c(
+    " " = 2,
+    "Phosphorus" = 2,
+    "Nitrogen" = 2
+  )) %>% save_kable(file = "./tables/table1.png", zoom = 1.5)
+
+```
+

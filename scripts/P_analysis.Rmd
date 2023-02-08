@@ -1,0 +1,236 @@
+---
+title: "LowP_analysis_6_9_21"
+author: "Dylan Baker"
+date: "7/30/2021"
+output: html_document
+---
+
+## **NOAA Omics Low Phosphorus Culture Analysis**
+
+### Research Question: What is the effect of low Nitrogen concentrations on the growth of different Microcystis strains?
+
+**Hypothesis 1:** I hypothesize that Microcystis will grow to a proportionally higher density as nitrogen and phosphorus concentrations are increased, regardless of axenic status because Nitrogen is an essential limiting nutrient.
+
+-   Plate Exp Design
+
+    -   Two 48-well, non-tissue culture treated plates were inoculated in triplicate at 5,000 cells/mL in COMBO media with N concentrations of 0, 10, 20, and 14000 μg/L respectively, and P concentrations of 0, 10, 20, 310, 1552. Upon P analysis of media, actual concentrations were 1, 9.6, 17.8, 27.6, 257.7, and 1280 μg/L. Media controls and blanks were included to subtract background fluorescence. Two excitation/emission spectra were used to measure growth of Microcystis: Chlorophyll A (435/680) and Phycocyanin (630/660).
+    -   24μL aliquots of select wells were taken and mixed with 1μL of 25% glutaraldehyde for a final concentration of 1% glutaraldehyde (Day 4,5,6,10) and stored at 4ºC until counted. Counts were done with a reusable hemocytometer.
+
+    ```{r setup, include=FALSE}
+    knitr::opts_chunk$set(eval = TRUE, 
+                          echo = TRUE, 
+                          cache = TRUE,
+                          include = TRUE,
+                          collapse = FALSE,
+                          dependson = NULL,
+                          warning = FALSE,
+                          engine = "R", # Chunks will always have R code, unless noted
+                          error = TRUE)
+
+    library(tidyverse)
+    library(patchwork)
+    library(lubridate)
+    library(ggpubr)
+    library(broom)
+    #https://stackoverflow.com/questions/11433432/how-to-import-multiple-csv-files-at-once
+source("functions.R")
+    ```
+
+```{r, import_data}
+#Make a list of the paths of files so that R can import with read_csv
+file_list <- list.files(path = "./data/low_P_12_7_21",
+                        full.names = TRUE, ignore.case = TRUE, pattern = ".csv$")
+#Import plate data with annotations
+data_all <-
+  map_df(file_list, ~read_data(.)) |>
+  group_by(`Well ID`,Plate) |>
+  mutate(begin = min(read_time),
+         read_interval = begin %--% read_time,
+         read_timeDays = as.numeric(as.duration((read_interval)/ddays(1)))) |>
+ ungroup()
+
+#Plate reader did not include some blank time data, so need to pull time data from existing blanks
+blank_data <- data_all |>
+  filter(`Well ID` == "BLK") |>
+  select(read_day,Plate,read_time, read_timeDays)
+
+empty_blank <- data_all |>
+  filter(is.na(`Well ID`)) |>
+  select(-c(`Well ID`, read_timeDays, read_time))
+
+filled_blank <- left_join(empty_blank, blank_data,
+                           by = c("Plate","read_day"))
+
+#Merge data back together, then filter out empty blank data
+data_all <- bind_rows(data_all, filled_blank) |>
+  filter(!is.na(read_timeDays))
+
+#Import plate map data
+map_data <- read_csv("./data/lowP_platemap_12_7_21.csv",
+                     col_types = cols(X4 = col_skip())) 
+
+#Join both maps for isolate info to transfer over
+
+#Some media control data lost in this step due to plate reader error. Not missing any sample data.
+full_data <-  inner_join(data_all, map_data,
+                        by = c("Well", "Plate")) |>
+  arrange(read_timeDays) |>
+  group_by(Plate,Well) |>
+  mutate(P_rounded = round(P_ug_L),
+         #evaporation constant derived from random wells sampled at experiment end. See plate_evap_data for rationale
+         evap_correction = (1 - read_timeDays * 0.002761443318),
+         PC_150_true = PC_150 * evap_correction,
+         chlA_150_true = chlA_150 * evap_correction,
+         time_diff = read_timeDays - lag(read_timeDays),
+         ln_PC_diff = log(PC_150_true/lag(PC_150_true)),
+         ln_chlA_diff = log(chlA_150_true/lag(chlA_150_true)),
+         growthrate_PC = ln_PC_diff/time_diff,
+         growthrate_chlA = ln_chlA_diff/time_diff) |>
+  select(Well, Plate, Treatment_name,Culture, State, P_ug_L, P_rounded,chlA_150, chlA_150_true, PC_150,PC_150_true,read_day,read_time,read_timeDays, growthrate_PC, growthrate_chlA) |>
+  unite(Plate, Well, sep = "_", col = p_well, remove = FALSE) |>
+  #One outlier well detected by eye
+  filter(p_well != "20_C5") |>
+  ungroup()
+
+write.csv(full_data, file = "./data/lowP_data_full_120721.csv")
+
+```
+
+```{r plotting growth curves}
+full_data <- full_data |>
+  mutate(P_level = factor(paste(P_ug_L, "μg/L P")),
+         PC_150 = log10(PC_150_true + 1),
+         chlA_150 = log10(chlA_150_true + 1))
+
+all_facets <- subset(full_data, Culture == "Media_CTRL") |>
+  slice_min(prop = .95, PC_150_true)
+indiv_facet <- subset(full_data, Culture != "Media_CTRL") |>
+  mutate(facet1 = P_level, 
+         facet2 = State)
+
+all_facets <- merge(all_facets, data.frame(unique(indiv_facet[c("facet1","facet2")])))
+
+plot_data <- rbind(all_facets, indiv_facet)
+
+PC_plot_P <- ggplot(data = plot_data, aes(x = read_timeDays, y = log10(PC_150_true), color = Culture)) +
+   geom_point(size = 2, shape = 21) +
+   scale_color_manual(values = c("NIES_843" = "cyan3",
+                                 "PCC_9701" = "darkgoldenrod2",
+                                "WT_7806" =  "firebrick3",
+                                "MUT_7806" = "chartreuse2",
+                                "Media_CTRL" = "gray"),
+                      labels = c("NIES_843" = "NIES-843", 
+                                 "PCC_9701" = "PCC 9701",
+                                 "WT_7806" = "PCC 7806",
+                                 "MUT_7806" = "PCC 7806 ΔmcyB", 
+                                "Media_CTRL" = "Media Control")
+                      ) +
+   geom_line(aes(group = p_well)) +
+   ylab("Log 10, Phycocyanin Fluorescence") +
+   xlab("Time (days)") +
+   facet_wrap(~factor(facet1, 
+                       levels = c("1 μg/L P","10 μg/L P","19 μg/L P",
+                                  "48 μg/L P","100 μg/L P","171 μg/L P",
+                                  "310 μg/L P","1551 μg/L P", "3030 μg/L P"
+                                  )) + facet2, nrow = 3) +
+  theme_pubclean() +
+  theme(strip.text = element_text( size = 12),
+        legend.position = "bottom"
+        )
+
+
+png(filename = "./figures/supplemental_figures/figureS2.png",
+    res = 300,
+    type = "cairo",
+    units = "in",
+    width = 10,
+    height = 10)
+PC_plot_P
+dev.off()
+```
+
+
+```{r GrowthRates Analysis for Ks and Vmax}
+MC <- full_data |>
+  filter(Culture == "Media_CTRL") 
+
+c(low_P_120721_ttests,sample_lm) := full_data |>
+  filter(Culture != "Media_CTRL") |>
+  group_by(p_well) |>
+  mutate(peak_time = ifelse(PC_150_true == max(PC_150_true), read_timeDays, -1)) |> #mark when the highest fluorescence value is reached, filter below that timepoint
+  filter(read_timeDays <= max(peak_time)) |>
+  ungroup() |>
+  filter(!peak_time == 0) |>
+  full_join(MC) |>
+  slope_ttests("PC_150_true", "P")
+
+gr_PC <- full_data |>
+  filter(Culture != "Media_CTRL", 
+         #read_timeDays > 4, read_timeDays < 9,
+         !is.na(growthrate_PC),
+         growthrate_PC > 0) |>
+  group_by(Culture, State, P_ug_L, Plate, Well, Treatment_name) |>
+  slice_max(n = 5, growthrate_PC) |>
+  summarise(gr_chlA_mean = mean(growthrate_chlA),
+            gr_PC_mean = mean(growthrate_PC),
+            gr_chlA_sd = sd(growthrate_chlA),
+            gr_pc_sd = sd(growthrate_PC),
+            n_obs = n(),
+            gr_chlA_se = gr_chlA_sd / sqrt(n_obs),
+            gr_pc_se = gr_pc_sd / sqrt(n_obs),
+            chlA_upper_cl = gr_chlA_mean + gr_chlA_se,
+            chlA_lower_cl = gr_chlA_mean - gr_chlA_se,
+            pc_upper_cl = gr_PC_mean + gr_pc_se,
+            pc_lower_cl = gr_PC_mean - gr_pc_se) |>
+  ungroup() |>
+  left_join(low_P_120721_ttests, by = "Treatment_name", copy = TRUE) |>
+  mutate(growthrate_corrected = case_when(p.value < (0.01) ~ gr_PC_mean,
+                                          Treatment_name == "A_9701_19P" | Treatment_name == "A_MUT_48P" ~ gr_PC_mean,
+                                          is.na(p.value) ~ 0,
+                                          T ~ 0),
+         gr_pc_se_corrected = ifelse(growthrate_corrected == 0, 0, gr_pc_se))
+
+write.csv(gr_PC, file = "./data/growthrate_estimates_P.csv")
+
+gr_PC_plot <- ggplot(data = gr_PC, aes(x = P_ug_L, y = growthrate_corrected)) +
+   geom_point(color = "orange",
+              size = 2) +
+   ylab("μ (1/day)") +
+   xlab("Phosphorus (μg/L)") +
+   facet_grid(factor(Culture, 
+                     levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
+                     labels = c("PCC 7806 ΔmcyB", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
+   stat_smooth(color = "black", 
+               size = 0.7,
+               method = "nls",
+               se = FALSE,
+               method.args = list(
+                 formula = y~mumax*x/(x + ks),
+                 start = list(mumax = 0.5, ks = 1)
+               )) +
+  geom_errorbar(mapping = aes(ymin = growthrate_corrected - gr_pc_se_corrected,
+                              ymax = growthrate_corrected + gr_pc_se_corrected)) +
+  ylim(0,1) +
+  theme_pubclean() +
+  theme(strip.text = element_text( size = 12),
+        axis.text.x = element_text(angle = 60, hjust = 0.4, vjust = 0.5)
+        )
+fig2B_Nmonod <- readRDS("./figures/fig2B.rds")
+
+fig2_Nmonod <- fig2B_Nmonod + labs(title = element_blank())
+
+Monod_patchwork <- (gr_PC_plot | fig2_Nmonod) + plot_annotation(tag_levels = "A") + plot_layout(guides = 'collect')
+
+
+png(file = "./figures/figure2.png", 
+    type = "cairo",
+    units = "in",
+    res = 450, width = 10, height = 8)
+Monod_patchwork 
+dev.off() 
+
+```
+
+
+
+

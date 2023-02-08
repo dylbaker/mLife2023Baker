@@ -1,0 +1,104 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r setup}
+library(tidyverse)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+```{r}
+library(tidyverse)
+library(googlesheets4)
+```
+
+```{r}
+googlesheets4::gs4_auth()
+```
+
+## Geomicro lab filters
+Get 2015-2019 flat filter extraction data
+```{r}
+flat_filters1 <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1m94BnXpnl0E11_BMDY70FKRWu1svh4pyBmzTiTtX-is/edit#gid=0",sheet = "Flat_filter") %>% 
+  as.tibble() %>% 
+  filter(`Master#` != "Master#") %>% 
+  mutate(Date = if_else(sortchem == "NA", Extracted, Date),
+    Date = as.numeric(Date),
+    Date = lubridate::as_datetime(Date),
+    Extracted = as.numeric(Extracted),
+    Extracted = lubridate::as_datetime(Extracted),
+    Fraction ="whole water") %>% 
+  dplyr::rename(dna_conc_ng_per_ul_e1 = "DNA ng/uL E1",dna_conc_ng_per_ul_e2 = "DNA ng/uL E2")
+
+flat_filters2 <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1m94BnXpnl0E11_BMDY70FKRWu1svh4pyBmzTiTtX-is/edit#gid=0",sheet = "Flat_filter2") %>% 
+  as.tibble() %>% 
+  filter(`Master#` != "Master#") %>% 
+  mutate(Date = if_else(sortchem == "NA", Extracted, Date),
+    Date = as.numeric(Date),
+    Date = lubridate::as_datetime(Date),
+    Extracted = as.numeric(Extracted),
+    Extracted = lubridate::as_datetime(Extracted),
+    Fraction ="whole water") %>% 
+  dplyr::rename(dna_conc_ng_per_ul_e3 = "DNA ng/uL E1",dna_conc_ng_per_ul_e4 = "DNA ng/uL E2")
+
+flat_filters <- bind_rows(flat_filters1, flat_filters2)
+
+flat_filters_long <- flat_filters %>% 
+  pivot_longer(cols = c("dna_conc_ng_per_ul_e1", "dna_conc_ng_per_ul_e2","dna_conc_ng_per_ul_e3","dna_conc_ng_per_ul_e4"), names_to = "elution", values_to = "conc") %>% 
+  mutate(dna_ng = conc * 50,
+         meets_jgi_quant = if_else(dna_ng >= 500, TRUE, FALSE),
+         meets_UM_microbiome_conc = if_else(conc > 1, TRUE, FALSE),
+         dilute_for_UM_microbiome = if_else(conc > 5, TRUE, FALSE),
+         meets_UM_genomic_std_conc = if_else(conc > 3.8, TRUE, FALSE),
+         meets_UM_genomic_std_quant = if_else(dna_ng > 100, TRUE, FALSE),
+         meets_UM_genomic_lowInput_conc = if_else(conc > 0.02, TRUE, FALSE),
+         meets_UM_genomic_lowInput_quant = if_else(dna_ng > 100, TRUE, FALSE)) %>% 
+  filter(!is.na(conc))
+
+flat_filter_for_merge <- flat_filters %>% 
+  select(sortchem,Date, Station, Fraction) %>% 
+  mutate(batch = "flat_filters", 
+         lab = "geomicro", 
+         depth = "integrated",
+         Fraction = as.character(Fraction)) %>% 
+  filter(!str_detect(Fraction,"blank"))
+
+```
+
+Get 2019-2021 sterivex extraction data
+```{r}
+sampling_type <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1m94BnXpnl0E11_BMDY70FKRWu1svh4pyBmzTiTtX-is/edit#gid=1843688964", sheet = "sampling_type_key")
+
+sterivex1 <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1m94BnXpnl0E11_BMDY70FKRWu1svh4pyBmzTiTtX-is/edit#gid=0",sheet = "Sterivex_MetaG1") %>% 
+  as.tibble() %>% 
+  filter(`Master_#` != "no sample assigned 85",
+         `Master_#` != "NULL") %>% 
+  mutate(`Master_#` = as.numeric(`Master_#`)) %>% 
+  dplyr::rename(dna_conc_ng_per_ul_e1 = "DNA ng/uL E1",dna_conc_ng_per_ul_e2 = "DNA ng/uL E2") %>% 
+  left_join(sampling_type)
+
+sterivex2 <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1m94BnXpnl0E11_BMDY70FKRWu1svh4pyBmzTiTtX-is/edit#gid=0",sheet = "Sterivex_MetaG2") %>% 
+  as.tibble() %>% 
+  filter(`Master_#` != "no sample assigned 85",
+         `Master_#` != "NULL") %>% 
+  mutate(`Master_#` = as.numeric(`Master_#`)) %>% 
+  dplyr::rename(dna_conc_ng_per_ul_e3 = "DNA ng/uL E1",dna_conc_ng_per_ul_e4 = "DNA ng/uL E2") %>% 
+  select(-`Freezer Location`) %>% 
+  left_join(sampling_type)
+
+sterivex <- bind_rows(sterivex1,sterivex2) %>% 
+  filter(!is.na(master_num_w_prefix))
+
+
+```
+
+Geomicro samples
+```{r}
+geomicro_samples <- sterivex %>% 
+  bind_rows(flat_filters %>% mutate(Year = list(Year))) %>% 
+  write_tsv("data/metadata/geomicro_sample_info.tsv")
+```
+
+
+

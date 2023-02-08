@@ -1,0 +1,1 @@
+The Snakefile contains the code used to analyse the fastq sequence files. You will need a high performance computing cluster to be able to run this analysis and download any databases referenced in the code yourself. The code for DADA two starts on line 152 and the code for QIIME2 classification starts on line 511.

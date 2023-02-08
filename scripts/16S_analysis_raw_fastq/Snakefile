@@ -1,0 +1,906 @@
+# This is a workflow to process the calcrete and aragonite 16S sequencing data.
+# It also manages the combined analysis of calcrete, aragonite, and concrete samples.
+
+import os
+configfile: "config.yaml"
+localrules: all
+
+# Substitute bash $USER environment variable with actual user id, otherwise some steps fail
+param_work_dir = config["work_dir"] #get working directory from config file
+userid = env_var = os.environ['USER'] #get bash $USER variable
+work_dir = param_work_dir.replace("$USER", userid) #sub $USER for actual username
+
+# config items can be referenced in rules but must be enclosed in {}, like this: {config[scratch]}
+
+#Target rule; runs the whole pipline and is run if no file specified when snakemake is run
+rule all:
+    input: 
+        "data/emp_comparison/diversity_metrics"
+
+
+# Run fastqc on raw reads
+# Cheating a little with file touches to simplify inputs and outputs (they're just a marker that job is done)
+rule fastqc_raw:
+    output:
+        touch("results/qc/raw_fastqc_{run}.done")
+    conda:
+          "code/fastqc.yaml"
+    resources: cpus = 8
+    shell:
+        """
+        mkdir -p results/qc/{wildcards.run}/raw
+
+        for file in data/seqs/{wildcards.run}/raw/*.fastq.gz
+        do
+        fastqc -f fastq -t {resources.cpus} -o results/qc/{wildcards.run}/raw ${{file}}
+        done
+        """
+
+# Preprocess reads according to DADA2 workflow
+#   * Filters N and trims primers
+# rule preprocess_reads:
+#     input: 
+#         seqs_folder = "data/seqs/{run}/raw",
+#         markdown = "code/preprocess.Rmd"
+#     output: 
+#         filtN_folder = temp(directory("data/seqs/{run}/filtN")),
+#         trimmed_reads = directory("data/seqs/{run}/trimmed_reads"),
+#         manifest = "data/seqs/{run}/trimmed_reads/manifest.txt",
+#         report = "results/{run}_trimming.html"
+#     resources: cpus=16, mem_mb=50000, time_min=60
+#     container: "docker://eandersk/r_microbiome"
+#     shell:
+#         """        
+#         cd /geomicro/data2/kiledal/projects/2022_erie_16S_timeseries/
+        
+#         R --no-echo -e 'rmarkdown::render("{input.markdown}", params = list( \
+#             raw_folder = "{input.seqs_folder}", \
+#             trimmed_folder = "{output.trimmed_reads}", \
+#             filtN_folder = "{output.filtN_folder}", \
+#             sample_type = "{wildcards.run}"), \
+#             output_file = here::here("{output.report}"))'
+#         """
+# R --no-echo -e 'rmarkdown::render("code/preprocess.Rmd", params = list(raw_folder = "data/seq_data/calcrete/raw_data", trimmed_folder = "data/seq_data/calcrete/trimmed_reads", sample_type = "calcrete"), output_file = here::here("results/calcrete_preprocessing.html"))'
+
+
+# Run fastqc on raw reads
+rule fastqc_filt:
+    output:
+        touch("results/qc/filt_fastqc.done")
+    conda:
+          "code/fastqc.yaml"
+    shell:
+        """
+        mkdir -p results/qc/calcrete/filt    
+
+        for file in data/calcrete/raw_data/trimmed_reads/*.fastq
+        do
+        fastqc -f fastq -t {resources.cpus} -o results/qc/calcrete/filt ${{file}}
+        done
+
+
+        mkdir -p results/qc/aragonite/filt
+
+        for file in data/aragonite/raw_data/trimmed_reads/*.fastq.gz
+        do
+        fastqc -f fastq -t {resources.cpus} -o results/qc/aragonite/filt ${{file}}
+        done
+        """
+
+# Summarize fastqc results
+rule multiqc:
+    input:
+        "results/qc/raw_fastqc.done",
+        "results/qc/filt_fastqc.done"
+    output:
+        aragonite_combined = directory("results/qc/aragonite/combined_multiqc"),
+        aragonite_raw = directory("results/qc/aragonite/raw_multiqc"),
+        calcrete_combined = directory("results/qc/calcrete/combined_multiqc"),
+        calcrete_raw = directory("results/qc/calcrete/raw_multiqc"),
+        multiqc_done = touch("results/qc/multiqc.done")
+    conda: "code/multiqc_env.yaml"
+    shell:
+        """
+        #aragonite
+        multiqc --interactive -d "results/qc/aragonite/raw" "results/qc/aragonite/filt" -o {output.aragonite_combined}
+
+        #aragonite raw_only
+        multiqc --interactive -d "results/qc/aragonite/raw" -o {output.aragonite_raw}
+
+        #calcrete
+        multiqc --interactive -d "results/qc/calcrete/raw" "results/qc/calcrete/filt" -o {output.calcrete_combined}
+
+        #calcrete raw only
+        multiqc --interactive -d "results/qc/calcrete/raw" -o {output.calcrete_raw}
+        """
+
+
+
+
+
+# Import reads into QIIME2 artifact
+rule import_reads:
+    input: 
+        manifest = "data/seqs/{run}/trimmed_reads/manifest.txt"
+    output: 
+        demux = "data/pre_filtering/{run}/demux.qza",
+        demux_summary = "data/pre_filtering/{run}/demux.qzv"
+    conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+    resources: cpus=1, mem_mb=25000, time_min=120
+    shell:
+        """
+        # Import the reads with primers removed by cutadapt into qiime2
+        qiime tools import \
+            --type 'SampleData[PairedEndSequencesWithQuality]' \
+            --input-path {input.manifest} \
+            --output-path {output.demux} \
+            --input-format PairedEndFastqManifestPhred33
+        
+        # Make Q2 read summary vis.
+        qiime demux summarize \
+            --i-data {output.demux} \
+            --o-visualization {output.demux_summary}
+        """
+
+##########
+# Need to separate simple processing from the very computationally intense steps.
+# Particulay any related simple tasks that depend on metadata, otherwise things like DADA2
+# and SEPP re-run whenever metadata is updated when they really only update if sequence data is updated (unlikely).
+##########
+
+
+# Run DADA2 to denoise sequence data and obtain ASVs & ASV counts
+rule dada2:
+    input: 
+        demux = rules.import_reads.output.demux
+    output:
+        rep_seqs = "data/pre_filtering/{run}/dada2_seqs.qza",
+        table = "data/pre_filtering/{run}/dada2_table.qza",
+        denoising_stats = "data/pre_filtering/{run}/dada2_stats.qza"
+    conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+    resources: cpus=48, mem_mb=50000, time_min=1440
+    shell:
+        """
+        # Denoise the sequence data, determine representative sequence variants, and make ASV table
+        qiime dada2 denoise-paired \
+            --i-demultiplexed-seqs {input.demux} \
+            --p-trunc-len-f 200 --p-trunc-len-r 200 \
+            --p-n-threads {resources.cpus} \
+            --o-representative-sequences {output.rep_seqs} \
+            --o-table {output.table} \
+            --o-denoising-stats {output.denoising_stats}
+        """
+
+# Quality filter the ASVs based on length and merge exact overlaps
+# rule filter_ASVs:
+#     input: 
+#         #metadata = "data/{sample_type}/metadata.tsv",
+#         dada2_table = rules.dada2.output.table,
+#         dada2_seqs = rules.dada2.output.rep_seqs
+#     output:
+#         dada2_table_viz = "data/pre_filtering/{run}/dada2_table.qzv",
+#         clust_table = "data/pre_filtering/{run}/clust_table.qza",
+#         clust_table_viz = "data/pre_filtering/{run}/clust_table.qzv",
+#         clust_seqs = "data/pre_filtering/{run}/clust_seqs.qza",
+#         clust_seqs_viz = "data/pre_filtering/{run}/clust_seqs.qzv",
+#         filt_table = "data/pre_filtering/{run}/filt_table.qza",
+#         filt_table_viz = "data/pre_filtering/{run}/filt_table.qzv",
+#         filt_seqs = "data/pre_filtering/{run}/filt_seqs.qza",
+#         filt_seqs_viz = "data/pre_filtering/{run}/filt_seqs.qzv"
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     shell:
+#         """
+#         # Summarize the DADA2 table
+#         qiime feature-table summarize \
+#             --i-table {input.dada2_table} \
+#             --o-visualization {output.dada2_table_viz} \
+#             #--m-sample-metadata-file {input.metadata}
+
+#         # Dada2 often produces some identical sequences of slightly different length, 
+#         # this merges those sequences. Similar in concept to the "collapseNoMismatch" command in dada2.
+
+#         qiime vsearch cluster-features-de-novo \
+#             --i-table {input.dada2_table} \
+#             --i-sequences {input.dada2_seqs} \
+#             --p-perc-identity 1 \
+#             --o-clustered-table {output.clust_table} \
+#             --o-clustered-sequences {output.clust_seqs}
+
+#         # Make visualizations for unfiltered table and seqs
+#         qiime feature-table summarize \
+#             --i-table {output.clust_table} \
+#             --o-visualization {output.clust_table_viz} \
+#             #--m-sample-metadata-file {input.metadata}
+        
+#         qiime feature-table tabulate-seqs \
+#             --i-data {output.clust_seqs} \
+#             --o-visualization {output.clust_seqs_viz}
+
+#         #Filter to get sequences >= 400bp & <= 450bp
+#         qiime feature-table filter-features \
+#             --i-table {output.clust_table} \
+#             --m-metadata-file {output.clust_seqs} \
+#             --p-where 'length(sequence) >= 400 AND length(sequence) <= 450' \
+#             --o-filtered-table {output.filt_table}
+
+#         #Make sequences file only include those in the newly filtered table
+#         qiime feature-table filter-seqs \
+#             --i-data {output.clust_seqs} \
+#             --i-table {output.filt_table} \
+#             --o-filtered-data {output.filt_seqs}
+
+#         #make visualizations
+#         qiime feature-table summarize \
+#             --i-table {output.filt_table} \
+#             --o-visualization {output.filt_table_viz} \
+#             #--m-sample-metadata-file {input.metadata}
+
+#         qiime feature-table tabulate-seqs \
+#             --i-data {output.filt_seqs} \
+#             --o-visualization {output.filt_seqs_viz}
+#         """
+
+# Quality filter the ASVs based on length and merge exact overlaps, no metadata
+rule filter_ASVs:
+    input: 
+        dada2_table = rules.dada2.output.table,
+        dada2_seqs = rules.dada2.output.rep_seqs
+    output:
+        dada2_table_viz = "data/pre_filtering/{run}/dada2_table.qzv",
+        clust_table = "data/pre_filtering/{run}/clust_table.qza",
+        clust_table_viz = "data/pre_filtering/{run}/clust_table.qzv",
+        clust_seqs = "data/pre_filtering/{run}/clust_seqs.qza",
+        clust_seqs_viz = "data/pre_filtering/{run}/clust_seqs.qzv",
+        filt_table = "data/pre_filtering/{run}/filt_table.qza",
+        filt_table_viz = "data/pre_filtering/{run}/filt_table.qzv",
+        filt_seqs = "data/pre_filtering/{run}/filt_seqs.qza",
+        filt_seqs_viz = "data/pre_filtering/{run}/filt_seqs.qzv"
+    conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+    shell:
+        """
+        # Summarize the DADA2 table
+        qiime feature-table summarize \
+            --i-table {input.dada2_table} \
+            --o-visualization {output.dada2_table_viz} 
+
+        # Dada2 often produces some identical sequences of slightly different length, 
+        # this merges those sequences. Similar in concept to the "collapseNoMismatch" command in dada2.
+
+        qiime vsearch cluster-features-de-novo \
+            --i-table {input.dada2_table} \
+            --i-sequences {input.dada2_seqs} \
+            --p-perc-identity 1 \
+            --o-clustered-table {output.clust_table} \
+            --o-clustered-sequences {output.clust_seqs}
+
+        # Make visualizations for unfiltered table and seqs
+        qiime feature-table summarize \
+            --i-table {output.clust_table} \
+            --o-visualization {output.clust_table_viz} 
+        
+        qiime feature-table tabulate-seqs \
+            --i-data {output.clust_seqs} \
+            --o-visualization {output.clust_seqs_viz}
+
+        #Filter to get sequences >= 400bp & <= 450bp
+        qiime feature-table filter-features \
+            --i-table {output.clust_table} \
+            --m-metadata-file {output.clust_seqs} \
+            --p-where 'length(sequence) >= 200 AND length(sequence) <= 400' \
+            --o-filtered-table {output.filt_table}
+
+        #Make sequences file only include those in the newly filtered table
+        qiime feature-table filter-seqs \
+            --i-data {output.clust_seqs} \
+            --i-table {output.filt_table} \
+            --o-filtered-data {output.filt_seqs}
+
+        #make visualizations
+        qiime feature-table summarize \
+            --i-table {output.filt_table} \
+            --o-visualization {output.filt_table_viz} 
+
+        qiime feature-table tabulate-seqs \
+            --i-data {output.filt_seqs} \
+            --o-visualization {output.filt_seqs_viz}
+        """
+
+########## Fix this:
+# Combine the different sample type tables here! Simplifies things to not have to run
+# things like SEPP and tax class. multiple times and they can easily be separated later as needed
+##########
+
+
+
+rule merge_projects:
+    input:
+        run1_table = "data/pre_filtering/run_1/filt_table.qza",
+        run2_table = "data/pre_filtering/run_2/filt_table.qza",
+        run1_seqs = "data/pre_filtering/run_1/filt_seqs.qza",
+        run2_seqs = "data/pre_filtering/run_2/filt_seqs.qza"
+    output:
+        run1_table_renamed = "data/pre_filtering/run_1/filt_table_renamed.qza",
+        run2_table_renamed = "data/pre_filtering/run_2/filt_table_renamed.qza",
+        merged_table = "data/combined/raw_table.qza",
+        merged_seqs = "data/combined/raw_seqs.qza"
+    conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+    shell:
+        """
+        qiime feature-table rename-ids \
+            --i-table {input.run1_table} \
+            --m-metadata-file data/pre_filtering/run_1/sample_rename.tsv \
+            --m-metadata-column new_ID \
+            --o-renamed-table {output.run1_table_renamed}
+        
+        qiime feature-table rename-ids \
+            --i-table {input.run2_table} \
+            --m-metadata-file data/pre_filtering/run_2/sample_rename.tsv \
+            --m-metadata-column new_ID \
+            --o-renamed-table {output.run2_table_renamed}
+
+        qiime feature-table merge \
+            --i-tables {output.run1_table_renamed} \
+            --i-tables {output.run2_table_renamed} \
+            --o-merged-table {output.merged_table}
+
+        qiime feature-table merge-seqs \
+            --i-data  {input.run1_seqs} \
+            --i-data  {input.run2_seqs} \
+            --o-merged-data {output.merged_seqs}        
+        """
+
+# Insert ASV sequences into reference tree with SEPP
+rule merged_sepp:
+    input:
+        filt_seqs = "data/combined/raw_seqs.qza",
+        sepp_refs = "data/refs/sepp-refs-silva-128.qza"
+    output:
+        tree = "data/combined/sepp_tree.qza",
+        placements = "data/combined/sepp_placements.qza"
+    conda: "code/qiime2-2022.8-py38-linux-conda.yml"
+    resources: cpus = 64, mem_mb=512000, time_min=4320
+    shell:
+        """
+        qiime fragment-insertion sepp \
+            --i-representative-sequences {input.filt_seqs} \
+            --i-reference-database {input.sepp_refs} \
+            --p-threads {resources.cpus} \
+            --o-tree {output.tree} \
+            --o-placements {output.placements}
+        """
+
+# Old attempt at decontamination, should be deleted
+# rule remove_contams:
+#     input:
+#         table = "data/combined/raw_table.qza",
+#         contaminants = "data/concrete/contaminants.txt"
+#     output:
+#         decontam_table = "data/combined/decontam_table.qza"
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     shell:    
+#         """
+#         qiime feature-table filter-features \
+#             --i-table {input.table} \
+#             --m-metadata-file {input.contaminants} \
+#             --p-exclude-ids \
+#             --o-filtered-table {output.decontam_table}
+#         """
+
+
+# Insert ASV sequences into reference tree with SEPP
+# rule sepp_filter:
+#     input:
+#         tree = rules.sepp.output.tree,
+#         placements = rules.sepp.output.placements,
+#         filt_table = rules.filter_ASVs.output.filt_table,
+#         filt_seqs = rules.filter_ASVs.output.filt_seqs,
+#         #metadata = rules.filter_ASVs.input.metadata
+#     output:
+#         table = "data/preDecontam/{run}/table.qza",
+#         table_viz = "data/preDecontam/{run}/table.qzv",
+#         reject_table = "data/preDecontam/{run}/sepp_noMatch_table.qza",
+#         reject_table_viz = "data/preDecontam/{run}/sepp_noMatch_table.qzv",
+#         seqs = "data/preDecontam/{run}/seqs.qza",
+#         seqs_viz = "data/preDecontam/{run}/seqs.qzv"
+#     conda: "code/qiime2-2022.8-py38-linux-conda.yml"
+#     shell:
+#         """
+#         qiime fragment-insertion filter-features \
+#             --i-table {input.filt_table} \
+#             --i-tree {input.tree} \
+#             --o-filtered-table {output.table} \
+#             --o-removed-table {output.reject_table}
+        
+#         qiime feature-table summarize \
+#             --i-table {output.table} \
+#             --o-visualization {output.table_viz} \
+#             #--m-sample-metadata-file {input.metadata}
+        
+#         qiime feature-table summarize \
+#             --i-table {output.reject_table} \
+#             --o-visualization {output.reject_table_viz} \
+#             #--m-sample-metadata-file {input.metadata}
+        
+#         #Make sequences file only include those in the newly filtered table
+#         qiime feature-table filter-seqs \
+#             --i-data {input.filt_seqs} \
+#             --i-table {output.table} \
+#             --o-filtered-data {output.seqs}
+            
+#         qiime feature-table tabulate-seqs \
+#             --i-data {output.seqs} \
+#             --o-visualization {output.seqs_viz}
+#         """
+
+
+# Make SILVA classifier for specific amplicons used (357F-806R)
+# Follows this guide: https://forum.qiime2.org/t/processing-filtering-and-evaluating-the-silva-database-and-other-reference-sequence-data-with-rescript/15494#heading--second-header
+rule make_classifier:
+    output:
+        classifier = "data/refs/silva-138-ssu-nr99-357f-806r-classifier.qza"
+    conda: "code/rescript.yml"
+    params: 
+        workdir = config["work_dir"],
+        f_primer = "CCTACGGGNGGCWGCAG",
+        r_primer = "GACTACHVGGGTATCTAATCC"
+    resources: cpus = 8, mem_mb=200000, time_min=7200
+    shell:
+        """
+        proj_dir=$PWD
+
+        mkdir -p {params.workdir}/silva_classifier
+        cd {params.workdir}/silva_classifier
+
+        qiime rescript get-silva-data \
+            --p-version '138' \
+            --p-target 'SSURef_NR99' \
+            --p-include-species-labels \
+            --o-silva-sequences silva-138-ssu-nr99-seqs.qza \
+            --o-silva-taxonomy silva-138-ssu-nr99-tax.qza
+
+        qiime rescript cull-seqs \
+            --i-sequences silva-138-ssu-nr99-seqs.qza \
+            --o-clean-sequences silva-138-ssu-nr99-seqs-cleaned.qza
+
+        qiime rescript filter-seqs-length-by-taxon \
+            --i-sequences silva-138-ssu-nr99-seqs-cleaned.qza \
+            --i-taxonomy silva-138-ssu-nr99-tax.qza \
+            --p-labels Archaea Bacteria Eukaryota \
+            --p-min-lens 900 1200 1400 \
+            --o-filtered-seqs silva-138-ssu-nr99-seqs-filt.qza \
+            --o-discarded-seqs silva-138-ssu-nr99-seqs-discard.qza 
+
+        qiime rescript dereplicate \
+            --i-sequences silva-138-ssu-nr99-seqs-filt.qza  \
+            --i-taxa silva-138-ssu-nr99-tax.qza \
+            --p-rank-handles 'silva' \
+            --p-mode 'uniq' \
+            --o-dereplicated-sequences silva-138-ssu-nr99-seqs-derep-uniq.qza \
+            --o-dereplicated-taxa silva-138-ssu-nr99-tax-derep-uniq.qza    
+        
+        qiime feature-classifier extract-reads \
+            --i-sequences silva-138-ssu-nr99-seqs-derep-uniq.qza \
+            --p-f-primer {params.f_primer} \
+            --p-r-primer {params.r_primer} \
+            --p-n-jobs {resources.cpus} \
+            --p-read-orientation 'forward' \
+            --o-reads silva-138-ssu-nr99-seqs-515f-806r.qza
+
+        qiime rescript dereplicate \
+            --i-sequences silva-138-ssu-nr99-seqs-515f-806r.qza \
+            --i-taxa silva-138-ssu-nr99-tax-derep-uniq.qza \
+            --p-rank-handles 'silva' \
+            --p-mode 'uniq' \
+            --o-dereplicated-sequences silva-138-ssu-nr99-seqs-515f-806r-uniq.qza \
+            --o-dereplicated-taxa  silva-138-ssu-nr99-tax-515f-806r-derep-uniq.qza
+        
+        qiime feature-classifier fit-classifier-naive-bayes \
+            --i-reference-reads silva-138-ssu-nr99-seqs-515f-806r-uniq.qza \
+            --i-reference-taxonomy silva-138-ssu-nr99-tax-515f-806r-derep-uniq.qza \
+            --o-classifier classifier.qza
+
+        cp classifier.qza $proj_dir/{output.classifier}
+        """
+
+
+
+
+
+
+# Determine taxonomy of ASVs
+rule merged_tax_assign:
+    input: 
+        classifier = "data/refs/silva-138-99-515-806-nb-classifier.qza",
+        seqs = "data/combined/raw_seqs.qza"
+    output:
+        taxonomy = "data/combined/silva_132_taxonomy.qza",
+        tax_summary = "data/combined/silva_132_taxonomy.qzv"
+    conda: "code/qiime2-2022.8-py38-linux-conda.yml"
+    resources: cpus = 36, mem_mb=500000, time_min=1440
+    shell:
+        """
+        qiime feature-classifier classify-sklearn \
+            --i-classifier {input.classifier} \
+            --i-reads {input.seqs} \
+            --p-n-jobs {resources.cpus} \
+            --o-classification {output.taxonomy}
+
+        qiime metadata tabulate \
+            --m-input-file {output.taxonomy} \
+            --o-visualization {output.tax_summary}
+        """
+
+
+# rule calc_diversity:
+#     input:
+#         #metadata = rules.merge_metadata.output,
+#         tree = "data/combined/sepp_tree.qza",
+#         table = "data/combined/{table_type}_table.qza"
+#     output:
+#         dist = "data/combined/{table_type}-core-metrics-results/gen_0.5_unifrac_dist.qza",
+#         pcoa_genUniFrac = "data/combined/{table_type}-core-metrics-results/gen_0.5_unifrac_pcoa.qza",
+#         div_folder = directory("data/combined/{table_type}-core-metrics-results")
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     resources: cpus = 32, mem_mb=40000, time_min=1440
+#     shell:
+#         """
+#         rm -r {output.div_folder} #snakemake pre-makes dir, q2 doesn't like
+
+#         qiime diversity core-metrics-phylogenetic \
+#             --i-phylogeny {input.tree} \
+#             --i-table {input.table} \
+#             --p-sampling-depth 1000 \
+#             #--m-metadata-file {input.metadata} \
+#             --p-n-jobs-or-threads {resources.cpus} \
+#             --output-dir {output.div_folder}
+        
+#         qiime diversity beta-phylogenetic \
+#             --i-phylogeny {input.tree} \
+#             --i-table {input.table} \
+#             --p-metric 'generalized_unifrac' \
+#             --p-threads {resources.cpus} \
+#             --p-alpha 0.5 \
+#             --o-distance-matrix {output.dist}
+
+#          qiime diversity pcoa \
+#             --i-distance-matrix {output.dist} \
+#             --o-pcoa {output.pcoa_genUniFrac}
+#         """
+
+
+# rule q2_picrust2:
+#     input:
+#         table = "data/combined/decontam_table.qza",
+#         seqs = "data/combined/raw_seqs.qza"
+#     output:
+#         picrust_dir = directory("data/combined/picrust2_decontam"),
+#         path_abund = "data/combined/picrust2_decontam/pathway_abundance.qzv"
+#     resources: cpus = 32, mem_mb=400000, time_min=1440
+#     conda: "code/qiime2-2021.2_and_picrust2.yml"
+#     shell:    
+#         """
+#         rm -r {output.picrust_dir} #q2 fails if dir exists and snakemake automakes dir
+
+#         qiime picrust2 full-pipeline \
+#             --i-table {input.table} \
+#             --i-seq {input.seqs} \
+#             --output-dir {output.picrust_dir} \
+#             --p-threads {resources.cpus} \
+#             --p-hsp-method mp \
+#             --p-max-nsti 2 \
+#             --verbose
+
+#         qiime feature-table summarize \
+#             --i-table {output.picrust_dir}/pathway_abundance.qza \
+#             --o-visualization {output.picrust_dir}/pathway_abundance.qzv
+
+#         """
+
+
+# rule picrust2:
+#     input:
+#         table = "data/combined/decontam_table.qza",
+#         seqs = "data/combined/raw_seqs.qza"
+#     output:
+#         picrust_dir = directory("data/combined/stratified_picrust2_decontam"),
+#         table_export_dir = temp(directory("data/combined/table_export")),
+#         seqs_export_dir = temp(directory("data/combined/seqs_export")),
+#         biom = "data/combined/decontam_table.biom",
+#         fasta = "data/combined/seqs.fasta"
+#     resources: cpus = 8, mem_mb=400000, time_min=1440
+#     conda: "code/qiime2-2021.2_and_picrust2.yml"
+#     shell:    
+#         """
+#         rm -rf {output.picrust_dir} #q2 fails if dir exists and snakemake automakes dir
+
+#         qiime tools export \
+#             --input-path {input.table} \
+#             --output-path {output.table_export_dir}
+
+#         mv {output.table_export_dir}/feature-table.biom {output.biom}
+
+#         qiime tools export \
+#             --input-path {input.seqs} \
+#             --output-path {output.seqs_export_dir}
+
+#         mv {output.seqs_export_dir}/dna-sequences.fasta {output.fasta}
+        
+#         picrust2_pipeline.py \
+#             -s {output.fasta} \
+#             -i {output.biom} \
+#             --in_traits EC,KO,PFAM,COG \
+#             -o {output.picrust_dir} \
+#             -p {resources.cpus} \
+#             --stratified
+
+#         """
+
+
+
+# # EMP comparison
+
+# rule trim_seqs:
+#     input:
+#         combined_seqs = rules.merge_projects.output.merged_seqs,
+#         combined_table = rules.merge_decontam.output.merged_table
+#     output:
+#         trimmed_seqs = temp("data/emp_comparison/calcrete_aragonite_concrete_seqs.fasta"),
+#         q2_trimmed_seqs = "data/emp_comparison/calcrete_aragonite_concrete_seqs.qza",
+#         filt_90bp_table = "data/emp_comparison/calcrete_aragonite_concrete_table.qza",
+#     params:  
+#         combined_seqs_dir = "data/emp_comparison/seqs_export" #This should be switched back to a output temp(directory()), but needed to make --touch work 
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml" 
+#     shell:
+#         """
+#         qiime tools export \
+#             --input-path {input.combined_seqs} \
+#             --output-path {params.combined_seqs_dir}
+
+#         python code/GetV4Region.py \
+#             -i {params.combined_seqs_dir}/dna-sequences.fasta \
+#             -l 90 -s > {output.trimmed_seqs}
+
+#         qiime tools import \
+#             --input-path {output.trimmed_seqs} \
+#             --output-path {output.q2_trimmed_seqs} \
+#             --type 'FeatureData[Sequence]'
+
+#         qiime feature-table filter-features \
+#             --i-table {input.combined_table} \
+#             --m-metadata-file {output.q2_trimmed_seqs} \
+#             --o-filtered-table {output.filt_90bp_table}
+#         """
+
+# rule merge_emp_metadata:
+#     input: 
+#         emp_metadata = "data/emp_comparison/emp_metadata.tsv",
+#         our_metadata = rules.merge_metadata.output,
+#         script = "code/combine_emp_metadata.R"
+#     output: 
+#         combined_metadata = "data/emp_comparison/metadata.tsv"
+#     container: "docker://eandersk/r_microbiome"
+#     shell:
+#         """
+#         Rscript {input.script} {input.emp_metadata} {input.our_metadata} {output.combined_metadata}
+#         """
+
+
+# rule emp_merge: 
+#     input:
+#         combined_seqs = rules.trim_seqs.output.q2_trimmed_seqs,
+#         combined_table = rules.trim_seqs.output.filt_90bp_table,
+#         emp_metadata = rules.merge_emp_metadata.output.combined_metadata,
+#         emp_table = "data/emp_comparison/emp_deblur_90bp.release1_table.qza",
+#         emp_seqs = "data/emp_comparison/emp_deblur_90bp.release1_seqs.qza"
+#     output:
+#         tmp_merge_table = temp("data/emp_comparison/tmp_unfilt_combined_table.qza"),
+#         emp_merged_table = temp("data/emp_comparison/preSEPP_combined_table.qza"),
+#         emp_merged_seqs = temp("data/emp_comparison/preSEPP_combined_EXTRAseqs.qza"),
+#         filt_emp_merged_seqs = temp("data/emp_comparison/preSEPP_combined_seqs.qza")
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml" 
+#     shell:
+#         """
+#         qiime feature-table merge \
+#             --i-tables {input.combined_table} \
+#             --i-tables  {input.emp_table} \
+#             --o-merged-table {output.tmp_merge_table}
+
+#         qiime feature-table filter-samples \
+#             --i-table {output.tmp_merge_table} \
+#             --m-metadata-file {input.emp_metadata} \
+#             --p-where "include_in_comparison='TRUE'" \
+#             --o-filtered-table {output.emp_merged_table} \
+
+#         qiime feature-table merge-seqs \
+#             --i-data  {input.combined_seqs} \
+#             --i-data  {input.emp_seqs} \
+#             --o-merged-data {output.emp_merged_seqs}
+
+#         qiime feature-table filter-seqs \
+#              --i-data {output.emp_merged_seqs} \
+#              --i-table {output.emp_merged_table} \
+#              --o-filtered-data {output.filt_emp_merged_seqs}
+#         """
+
+# rule cluster_emp:
+#     input: 
+#         table = rules.emp_merge.output.emp_merged_table,
+#         filt_seqs = rules.emp_merge.output.filt_emp_merged_seqs
+#     output:
+#         clust_table = temp("data/emp_comparison/clust_table.qza"),
+#         clust_seqs = temp("data/emp_comparison/clust_seqs.qza")
+#     params:
+#         perc_identity = 0.99
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     resources: cpus = 24, mem_mb=200000, time_min=1440
+#     shell:
+#         """
+#         qiime vsearch cluster-features-de-novo \
+#             --i-table {input.table} \
+#             --i-sequences {input.filt_seqs} \
+#             --p-threads {resources.cpus} \
+#             --p-perc-identity {params.perc_identity} \
+#             --o-clustered-table {output.clust_table} \
+#             --o-clustered-sequences {output.clust_seqs}
+        
+#         #Only works with modified v-search to export .uc file  
+#         #mv /home/akiledal/vsearch.tsv data/emp_data/clust99_emp_tapwater_and_concrete_otu_membership.tsv
+#         """
+
+# rule emp_sepp:
+#     input:
+#         filt_seqs = rules.cluster_emp.output.clust_seqs,
+#         table = rules.cluster_emp.output.clust_table,
+#         sepp_refs = "data/refs/sepp-refs-silva-128.qza"
+#     output:
+#         tree = "data/emp_comparison/sepp_tree.qza",
+#         placements = "data/emp_comparison/sepp_placements.qza",
+#         seqs = "data/emp_comparison/combined_seqs.qza",
+#         table = "data/emp_comparison/combined_table.qza",
+#         not_inserted_table = "data/emp_comparison/not_sepp_inserted_table.qza"
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     resources: cpus = 48, mem_mb=400000, time_min=7200
+#     shell:
+#         """
+#         qiime fragment-insertion sepp \
+#             --i-representative-sequences {input.filt_seqs} \
+#             --i-reference-database {input.sepp_refs} \
+#             --p-threads {resources.cpus} \
+#             --o-tree {output.tree} \
+#             --o-placements {output.placements}
+
+#         qiime fragment-insertion filter-features \
+#              --i-table {input.table} \
+#              --i-tree {output.tree} \
+#              --o-filtered-table {output.table} \
+#              --o-removed-table {output.not_inserted_table}
+
+#         qiime feature-table filter-seqs \
+#              --i-data {input.filt_seqs} \
+#              --i-table {output.table} \
+#              --o-filtered-data {output.seqs}
+#         """
+
+
+# # Determine taxonomy of ASVs
+# rule emp_tax_assign:
+#     input: 
+#         classifier = "data/refs/silva-138-99-515-806-nb-classifier.qza",
+#         seqs = rules.emp_sepp.output.seqs
+#     output:
+#         taxonomy = "data/emp_comparison/silva_132_taxonomy.qza",
+#         tax_summary = "data/emp_comparison/silva_132_taxonomy.qzv"
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     resources: cpus = 48, mem_mb=600000, time_min=1440
+#     shell:
+#         """
+#         qiime feature-classifier classify-sklearn \
+#             --i-classifier {input.classifier} \
+#             --i-reads {input.seqs} \
+#             --p-n-jobs {resources.cpus} \
+#             --o-classification {output.taxonomy}
+
+#         qiime metadata tabulate \
+#             --m-input-file {output.taxonomy} \
+#             --o-visualization {output.tax_summary}
+#         """
+
+# rule calc_emp_div_stats:
+#     input: 
+#         metadata = rules.merge_emp_metadata.output.combined_metadata,
+#         table = rules.emp_sepp.output.table,
+#         tree = rules.emp_sepp.output.tree,
+#         seqs = rules.emp_sepp.output.seqs
+#     output:
+#         diversity_metrics = directory("data/emp_comparison/diversity_metrics")
+#     conda: "code/qiime2-2021.4-py38-linux-conda.yml"
+#     resources: cpus = 32, mem_mb=200000, time_min=1440
+#     shell:
+#         """
+#         PROJ_DIR=$PWD #save project directory
+#         mkdir -p {config[scratch]}/$SLURM_JOB_ID #make a directory on scratch disk
+
+#         # Copy files to scratch-- apparently there is really heavy read activty during this calculation
+#         # And it clogs the BIOMIX internal fileshare network (avoiding angry emails)
+#         cp {input.metadata} {input.table} {input.tree} {input.seqs} {config[scratch]}/$SLURM_JOB_ID/
+        
+#         cd {config[scratch]}/$SLURM_JOB_ID
+
+#         # Calculate all QIIME2 'core diveristy metrics'
+#         qiime diversity core-metrics-phylogenetic \
+#             --i-phylogeny *_tree.qza \
+#             --i-table *_table.qza \
+#             --p-sampling-depth 1000 \
+#             --m-metadata-file  metadata.tsv \
+#             --p-n-jobs-or-threads {resources.cpus} \
+#             --output-dir core-metrics-results
+
+#         # Calculate general (0.5) UniFrac distances
+#         qiime diversity beta-phylogenetic \
+#             --i-phylogeny *_tree.qza \
+#             --i-table core-metrics-results/rarefied_table.qza \
+#             --p-metric 'generalized_unifrac' \
+#             --p-threads {resources.cpus} \
+#             --p-alpha 0.5 \
+#             --o-distance-matrix core-metrics-results/general_0_5_unifrac_distance_matrix.qza
+        
+#         # Calculate PCoA
+#         qiime diversity pcoa \
+#             --i-distance-matrix core-metrics-results/general_0_5_unifrac_distance_matrix.qza \
+#             --o-pcoa core-metrics-results/general_0_5_unifrac_pcoa.qza
+        
+#         # Emporer 3D PCOA plot
+#         qiime emperor plot \
+#             --i-pcoa core-metrics-results/general_0_5_unifrac_pcoa.qza \
+#             --m-metadata-file metadata.tsv \
+#             --o-visualization core-metrics-results/general_0_5_unifrac_emperor.qzv
+
+#         # Transfer back to project directory and cleanup
+#         mv -f core-metrics-results $PROJ_DIR/data/emp_comparison/diversity_metrics
+#         rm -r {config[scratch]}/$SLURM_JOB_ID
+#         """
+
+# rule empo3_indicators:
+#     input: 
+#         script = "code/empo3_indicators.R",
+#         metadata = "data/emp_comparison/metadata.tsv",
+#         table = "data/emp_comparison/combined_table.qza", 
+#         taxonomy = "data/emp_comparison/silva_132_taxonomy.qza"
+#     output: 
+#         inds = "results/emp_comparison/inds.rds"
+#     container: "docker://eandersk/r_microbiome",
+#     resources: cpus = 1, mem_mb=200000, time_min=5440
+#     shell:
+#         """
+#         Rscript {input.script}
+#         """
+
+# rule empo3_genus_indicators:
+#     input: 
+#         script = "code/empo3_genus_indicators.R",
+#         metadata = "data/emp_comparison/metadata.tsv",
+#         table = "data/emp_comparison/combined_table.qza", 
+#         taxonomy = "data/emp_comparison/silva_132_taxonomy.qza"
+#     output: 
+#         inds = "results/emp_comparison/genus_inds.rds"
+#     container: "docker://eandersk/r_microbiome",
+#     resources: cpus = 1, mem_mb=200000, time_min=5440
+#     shell:
+#         """
+#         Rscript {input.script}
+#         """
+
+# rule empo3_family_indicators:
+#     input: 
+#         script = "code/empo3_family_indicators.R",
+#         metadata = "data/emp_comparison/metadata.tsv",
+#         table = "data/emp_comparison/combined_table.qza", 
+#         taxonomy = "data/emp_comparison/silva_132_taxonomy.qza"
+#     output: 
+#         inds = "results/emp_comparison/family_inds.rds"
+#     container: "docker://eandersk/r_microbiome",
+#     resources: cpus = 1, mem_mb=200000, time_min=5440
+#     shell:
+#         """
+#         Rscript {input.script}
+#         """

@@ -1,0 +1,79 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r setup}
+R.version
+
+library(dada2,warn.conflicts = FALSE)
+library(ShortRead)
+library(Biostrings)
+library(foreach)
+library(here)
+library(tidyverse)
+
+knitr::opts_knit$set(root.dir = here())
+knitr::opts_chunk$set(dev.args = list(png = list(type = "cairo")))
+```
+
+
+
+```{r}
+dada_seqs <- qiime2R::read_qza("data/pre_filtering/run_1/dada2_seqs.qza")$data %>% 
+  data.frame(id = names(.), seq = .)
+
+dada_seqs %>% 
+  ggplot(aes(nchar(seq))) +
+  geom_histogram(bins = 50) +
+  scale_x_log10(n.breaks = 10) +
+  scale_y_log10() 
+```
+
+
+```{r}
+stats <- qiime2R::read_qza("data/pre_filtering/run_1/dada2_stats.qza")$data
+```
+
+```{r}
+
+to_rename <- c("MockZymoPosA", "MockZymoPosD", "WaterNegC", "WaterNegA", "MockZymoPosB", "MockZymoPosC")
+
+table1 <- qiime2R::read_qza("data/pre_filtering/run_1/dada2_table.qza")$data %>% 
+  as.data.frame() 
+
+run1_samples <- colnames(table1) %>% 
+  data.frame(SampleID = .) %>% 
+  mutate(new_ID = case_when(
+        SampleID == "MockZymoPosA" ~ "MockZymoPosA_run1",
+        SampleID == "MockZymoPosD" ~ "MockZymoPosD_run1",
+        SampleID == "WaterNegC" ~ "WaterNegC_run1",
+        SampleID == "WaterNegB" ~ "WaterNegB_run1",
+        SampleID == "WaterNegD" ~ "WaterNegD_run1",
+        SampleID == "WaterNegA" ~ "WaterNegA_run1",
+        SampleID == "MockZymoPosB" ~ "MockZymoPosB_run1",
+        SampleID == "MockZymoPosC" ~ "MockZymoPosC_run1",
+        TRUE ~ SampleID)) %>% 
+  write_tsv("data/pre_filtering/run_1/sample_rename.tsv")
+
+
+table2 <- qiime2R::read_qza("data/pre_filtering/run_2/dada2_table.qza")$data %>% 
+  as.data.frame() 
+
+run2_samples <- colnames(table2) %>% 
+  data.frame(SampleID = .) %>% 
+  mutate(new_ID = case_when(
+        SampleID == "MockZymoPosA" ~ "MockZymoPosA_run2",
+        SampleID == "MockZymoPosD" ~ "MockZymoPosD_run2",
+        SampleID == "WaterNegC" ~ "WaterNegC_run2",
+        SampleID == "WaterNegB" ~ "WaterNegB_run2",
+        SampleID == "WaterNegD" ~ "WaterNegD_run2",
+        SampleID == "WaterNegA" ~ "WaterNegA_run2",
+        SampleID == "MockZymoPosB" ~ "MockZymoPosB_run2",
+        SampleID == "MockZymoPosC" ~ "MockZymoPosC_run2",
+        TRUE ~ SampleID)) %>% 
+  write_tsv("data/pre_filtering/run_2/sample_rename.tsv")
+
+```
+
+
+
