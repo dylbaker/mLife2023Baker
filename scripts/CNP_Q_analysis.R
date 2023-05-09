@@ -8,95 +8,89 @@ library(ggpubr)
 CNP_Quotas <- read_excel("./data/Microcystis Quota Estimates.xlsx", 
                          sheet = "final_table") 
 matrix <- read_excel("./data/Microcystis Quota Estimates.xlsx", 
-                     sheet = "corr_matrix") |>
-  pivot_longer(cols = c(mumax_P, mumax_N, ks_P, ks_N, Q_N, Q_P), names_to = c('Parameter','Element'), names_sep = '_' ) |>
-  mutate(Element = case_when( Element == 'N' ~ 'Nitrogen',
-                              T ~ 'Phosphorus'))
-matrix$facets = factor(matrix$Parameter, 
-  labels = c(
-  "K[s]", 
-  "μ[max]", 
-  "Quota"), 
-  levels = c(
-    "ks", 
-    "mumax", 
-    "Q"))
+                     sheet = "corr_matrix")
 
-barplot_ksN <- ggplot(data = filter(matrix, Parameter == 'ks', Element == "Nitrogen"), aes(x = Culture, y = value)) +
-  geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
-  coord_cartesian(ylim = c(0, 400), expand = F) +
-  facet_wrap(~ Element + facets, nrow = 1, scales = 'free_y', labeller = label_parsed) +
-  scale_fill_manual(values = c("Axenic" = "gray20",
+barplot_ksN <- ggplot(data = matrix, aes(x = Culture, y = ks_N, 
+                                         ymin = ks_N - ks_N_SE,
+                                         ymax = ks_N + ks_N_SE,
+                                         fill = State)) +
+  geom_bar(position = "dodge", stat = 'identity', aes(fill = State)) +
+  coord_cartesian(ylim = c(0, 499), expand = F) +
+  geom_errorbar(position = position_dodge(0.9), width = 0.4) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab(expression(K[s]~(μgL^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
-        strip.text = element_text(size = 16),
         legend.position = "right"
   ) 
-barplot_mumaxN <- ggplot(data = filter(matrix, Parameter == 'mumax', Element == "Nitrogen"), aes(x = Culture, y = value)) +
-  geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
+barplot_mumaxN <- ggplot(data = matrix, aes(x = Culture, y = mumax_N,
+                                            ymin = mumax_N - mumax_N_SE,
+                                            ymax = mumax_N + mumax_N_SE,
+                                            fill = State)) +
+  geom_bar(position = "dodge", stat = 'identity', aes(fill = State)) +
   coord_cartesian(ylim = c(0, 0.65), expand = F) +
-  facet_wrap(~ Element + facets,nrow = 1, scales = 'free_y', labeller = label_parsed) +
-  scale_fill_manual(values = c("Axenic" = "gray20",
+  geom_errorbar(position = position_dodge(0.9), width = 0.4) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab(expression(μ[max]~(day^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
-        strip.text = element_text(size = 16),
         legend.position = "right"
   ) 
-barplot_QN <- ggplot(data = filter(matrix, Parameter == 'Q', Element == "Nitrogen"), aes(x = Culture, y = value)) +
+
+barplot_QN <- ggplot(data = matrix, aes(x = Culture, y = Q_N)) +
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
-  coord_cartesian(ylim = c(0,160), expand = F) +
-  facet_wrap(~ Element + facets,nrow = 1, scales = 'free_y', labeller = label_parsed) +
-  scale_fill_manual(values = c("Axenic" = "gray20",
+  coord_cartesian(ylim = c(0,165), expand = F) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab(expression(Quota~(fmol~cell^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
-        strip.text = element_text(size = 16),
         legend.position = "right"
   ) 
 N_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AUTO", 
                      barplot_ksN, barplot_mumaxN, barplot_QN)
+
 ggsave('./figures/figure3.png',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
 
-barplot_ksP <- ggplot(data = filter(matrix, Parameter == 'ks', Element == "Phosphorus"), aes(x = Culture, y = value)) +
+barplot_ksP <- ggplot(data = matrix, aes(x = Culture, y = ks_P, 
+                                         ymin = ks_P - ks_P_SE,
+                                         ymax = ks_P + ks_P_SE,
+                                         fill = State)) +
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
-  coord_cartesian(ylim = c(0,8), expand = F) +
-  facet_wrap(~ Element + facets, nrow = 1, scales = 'free_y', labeller = label_parsed) +
-  scale_fill_manual(values = c("Axenic" = "gray20",
+  coord_cartesian(ylim = c(0,9), expand = F) +
+  geom_errorbar(position = position_dodge(0.9), width = 0.4) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab(expression(K[s]~(μgL^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
-        strip.text = element_text(size = 16),
         legend.position = "right"
   ) 
-barplot_mumaxP <- ggplot(data = filter(matrix, Parameter == 'mumax', Element == "Phosphorus"), aes(x = Culture, y = value)) +
+barplot_mumaxP <- ggplot(data = matrix, aes(x = Culture, y = mumax_P,
+                                            ymin = mumax_P - mumax_P_SE,
+                                            ymax = mumax_P + mumax_P_SE,
+                                            fill = State)) +
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
   coord_cartesian(ylim = c(0,0.65), expand = F) +
-  facet_wrap(~ Element + facets,nrow = 1, scales = 'free_y', labeller = label_parsed) +
-  scale_fill_manual(values = c("Axenic" = "gray20",
+  geom_errorbar(position = position_dodge(0.9), width = 0.4) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab(expression(μ[max]~(day^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
-        strip.text = element_text(size = 16),
         legend.position = "right"
   )  
 
-barplot_QP <- ggplot(data = filter(matrix, Parameter == 'Q', Element == "Phosphorus"), aes(x = Culture, y = value)) +
+barplot_QP <- ggplot(data = matrix, aes(x = Culture, y = Q_P)) +
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
-  coord_cartesian(ylim = c(0,4), expand = F) +
-  facet_wrap(~ Element + facets,nrow = 1, scales = 'free_y', labeller = label_parsed) +
-  scale_fill_manual(values = c("Axenic" = "gray20",
+  coord_cartesian(ylim = c(0,3.5), expand = F) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab(expression(Quota~(fmol~cell^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
-        strip.text = element_text(size = 16),
         legend.position = "right"
   ) 
 

@@ -20,11 +20,12 @@ output: html_document
     library(lubridate)
     library(ggpubr)
     library(broom)
+    library(grid)
 
 source("functions.R")
     ```
 
-```{r warning=FALSE}
+```{r Data import, warning=FALSE}
 #Make a list of the paths of files so that R can import with read_csv
 file_list <- list.files(path = "./data/low_N_10_18_21",
                         full.names = TRUE, ignore.case = TRUE, pattern = "^Plate.*.csv")
@@ -34,7 +35,7 @@ data_all <-
   file_list %>%
   map_df(~read_data(.)) |>
   group_by(`Well ID`,Plate) |>
-  mutate(begin = min(read_time),
+  dplyr::mutate(begin = min(read_time),
          read_interval = begin %--% read_time,
          read_timeDays = as.numeric(as.duration((read_interval)/ddays(1)))) |>
   ungroup()
@@ -53,7 +54,7 @@ data_all <- bind_rows(data_all, filled_blank) |>
   filter(!is.na(read_timeDays)) |>
   unique() |>
   #Reads start at day 1, when it should actually be day 0.
-  mutate(read_day = read_day - 1)
+  dplyr::mutate(read_day = read_day - 1)
 
 #Import plate map data
 map_data <- read_csv("./data/lowN_10_18_21_map.csv")
@@ -63,8 +64,7 @@ full_data <- inner_join(data_all, map_data,
                         by = c("Well", "Plate")) |>
   group_by(Plate,Well,Culture, State, N_ug_L) |>
   arrange(read_timeDays) |>
-  mutate(N_rounded = round(N_ug_L),
-         #evaporation constant derived from random wells sampled at experiment end. See plate_evap_data for rationale
+  dplyr::mutate(#evaporation constant derived from random wells sampled at experiment end. See plate_evap_data for rationale
          evap_correction = (1 - read_timeDays * 0.002761443318),
          PC_100_true = PC_100 * evap_correction + 1 ,
          chlA_150_true = chlA_150 * evap_correction + 1,
@@ -73,7 +73,7 @@ full_data <- inner_join(data_all, map_data,
          time_diff = read_timeDays - lag(read_timeDays),
          growthrate_PC = ln_PC_diff/time_diff,
          growthrate_chlA = ln_chlA_diff/time_diff) |>
-  dplyr::select(Well, Plate, Treatment_name,Culture, State, N_ug_L, N_rounded,chlA_150, chlA_150_true, PC_100,PC_100_true,read_day,read_time,read_timeDays, growthrate_PC, growthrate_chlA) |>
+  dplyr::select(Well, Plate, Treatment_name,Culture, State, N_ug_L,chlA_150, chlA_150_true, PC_100,PC_100_true,read_day,read_time,read_timeDays, growthrate_PC, growthrate_chlA) |>
   unite(Plate, Well, sep = "_", col = p_well, remove = FALSE) |>
   ungroup()
 
@@ -83,21 +83,24 @@ write.csv(full_data, file = "./data/lowN_data_full_101821.csv")
 
 ```{r plotting growth curves}
 facet_data <- full_data |>
-  mutate(N_level = factor(paste(N_ug_L, "μg/L N")))
+  dplyr::mutate(N_level = factor(paste(N_ug_L, "μg/L N")))
 
-all_facets <- subset(facet_data, Culture == "Media_CTRL")
+blank_facets <- subset(facet_data, Culture == "Media_CTRL") |>
+  group_by(Plate, read_day, read_timeDays) |>
+  dplyr::mutate(PC_100_true = mean(PC_100_true)) |>
+  filter(!duplicated(PC_100_true))
 
-indiv_facet <- subset(facet_data, Culture != "Media_CTRL") |>
-  mutate(facet1 = N_level, 
+sample_facets <- subset(facet_data, Culture != "Media_CTRL") |>
+  dplyr::mutate(facet1 = N_level, 
          facet2 = State) 
 
-all_facets <- merge(all_facets, data.frame(unique(indiv_facet[c("facet1","facet2")])))
+all_facets <- merge(blank_facets, data.frame(unique(sample_facets[c("facet1","facet2")])))
 
-plot_data <- rbind(all_facets, indiv_facet)|>
+plot_data <- rbind(all_facets, sample_facets)|>
   filter(facet1 != "883 μg/L N")
 
 PC_plot_N <- ggplot(data = plot_data, aes(x = read_timeDays, y = log10(PC_100_true), color = Culture)) +
-   geom_point(size = 2, shape = 21) +
+   geom_point(size = 1.5, shape = 21) +
    scale_color_manual(values = c("NIES_843" = "cyan3",
                                  "PCC_9701" = "darkgoldenrod2",
                                 "WT_7806" =  "firebrick3",
@@ -113,28 +116,25 @@ PC_plot_N <- ggplot(data = plot_data, aes(x = read_timeDays, y = log10(PC_100_tr
    ylab("Log 10, Phycocyanin Fluorescence") +
    xlab("Time (days)") +
    xlim(0, 19) +
-   ylim(0,4) +
+   coord_cartesian(ylim = c(0,3.5), expand = F) +
    facet_wrap(~factor(facet1, 
-                       levels = c("8 μg/L N","40 μg/L N",
+                       levels = c("8 μg/L N","40.5 μg/L N",
                                   "87 μg/L N"
                                    ,"425 μg/L N",
                                     "2760 μg/L N"
                                    ,"14150 μg/L N", "30500 μg/L N"
                                   )) + facet2, nrow = 4) +
-  theme_pubclean() +
+  theme_pubr(border = T, base_size = 14) +
   theme(strip.text = element_text(size = 12),
-        legend.position = "right"
-        ) 
+        legend.direction = "vertical") 
 
 
-
-
-png(filename = "./figures/supplemental_figures/figureS3.png",
-    res = 300,
+png(filename = "./figures/figure5.png",
+    res = 600,
     type = "cairo",
-    units = "in",
-    width = 11,
-    height = 10)
+    units = "mm",
+    width = 180,
+    height = 250)
 
 grid.draw(shift_legend(PC_plot_N))
 
@@ -182,7 +182,7 @@ MC <- full_data |>
 c(lowN_101821_ttests,sample_lm) := full_data |>
   filter(read_timeDays < 18, Culture != "Media_CTRL") |>
   group_by(p_well) |>
-  mutate(peak_time = ifelse(PC_100_true == max(PC_100_true), read_timeDays, -1)) |> #mark when the highest fluorescence value is reached, filter below that timepoint
+  dplyr::mutate(peak_time = ifelse(PC_100_true == max(PC_100_true), read_timeDays, -1)) |> #mark when the highest fluorescence value is reached, filter below that timepoint
   filter(read_timeDays <= max(peak_time)) |>
   ungroup() |>
   filter(!peak_time == 0) |>
@@ -202,7 +202,7 @@ gr_PC <- full_data |>
          growthrate_PC > 0) |>
   group_by(Culture, State, N_ug_L, Plate, Well, Treatment_name) |>
   slice_max(n = 5, growthrate_PC) |>
-  summarise(gr_chlA_mean = mean(growthrate_chlA),
+  dplyr::summarise(gr_chlA_mean = mean(growthrate_chlA),
             gr_PC_mean = mean(growthrate_PC),
             gr_chlA_sd = sd(growthrate_chlA),
             gr_pc_sd = sd(growthrate_PC),
@@ -214,7 +214,7 @@ gr_PC <- full_data |>
             pc_upper_cl = gr_PC_mean + gr_pc_se,
             pc_lower_cl = gr_PC_mean - gr_pc_se) |>
   left_join(lowN_101821_ttests, by = "Treatment_name", copy = TRUE) |>
-  mutate(growthrate_corrected = case_when(N_ug_L == 40 ~ 0,
+  dplyr::mutate(growthrate_corrected = case_when(N_ug_L == 40 ~ 0,
                                           p.value < (0.05) ~ gr_PC_mean,
                                           is.na(p.value) ~ 0,
                                           T ~ 0),
@@ -228,6 +228,7 @@ gr_PC_plot <- ggplot(data = filter(gr_PC, !N_ug_L == 883), aes(x = N_ug_L, y = g
               size = 2) +
    ylab("μ (1/day)") +
    xlab("Nitrogen (μg/L)") +
+   coord_cartesian(ylim = c(0.0,1.0)) +
    facet_grid(factor(Culture, 
                      levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
                      labels = c("PCC 7806 ΔmcyB", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
@@ -240,23 +241,21 @@ gr_PC_plot <- ggplot(data = filter(gr_PC, !N_ug_L == 883), aes(x = N_ug_L, y = g
                  start = list(mumax = 0.5, ks = 30)
                )) +
   geom_errorbar(mapping = aes(ymin = growthrate_corrected - gr_pc_se_corrected,
-                              ymax = growthrate_corrected + gr_pc_se_corrected), width = 250) +
-   ylim(0,1) +
-  theme_pubclean() +
-  #labs(title = "Phycocyanin Manual") +
-  theme(strip.text = element_text( size = 12),
-        axis.text.x = element_text(angle = 60, hjust = 0.4, vjust = 0.5)
+                              ymax = growthrate_corrected + gr_pc_se_corrected), width = 400) +
+  theme_pubr(border = T, base_size = 14) +
+  theme(strip.text = element_text(size = 12),
+        axis.text.x = element_text(angle = 60, hjust = 1)
         )
 
 
-png(file = "./figures/Figure2B.png", 
+png(file = "./figures/Figure2B.png",
     type = "cairo",
-    units = "in",
-    res = 450, width = 6, height = 6)
+    units = "mm",
+    res = 600, width = 180, height = 180)
 
 gr_PC_plot
 
-dev.off() 
+dev.off()
 
 #Saved for later to incorporate with fig2A to make final figure 2
 saveRDS(gr_PC_plot, file = "./figures/fig2B.rds")
@@ -276,7 +275,7 @@ gr_chlA <- full_data |>
             gr_chlA_se = gr_chlA_sd / sqrt(n_obs),
             gr_pc_se = gr_pc_sd / sqrt(n_obs)) |>
   left_join(lowN_101821_ttests, by = "Treatment_name", copy = TRUE) |>
-  mutate(growthrate_corrected = ifelse(p.value < (0.05), gr_chlA_mean, 0),
+  dplyr::mutate(growthrate_corrected = ifelse(p.value < (0.05), gr_chlA_mean, 0),
          gr_chlA_se_corrected = ifelse(growthrate_corrected == 0, 0, gr_chlA_se)) |>
   filter((!growthrate_corrected == 0 | N_ug_L < 100)) |>
   dplyr::select(Culture, State, N_ug_L, gr_chlA_mean, gr_chlA_se_corrected, p.value, growthrate_corrected)
