@@ -60,23 +60,13 @@ grs <- list.files(path = "./data", pattern = "estimates_(N|P).csv",
 N <- grs |> 
   map_df(~read_data_growthrates(.)) |>
   filter(!is.na(N_ug_L), ! N_ug_L == 883) |>
-  select(Culture, State, N_ug_L, gr_PC_mean, growthrate_corrected, slope,p.value)
+  dplyr::select(Culture, State, N_ug_L, gr_PC_mean, growthrate_corrected, slope,p.value)
   
 
 P <- grs |>
   map_df(~read_data_growthrates(.)) |>
   filter(!is.na(P_ug_L)) |>
-  select(Culture, State, P_ug_L, gr_PC_mean, growthrate_corrected, slope, p.value) |>
-  #Add actual values for P to be as accurate as possible
-  mutate(P_ug_L = case_when(P_ug_L == 1 ~ 1.133,
-                         P_ug_L ==  10 ~ 9.6175,
-                          P_ug_L == 19 ~ 18.713,
-                         P_ug_L ==  48 ~ 47.545,
-                         P_ug_L ==  100 ~ 100.029,
-                         P_ug_L ==  171 ~ 171.14,
-                         P_ug_L ==  310 ~ 309.5,
-                         P_ug_L ==  1551 ~ 1551.55,
-                         P_ug_L ==  3030 ~ 3029.95))
+  dplyr::select(Culture, State, P_ug_L, gr_PC_mean, growthrate_corrected, slope, p.value)
   
 
 
@@ -94,6 +84,40 @@ pccx <- pccx(P)
 nccax <- nccax(N)
 nccx <- nccx(N)
 
+summary_stats <- rbind(pccax,pccx,nccax,nccx) |>
+  dplyr::rename("Contrast" = Form,
+                "Difference" = Estimate,
+                "Significance" = psig.adj,
+                "(SE)" = SE) |>
+  mutate(Parameter = case_when(str_detect(Contrast, "ks") ~ "Ks",
+                               T ~ "μmax")) |>
+  ddply(.(Parameter, Element, State), summarise,
+              mean_abs_diff = mean(abs(Difference)),
+              n = 4,
+              abs_sd = sd(abs(Difference)))
+
+t_tests <- summary_stats |>
+  tidy(t.test())
+contrasts_barplot <- ggplot(data = summary_stats, aes(x = State, y = mean_abs_diff)) +
+  geom_bar(stat = 'identity', aes(fill = State)) +
+  facet_wrap(~ Element + Parameter, nrow = 2, scales = 'free') +
+  coord_cartesian(expand = 0.01) +
+  scale_fill_manual(values = c("Axenic" = "gray45",
+                               "Xenic" = "gray85")) +
+  ylab("Mean |Difference|") +
+  theme_pubr(base_size = 14, margin = F) +
+  theme(legend.position = "right"
+        )
+
+png(file = "./figures/figure7.png", 
+    type = "cairo",
+    units = "mm",
+    res = 600, width = 180, height = 100)
+
+contrasts_barplot
+
+dev.off() 
+  
 all_contrasts <- rbind(pccax,pccx,nccax,nccx) |>
   dplyr::rename("Contrast" = Form,
                 "Difference" = Estimate,

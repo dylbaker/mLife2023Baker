@@ -19,6 +19,7 @@ barplot_ksN <- ggplot(data = matrix, aes(x = Culture, y = ks_N,
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
+  scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(K[s]~(μgL^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
@@ -33,6 +34,7 @@ barplot_mumaxN <- ggplot(data = matrix, aes(x = Culture, y = mumax_N,
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
+  scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(μ[max]~(day^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
@@ -44,6 +46,7 @@ barplot_QN <- ggplot(data = matrix, aes(x = Culture, y = Q_N)) +
   coord_cartesian(ylim = c(0,165), expand = F) +
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
+  scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(Quota~(fmol~cell^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
@@ -53,6 +56,7 @@ N_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AU
                      barplot_ksN, barplot_mumaxN, barplot_QN)
 
 ggsave('./figures/figure3.png',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
+ggsave('./figures/figure3.svg',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
 
 barplot_ksP <- ggplot(data = matrix, aes(x = Culture, y = ks_P, 
                                          ymin = ks_P - ks_P_SE,
@@ -63,6 +67,7 @@ barplot_ksP <- ggplot(data = matrix, aes(x = Culture, y = ks_P,
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
+  scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(K[s]~(μgL^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
@@ -77,6 +82,7 @@ barplot_mumaxP <- ggplot(data = matrix, aes(x = Culture, y = mumax_P,
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
+  scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(μ[max]~(day^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
@@ -88,6 +94,7 @@ barplot_QP <- ggplot(data = matrix, aes(x = Culture, y = Q_P)) +
   coord_cartesian(ylim = c(0,3.5), expand = F) +
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
+  scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(Quota~(fmol~cell^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
@@ -97,13 +104,13 @@ barplot_QP <- ggplot(data = matrix, aes(x = Culture, y = Q_P)) +
 P_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AUTO", 
                      barplot_ksP, barplot_mumaxP, barplot_QP)
 ggsave('./figures/figure4.png',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
+ggsave('./figures/figure4.svg',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
 
-
-Q_lm <- lm(Qn~Qp, matrix)
+Q_lm <- lm(Q_N~Q_P, matrix)
 mu_lm <- lm(mumax_N~ mumax_P, matrix)
 ks_lm <- lm(ks_N~ks_P, matrix)
 
-p1 <- ggplot(matrix, aes(x = Qn, y = Qp)) +
+p1 <- ggplot(matrix, aes(x = Q_N, y = Q_P)) +
   geom_point() +
   geom_smooth(method = "lm",
               formula = y~x, se = F, color = "black") +
@@ -166,6 +173,6 @@ kable(CNP_Quotas,escape = F, digits = 4, align = c("l") ,col.names = c("Culture"
                                                                                                             "N:P","C:N","C:P" ))  %>%
   kable_styling("striped", full_width = T) %>%
   column_spec(c(4,9),width_min = "1in") %>%
-  add_header_above(c("", "Phosphorus" = 5, "Nitrogen" = 5, "Carbon" = 1, "Elemental Ratios" = 3)) %>% save_kable(file = "./tables/table2.doc", zoom = 1.5)
+  add_header_above(c("", "Phosphorus" = 5, "Nitrogen" = 5, "Carbon" = 1, "Elemental Ratios" = 3)) %>% save_kable(file = "./tables/new_table1.doc", zoom = 1.5)
   
 

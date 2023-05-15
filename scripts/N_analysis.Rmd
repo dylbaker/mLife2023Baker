@@ -214,7 +214,7 @@ gr_PC <- full_data |>
             pc_upper_cl = gr_PC_mean + gr_pc_se,
             pc_lower_cl = gr_PC_mean - gr_pc_se) |>
   left_join(lowN_101821_ttests, by = "Treatment_name", copy = TRUE) |>
-  dplyr::mutate(growthrate_corrected = case_when(N_ug_L == 40 ~ 0,
+  dplyr::mutate(growthrate_corrected = case_when(N_ug_L == 40.5 ~ 0,
                                           p.value < (0.05) ~ gr_PC_mean,
                                           is.na(p.value) ~ 0,
                                           T ~ 0),
