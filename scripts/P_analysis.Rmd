@@ -76,11 +76,12 @@ map_data <- read_csv("./data/lowP_platemap_12_7_21.csv",
 full_data <-  inner_join(data_all, map_data,
                         by = c("Well", "Plate")) |>
   arrange(read_timeDays) |>
+  dplyr::mutate(
+    evap_correction = (1 - read_timeDays * 0.002761443318),
+         PC_150_true = abs(PC_150 - mean(PC_150[Culture == "Media_CTRL"])) * evap_correction,
+         chlA_150_true = chlA_150 * evap_correction) |>
   group_by(Plate,Well) |>
-  dplyr::mutate(#evaporation constant derived from random wells sampled at experiment end. See plate_evap_data for rationale
-         evap_correction = (1 - read_timeDays * 0.002761443318),
-         PC_150_true = PC_150 * evap_correction,
-         chlA_150_true = chlA_150 * evap_correction,
+  dplyr::mutate(
          time_diff = read_timeDays - lag(read_timeDays),
          ln_PC_diff = log(PC_150_true/lag(PC_150_true)),
          ln_chlA_diff = log(chlA_150_true/lag(chlA_150_true)),
@@ -99,26 +100,31 @@ write.csv(full_data, file = "./data/lowP_data_full_120721.csv")
 ```{r plotting growth curves}
 
 facet_data <- full_data |>
-  dplyr::mutate(P_level = factor(paste(P_ug_L, "μg/L P")),
-         PC_150 = log10(PC_150_true + 1),
-         chlA_150 = log10(chlA_150_true + 1))
+  mutate(P_level = factor(paste(P_ug_L, "μg/L P")),
+         #log10_chlA = log10(chlA_true),
+         log10_PC = log10(PC_150_true))
 
 blank_facets <- subset(facet_data, Culture == "Media_CTRL") |>
-  group_by(Plate, read_day, read_timeDays) |>
-  dplyr::mutate(PC_150 = mean(PC_150)) |>
-  filter(!duplicated(PC_150))
+  group_by(read_day, Culture,State, Treatment_name) %>%
+  dplyr::summarise(across(c(log10_PC),
+                   list(avg = mean, sd = sd, se = ~( sd(.x)/sqrt(n()))),
+                   .names = "{.fn}_{.col}"))
 
 sample_facets <- subset(facet_data, Culture != "Media_CTRL") |>
   dplyr::mutate(facet1 = P_level, 
          facet2 = State) 
 
-all_facets <- merge(blank_facets, data.frame(unique(sample_facets[c("facet1","facet2")])))
+all_blank_facets <- merge(blank_facets, data.frame(unique(sample_facets[c("facet1","facet2")])))
 
-plot_data <- rbind(all_facets, sample_facets) |>
-  mutate(PC_150 = PC_150 - mean(PC_150[Treatment_name == "BLANK"])) #Subtract background fluorescence.
 
-PC_plot_P <- ggplot(data = plot_data, aes(x = read_timeDays, y = PC_150, color = Culture)) +
+PC_plot_P <- ggplot(data = sample_facets, aes(x = read_timeDays, y = log10_PC, color = Culture)) +
    geom_point(size = 1.5, shape = 21) +
+   geom_line(aes(group = p_well)) +
+   geom_point(inherit.aes = F, data = all_blank_facets,
+              aes(x = read_day, y = avg_log10_PC), color = "gray") +
+   geom_errorbar(inherit.aes = F, data = all_blank_facets,
+               aes(x= read_day, ymin = avg_log10_PC - 2 * se_log10_PC,
+                   ymax = avg_log10_PC + 2 * se_log10_PC), width = 0.5, color = "gray") +
    scale_color_manual(values = c("NIES_843" = "cyan3",
                                  "PCC_9701" = "darkgoldenrod2",
                                 "WT_7806" =  "firebrick3",
@@ -130,10 +136,9 @@ PC_plot_P <- ggplot(data = plot_data, aes(x = read_timeDays, y = PC_150, color =
                                  "MUT_7806" = "PCC 7806 ΔmcyB", 
                                 "Media_CTRL" = "Media Control")
                       ) +
-   geom_line(aes(group = p_well)) +
    ylab("Log 10, Phycocyanin Fluorescence") +
    xlab("Time (days)") +
-   coord_cartesian(ylim = c(0,3.2), expand = F) +
+   coord_cartesian(ylim = c(0,4)) +
    facet_wrap(~factor(facet1, 
                        levels = c("1.1 μg/L P","9.6 μg/L P","18.7 μg/L P",
                                   "47.6 μg/L P","100 μg/L P","171.1 μg/L P",
@@ -229,6 +234,64 @@ dev.off()
 
 ```
 
+
+```{r growthrates side analysis}
+P_PC <- full_data %>%
+  filter(Culture != "BLANK") %>%
+  all_easylinear(PC_150_true ~ read_timeDays | Well + Plate + State + P_ug_L + Culture, 
+                 data = ., h = 3, quota = 0.95)
+
+par(mfrow = c(1,3))
+plot(P_PC, log = 'y')
+
+results_P_full_PC <- summary(P_PC)
+
+results_P_PC <- results(P_PC) %>%
+  dplyr::rename(growthrate = mumax)
+
+std_error_P <- extract_dfs(results_P_full_PC) |>
+  separate(col = sample, c("Well","Plate","State","P_ug_L","Culture"), sep = ":", convert = FALSE) %>%
+  mutate(yplus = growthrate + std_error,
+         yminus = growthrate - std_error,
+         P_ug_L = as.double(P_ug_L),
+         Plate = as.integer(Plate)) %>%
+  dplyr::select(-growthrate) 
+
+#Add standard error to the dataframe
+grs_PC <- inner_join(results_P_PC, std_error_P, by = c("Well","Plate","State","P_ug_L","Culture")) %>%
+  #left_join(., low_P_120721_ttests,by = c("Well","Plate","State","P_ug_L","Culture"), copy = TRUE) %>%
+  mutate(growthrate_corrected = ifelse(p.value < 0.05 & r2 > 0.9, growthrate, 0)) %>%
+  #filter((!growthrate_corrected == 0 | N_ug_L < 100)) %>%
+  dplyr::select(Well, Plate, State,
+         P_ug_L,lag, growthrate_corrected, Treatment_name,
+         growthrate, Culture,
+         r2, std_error, p.value)
+
+gr_chlA_plot_auto <- ggplot(data = filter(grs_chlA, Culture != "LEP"), 
+                       aes(x = P_ug_L, y = growthrate)) +
+   geom_point(color = "darkgreen",
+              size = 2) +
+   ylab("μ (1/day)") +
+   xlab("Phosphorus (μg/L)") +
+   facet_grid(~factor(Culture, 
+                     levels = c("CS", "SA", "MM", "LE"), 
+                     labels = c("C. sorokiniana", "S. acuminatus", 
+                                "M. minutum", "Mychonastes sp."))) +
+   stat_smooth(color = "black", 
+               size = 0.7,
+               method = "nls",
+               se = FALSE,
+               method.args = list(
+                 formula = y~mumax*x/(x + ks),
+                 start = list(mumax = .75, ks = 5)
+               )) +
+  geom_errorbar(mapping = aes(ymin = growthrate_corrected - std_error,
+                              ymax = growthrate_corrected + std_error, width = 20)) +
+  ylim(0,1) +
+  theme_pubclean(base_size = 12) +
+  rotate_x_text(angle = 60)
+
+```
 
 
 

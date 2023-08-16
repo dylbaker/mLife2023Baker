@@ -17,12 +17,14 @@ barplot_ksN <- ggplot(data = matrix, aes(x = Culture, y = ks_N,
   geom_bar(position = "dodge", stat = 'identity', aes(fill = State)) +
   coord_cartesian(ylim = c(0, 499), expand = F) +
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
-  scale_fill_manual(values = c("Axenic" = "gray45",
-                               "Xenic" = "gray85")) +
+  scale_fill_manual(values = c("Axenic" = "darkseagreen1",
+                               "Xenic" = "forestgreen")) +
   scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(K[s]~(μgL^-1))) +
+  rremove("xlab") +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
+        axis.title.x = element_blank(),
         legend.position = "right"
   ) 
 barplot_mumaxN <- ggplot(data = matrix, aes(x = Culture, y = mumax_N,
@@ -32,24 +34,27 @@ barplot_mumaxN <- ggplot(data = matrix, aes(x = Culture, y = mumax_N,
   geom_bar(position = "dodge", stat = 'identity', aes(fill = State)) +
   coord_cartesian(ylim = c(0, 0.65), expand = F) +
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
-  scale_fill_manual(values = c("Axenic" = "gray45",
-                               "Xenic" = "gray85")) +
+  scale_fill_manual(values = c("Axenic" = "darkseagreen1",
+                               "Xenic" = "forestgreen")) +
   scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(μ[max]~(day^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
+        axis.title.x = element_blank(),
         legend.position = "right"
   ) 
 
 barplot_QN <- ggplot(data = matrix, aes(x = Culture, y = Q_N)) +
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
   coord_cartesian(ylim = c(0,165), expand = F) +
-  scale_fill_manual(values = c("Axenic" = "gray45",
-                               "Xenic" = "gray85")) +
+  scale_fill_manual(values = c("Axenic" = "darkseagreen1",
+                               "Xenic" = "forestgreen")) +
   scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(Quota~(fmol~cell^-1))) +
+  rremove("xlab") +
   theme_pubr(margin = F, border = T, base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1, angle = 70),
+        axis.title.x = element_blank(),
         legend.position = "right"
   ) 
 N_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AUTO", 
@@ -65,8 +70,8 @@ barplot_ksP <- ggplot(data = matrix, aes(x = Culture, y = ks_P,
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
   coord_cartesian(ylim = c(0,9), expand = F) +
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
-  scale_fill_manual(values = c("Axenic" = "gray45",
-                               "Xenic" = "gray85")) +
+  scale_fill_manual(values = c("Axenic" = "darkseagreen1",
+                               "Xenic" = "forestgreen")) +
   scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(K[s]~(μgL^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
@@ -80,8 +85,8 @@ barplot_mumaxP <- ggplot(data = matrix, aes(x = Culture, y = mumax_P,
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
   coord_cartesian(ylim = c(0,0.65), expand = F) +
   geom_errorbar(position = position_dodge(0.9), width = 0.4) +
-  scale_fill_manual(values = c("Axenic" = "gray45",
-                               "Xenic" = "gray85")) +
+  scale_fill_manual(values = c("Axenic" = "darkseagreen1",
+                               "Xenic" = "forestgreen")) +
   scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(μ[max]~(day^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
@@ -92,8 +97,8 @@ barplot_mumaxP <- ggplot(data = matrix, aes(x = Culture, y = mumax_P,
 barplot_QP <- ggplot(data = matrix, aes(x = Culture, y = Q_P)) +
   geom_bar(stat = 'identity', aes(fill = State), position = position_dodge()) +
   coord_cartesian(ylim = c(0,3.5), expand = F) +
-  scale_fill_manual(values = c("Axenic" = "gray45",
-                               "Xenic" = "gray85")) +
+  scale_fill_manual(values = c("Axenic" = "darkseagreen1",
+                               "Xenic" = "forestgreen")) +
   scale_x_discrete(limits = c("PCC 7806 ΔmcyB","PCC 7806","PCC 9701", "NIES-843")) +
   ylab(expression(Quota~(fmol~cell^-1))) +
   theme_pubr(margin = F, border = T, base_size = 16) +
@@ -103,8 +108,15 @@ barplot_QP <- ggplot(data = matrix, aes(x = Culture, y = Q_P)) +
 
 P_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AUTO", 
                      barplot_ksP, barplot_mumaxP, barplot_QP)
+
 ggsave('./figures/figure4.png',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
 ggsave('./figures/figure4.svg',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
+
+all_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 2,ncol = 3, labels = "AUTO", 
+                       barplot_ksN, barplot_mumaxN, barplot_QN,
+                       barplot_ksP, barplot_mumaxP, barplot_QP)
+ggsave('./figures/figure5_wcolor.png',all_plots,width = 180, height = 300, units = "mm", dpi = 600)
+ggsave('./figures/figure5_wcolor.svg',all_plots,width = 180, height = 300, units = "mm", dpi = 600)
 
 Q_lm <- lm(Q_N~Q_P, matrix)
 mu_lm <- lm(mumax_N~ mumax_P, matrix)

@@ -39,16 +39,26 @@ read_data <- function(file_list, skip = NULL) {
     dplyr::select(-c(filename))
 }
 
-extract_dfs <- function(x, full_results) {
-  num <- x
-  name <- names(full_results[num])
-  df <- as.data.frame(full_results[[num]]$coefficients) |>
-    mutate(sample = name) |>
-    dplyr::select(sample, `Std. Error`, Estimate) |>
-    dplyr::rename(growthrate = Estimate,
-           std_error = `Std. Error`) |>
-    slice(2)
-  return(df)
+extract_dfs <- function(full_results) {
+  #Remove empty lists
+  list <- full_results[!sapply(full_results,is.character)]
+  
+  df_total <- data.frame()
+  
+  for (i in 1:length(list)) {
+    name <- names(list[i])
+    
+    df <- tidy(list[[i]]) 
+    
+    std_errors <- df |>
+      mutate(sample = name) |>
+      dplyr::select(sample, std.error, estimate) |>
+      dplyr::rename(growthrate = estimate,
+                    std_error = std.error) |>
+      slice(2)
+    df_total <- rbind(df_total, std_errors)
+  }
+  return(df_total)
 }
 
 extract_dfs2 <- function(x, full_results) {

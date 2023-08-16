@@ -60,12 +60,14 @@ grs <- list.files(path = "./data", pattern = "estimates_(N|P).csv",
 N <- grs |> 
   map_df(~read_data_growthrates(.)) |>
   filter(!is.na(N_ug_L), ! N_ug_L == 883) |>
+  mutate(growthrate_corrected = growthrate_corrected + 0.001) |>
   dplyr::select(Culture, State, N_ug_L, gr_PC_mean, growthrate_corrected, slope,p.value)
   
 
 P <- grs |>
   map_df(~read_data_growthrates(.)) |>
   filter(!is.na(P_ug_L)) |>
+  mutate(growthrate_corrected = growthrate_corrected + 0.001) |>
   dplyr::select(Culture, State, P_ug_L, gr_PC_mean, growthrate_corrected, slope, p.value)
   
 
@@ -77,6 +79,13 @@ P <- grs |>
 #Non-linear least squares regression of the monod function fitted to the Nitrogen and Phosphorus experimental datapoints. See functions.R for full implementation
 gnls_N <- get_nls_N(N)
 gnls_P <- get_nls_P(P)
+
+P_full <- nls_table(P, growthrate_corrected ~ mumax*P_ug_L/(P_ug_L + ks),
+                 mod_start = c(mumax = 1, ks = 3),
+                 .groups = c("Culture","State"))
+N_full <- nls_table(N, growthrate_corrected ~ mumax*N_ug_L/(N_ug_L + ks),
+                 mod_start = c(mumax = 1, ks = 100),
+                 .groups = c("Culture","State"))
 
 #Get all of the contrasts for μmax and ks across strain, grouped by Xenic or Axenic status
 pccax <- pccax(P)
