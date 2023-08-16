@@ -60,8 +60,8 @@ barplot_QN <- ggplot(data = matrix, aes(x = Culture, y = Q_N)) +
 N_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AUTO", 
                      barplot_ksN, barplot_mumaxN, barplot_QN)
 
-ggsave('./figures/figure3.png',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
-ggsave('./figures/figure3.svg',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
+ggsave('./figures/figure_pieces/figure5ABC.png',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
+ggsave('./figures/figure_pieces/figure5ABC.svg',N_plots,width = 180, height = 152, units = "mm", dpi = 600 )
 
 barplot_ksP <- ggplot(data = matrix, aes(x = Culture, y = ks_P, 
                                          ymin = ks_P - ks_P_SE,
@@ -109,14 +109,14 @@ barplot_QP <- ggplot(data = matrix, aes(x = Culture, y = Q_P)) +
 P_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 1, labels = "AUTO", 
                      barplot_ksP, barplot_mumaxP, barplot_QP)
 
-ggsave('./figures/figure4.png',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
-ggsave('./figures/figure4.svg',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure5DEF.png',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure5DEF.svg',P_plots,width = 180, height = 152, units = "mm", dpi = 600)
 
 all_plots <- ggarrange(common.legend = T, legend = "bottom",nrow = 2,ncol = 3, labels = "AUTO", 
                        barplot_ksN, barplot_mumaxN, barplot_QN,
                        barplot_ksP, barplot_mumaxP, barplot_QP)
-ggsave('./figures/figure5_wcolor.png',all_plots,width = 180, height = 300, units = "mm", dpi = 600)
-ggsave('./figures/figure5_wcolor.svg',all_plots,width = 180, height = 300, units = "mm", dpi = 600)
+ggsave('./figures/Finalized Figs for Publication/figure5_wcolor.png',all_plots,width = 180, height = 300, units = "mm", dpi = 600)
+ggsave('./figures/Finalized Figs for Publication/figure5_wcolor.svg',all_plots,width = 180, height = 300, units = "mm", dpi = 600)
 
 Q_lm <- lm(Q_N~Q_P, matrix)
 mu_lm <- lm(mumax_N~ mumax_P, matrix)
@@ -161,7 +161,7 @@ p3 <- ggplot(matrix, aes(x = ks_N, y = ks_P)) +
   theme(axis.title.x = element_markdown(size = 12),
         axis.title.y = element_markdown(size = 12))
 
-png(filename = "./figures/supplemental_figures/regressions_figS4.png",
+png(filename = "./figures/Finalized Figs for Publication/FigureS3_final.png",
     res = 300,
     type = "cairo",
     units = "in",

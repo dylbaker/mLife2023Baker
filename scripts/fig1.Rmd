@@ -11,7 +11,8 @@ library(qiime2R)
 #Only run ONCE then comment out
 # if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
 # devtools::install_github("jbisanz/qiime2R")
-#BiocManager::install("msa")
+# BiocManager::install(c('msa','ggtree', 'ggtreeExtra'))
+# install.packages(c('ggpubr', 'patchwork', 'vegan'))
 library(ggpubr)
 library(patchwork)
 
@@ -187,25 +188,16 @@ final_tree <- gheatmap(r, abund_matrix, offset =0.1, width = 2, color = "gray70"
     scale_x_ggtree() + 
     scale_y_continuous(expand=c(0,1))
 
-# png(filename = "./figures/16S_tree.png",
-#     res = 450,
-#     type = "cairo",
-#     units = "in",
-#     width = 12,
-#     height = 6)
-# final_tree
-# dev.off()
-
 combo_plot <- (final_tree / nmds_bray) + plot_annotation(tag_levels = "A") + plot_layout(widths = c(5,1))
 
 fig_1 <- ggarrange(ncol = 2, labels = "AUTO",final_tree, nmds_bray, widths = c(2,1))
 fig_1A <- ggarrange(labels = "A", final_tree)
 fig_1B <- ggarrange(labels = "B", nmds_bray)
-ggsave('./figures/figure1.png',fig_1,width = 180, height = 152, units = "mm", dpi = 600)
-ggsave('./figures/figure1A.png',fig_1A,width = 180, height = 100, units = "mm", dpi = 600)
-ggsave('./figures/figure1A.svg',fig_1A,width = 180, height = 100, units = "mm", dpi = 600)
-ggsave('./figures/figure1B.png',fig_1B,width = 180, height = 80, units = "mm", dpi = 600)
-ggsave('./figures/figure1B.svg',fig_1B,width = 180, height = 100, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1.png',fig_1,width = 180, height = 152, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1A.png',fig_1A,width = 180, height = 100, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1A.svg',fig_1A,width = 180, height = 100, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1B.png',fig_1B,width = 180, height = 80, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1B.svg',fig_1B,width = 180, height = 100, units = "mm", dpi = 600)
 
 ```
 

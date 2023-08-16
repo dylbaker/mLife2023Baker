@@ -129,7 +129,7 @@ PC_plot_N <- ggplot(data = plot_data, aes(x = read_timeDays, y = log10(PC_100_tr
         legend.direction = "vertical") 
 
 
-png(filename = "./figures/figure5.png",
+png(filename = "./figures/Finalized Figs for Publication/figure2_final.png",
     res = 600,
     type = "cairo",
     units = "mm",
@@ -248,7 +248,7 @@ gr_PC_plot <- ggplot(data = filter(gr_PC, !N_ug_L == 883), aes(x = N_ug_L, y = g
         )
 
 
-png(file = "./figures/Figure2B.png",
+png(file = "./figures/figure_pieces/Figure4B.png",
     type = "cairo",
     units = "mm",
     res = 600, width = 180, height = 180)
@@ -258,7 +258,7 @@ gr_PC_plot
 dev.off()
 
 #Saved for later to incorporate with fig2A to make final figure 2
-saveRDS(gr_PC_plot, file = "./figures/fig2B.rds")
+saveRDS(gr_PC_plot, file = "./figures/figure_pieces/fig4B.rds")
 
 gr_chlA <- full_data |>
   filter(Culture != "Media_CTRL", 
@@ -267,7 +267,7 @@ gr_chlA <- full_data |>
          growthrate_chlA > 0) |>
   group_by(Culture, State, N_ug_L, Plate, Well, Treatment_name) |>
   slice_max(n = 5, growthrate_PC) |>
-  summarise(gr_chlA_mean = mean(growthrate_chlA),
+  dplyr::summarise(gr_chlA_mean = mean(growthrate_chlA),
             gr_PC_mean = mean(growthrate_PC),
             gr_chlA_sd = sd(growthrate_chlA),
             gr_pc_sd = sd(growthrate_PC),
@@ -301,20 +301,13 @@ gr_chlA_plot <- ggplot(data = gr_chlA, aes(x = N_ug_L, y = growthrate_corrected)
                               ymax = growthrate_corrected + gr_chlA_se_corrected), width = 250) +
   #labs(title = "Chlorophyll-A Manual") +
    ylim(0,1) +
-  theme_pubclean() +
+  theme_pubr(border = T, base_size = 14) +
   theme(strip.text = element_text( size = 12),
         axis.text.x = element_text(angle = 60, hjust = 0.4, vjust = 0.5)
         ) 
-gr_chlA_plot
+fig_S1 <- ggarrange(common.legend = T, nrow = 1, labels = "AUTO", gr_PC_plot, gr_chlA_plot)
 
-png(file = "./figures/supplemental_figures/FigS1.png", 
-    type = "cairo",
-    units = "in",
-    res = 450, width = 10, height = 7)
-
-(gr_PC_plot | gr_chlA_plot) + plot_annotation(tag_levels = "A")
-
-dev.off() 
+ggsave('./figures/Finalized Figs for Publication/FigureS1_final.png',fig_S1,width = 180, height = 200, units = "mm", dpi = 600)
 
 ```
 

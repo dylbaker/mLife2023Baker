@@ -107,6 +107,7 @@ summary_stats <- rbind(pccax,pccx,nccax,nccx) |>
 
 t_tests <- summary_stats |>
   tidy(t.test())
+
 contrasts_barplot <- ggplot(data = summary_stats, aes(x = State, y = mean_abs_diff)) +
   geom_bar(stat = 'identity', aes(fill = State)) +
   facet_wrap(~ Element + Parameter, nrow = 2, scales = 'free') +
@@ -118,7 +119,7 @@ contrasts_barplot <- ggplot(data = summary_stats, aes(x = State, y = mean_abs_di
   theme(legend.position = "right"
         )
 
-png(file = "./figures/figure7.png", 
+png(file = "./figures/Finalized Figs for Publication/FigureS2.png", 
     type = "cairo",
     units = "mm",
     res = 600, width = 180, height = 100)
@@ -126,40 +127,41 @@ png(file = "./figures/figure7.png",
 contrasts_barplot
 
 dev.off() 
-  
-all_contrasts <- rbind(pccax,pccx,nccax,nccx) |>
-  dplyr::rename("Contrast" = Form,
-                "Difference" = Estimate,
-                "Significance" = psig.adj,
-                "(SE)" = SE) |>
-  mutate(Parameter = case_when(str_detect(Contrast, "ks") ~ "K<sub>s</sub> μg•L<sup>-1</sup>",
-                               T ~ "μmax day<sup>-1</sup>"),
-         Contrast = str_replace_all(Contrast, c("MUT_7806" = "PCC 7806 ΔmcyB",
-                                                "WT_7806" = "PCC 7806",
-                                                "PCC_9701" = "PCC 9701",
-                                                "NIES_843" = "NIES-843",
-                                                'ks' = '',
-                                                'mumax' = '')),
-         Significance = case_when(Significance == "NS" ~ '',
-                                  T ~ Significance),
-         Difference = round(Difference, digits = 2),
-         `(SE)` = paste0('(',round(`(SE)`, digits = 2),')'))|>
-  unite(c(Difference, `(SE)`, Significance), remove = T, sep = ' ', col = "Difference (SE)" ) |>
-  dplyr::select(- c(`t-value`,`p-value`,`p.adj`)) |>
-  pivot_wider(values_from = "Difference (SE)", names_from = c("State","Element"))
 
-kbl(
-  all_contrasts,
-  escape = F,
-  align = c("l") ,
-  col.names = c("Contrast", "Parameter","Difference (SE) Axenic", "Difference (SE) Xenic", "Difference (SE) Axenic", "Difference (SE) Xenic")
-)  %>%
-  kable_styling("striped", full_width = T) %>%
-  add_header_above(c(
-    " " = 2,
-    "Phosphorus" = 2,
-    "Nitrogen" = 2
-  )) %>% save_kable(file = "./tables/table1.png", zoom = 1.5)
+#Code below was changed out in CNP_Q_analysis.R to make Figure 5.
+# all_contrasts <- rbind(pccax,pccx,nccax,nccx) |>
+#   dplyr::rename("Contrast" = Form,
+#                 "Difference" = Estimate,
+#                 "Significance" = psig.adj,
+#                 "(SE)" = SE) |>
+#   mutate(Parameter = case_when(str_detect(Contrast, "ks") ~ "K<sub>s</sub> μg•L<sup>-1</sup>",
+#                                T ~ "μmax day<sup>-1</sup>"),
+#          Contrast = str_replace_all(Contrast, c("MUT_7806" = "PCC 7806 ΔmcyB",
+#                                                 "WT_7806" = "PCC 7806",
+#                                                 "PCC_9701" = "PCC 9701",
+#                                                 "NIES_843" = "NIES-843",
+#                                                 'ks' = '',
+#                                                 'mumax' = '')),
+#          Significance = case_when(Significance == "NS" ~ '',
+#                                   T ~ Significance),
+#          Difference = round(Difference, digits = 2),
+#          `(SE)` = paste0('(',round(`(SE)`, digits = 2),')'))|>
+#   unite(c(Difference, `(SE)`, Significance), remove = T, sep = ' ', col = "Difference (SE)" ) |>
+#   dplyr::select(- c(`t-value`,`p-value`,`p.adj`)) |>
+#   pivot_wider(values_from = "Difference (SE)", names_from = c("State","Element"))
+# 
+# kbl(
+#   all_contrasts,
+#   escape = F,
+#   align = c("l") ,
+#   col.names = c("Contrast", "Parameter","Difference (SE) Axenic", "Difference (SE) Xenic", "Difference (SE) Axenic", "Difference (SE) Xenic")
+# )  %>%
+#   kable_styling("striped", full_width = T) %>%
+#   add_header_above(c(
+#     " " = 2,
+#     "Phosphorus" = 2,
+#     "Nitrogen" = 2
+#   )) %>% save_kable(file = "./tables/table1.png", zoom = 1.5)
 
 ```
 
