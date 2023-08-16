@@ -8,7 +8,7 @@ N_analysis: makes figures S1 and S3, and makes panel B of figure 2, which is out
 
 P_analysis: makes figure S2 and panel A of figure 2
 
-nls_monod: makes table 1 and performs the nonlinear least squares regression on growth rate data to calculate the mumax and ks values seen in table 2, as well as doing statistical tests to show differences betweeen axenic and xenic state and across strains.
+nls_monod: makes table 1 and performs the nonlinear least squares regression on growth rate data to calculate the mumax and ks values seen in table 1, as well as doing statistical tests to show differences betweeen axenic and xenic state and across strains.
 
 functions.R: Contains lots of useful functions that are used in nearly all of the above scripts. They are really bulky, so it makes sense to have them in a separate file. They include importing the data, statistical analyses, and a couple of other niche functions used in this analysis.
 
