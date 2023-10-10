@@ -78,7 +78,7 @@ full_data <-  inner_join(data_all, map_data,
   arrange(read_timeDays) |>
   dplyr::mutate(
     evap_correction = (1 - read_timeDays * 0.002761443318),
-         PC_150_true = abs(PC_150 - mean(PC_150[Culture == "Media_CTRL"])) * evap_correction,
+         PC_150_true = PC_150* evap_correction,
          chlA_150_true = chlA_150 * evap_correction) |>
   group_by(Plate,Well) |>
   dplyr::mutate(
@@ -102,7 +102,7 @@ write.csv(full_data, file = "./data/lowP_data_full_120721.csv")
 facet_data <- full_data |>
   mutate(P_level = factor(paste(P_ug_L, "μg/L P")),
          #log10_chlA = log10(chlA_true),
-         log10_PC = log10(PC_150_true))
+         log10_PC = log10(PC_150_true) - log10(mean(PC_150_true[Culture == "Media_CTRL"])))
 
 blank_facets <- subset(facet_data, Culture == "Media_CTRL") |>
   group_by(read_day, Culture,State, Treatment_name) %>%
@@ -112,7 +112,8 @@ blank_facets <- subset(facet_data, Culture == "Media_CTRL") |>
 
 sample_facets <- subset(facet_data, Culture != "Media_CTRL") |>
   dplyr::mutate(facet1 = P_level, 
-         facet2 = State) 
+         facet2 = State,
+         Culture = factor(Culture, levels = c("NIES_843","PCC_9701","WT_7806","MUT_7806", "Media_CTRL")))
 
 all_blank_facets <- merge(blank_facets, data.frame(unique(sample_facets[c("facet1","facet2")])))
 
@@ -133,22 +134,24 @@ PC_plot_P <- ggplot(data = sample_facets, aes(x = read_timeDays, y = log10_PC, c
                       labels = c("NIES_843" = "NIES-843", 
                                  "PCC_9701" = "PCC 9701",
                                  "WT_7806" = "PCC 7806",
-                                 "MUT_7806" = "PCC 7806 ΔmcyB", 
-                                "Media_CTRL" = "Media Control")
+                                 "MUT_7806" = "PCC 7806 Δ*mcyB*", 
+                                "Media_CTRL" = "Media Control"), drop = FALSE
                       ) +
    ylab("Log 10, Phycocyanin Fluorescence") +
    xlab("Time (days)") +
-   coord_cartesian(ylim = c(0,4)) +
+   coord_cartesian(ylim = c(-0.05,3), expand = T
+                    ) +
    facet_wrap(~factor(facet1, 
                        levels = c("1.1 μg/L P","9.6 μg/L P","18.7 μg/L P",
                                   "47.6 μg/L P","100 μg/L P","171.1 μg/L P",
                                   "309.5 μg/L P","1551.6 μg/L P", "3030 μg/L P"
                                   )) + facet2, nrow = 3) +
-  theme_pubr(border = T, base_size = 12) +
-  theme(strip.text = element_text(size = 11),
+  theme_pubr(border = T, base_family = "arial", base_size = 8) +
+  theme(strip.text = element_text(size = 8),
+        legend.text = element_markdown(),
         legend.position = "bottom") 
 
-ggsave('./figures/Finalized Figs for Publication/figure3_final.png',PC_plot_P,width = 180, height = 225, units = "mm", dpi = 600)
+ggsave('./figures/Finalized Figs for Publication/figure3_final.png',PC_plot_P,width = 160, height = 160, units = "mm", dpi = 600)
 
 ```
 
@@ -202,7 +205,7 @@ gr_PC_plot <- ggplot(data = gr_PC, aes(x = P_ug_L, y = growthrate_corrected)) +
    coord_cartesian(ylim = c(0.0,1.0)) +
    facet_grid(factor(Culture, 
                      levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
-                     labels = c("PCC 7806 ΔmcyB", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
+                     labels = c("PCC 7806 Δ*mcyB*", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
    stat_smooth(color = "black", 
                size = 0.7,
                method = "nls",
@@ -213,81 +216,94 @@ gr_PC_plot <- ggplot(data = gr_PC, aes(x = P_ug_L, y = growthrate_corrected)) +
                )) +
   geom_errorbar(mapping = aes(ymin = growthrate_corrected - gr_pc_se_corrected,
                               ymax = growthrate_corrected + gr_pc_se_corrected)) +
-  theme_pubr(border = T, base_size = 14) +
-  theme(strip.text = element_text(size = 12),
+  theme_pubr(border = T,base_family = 'arial', base_size = 8) +
+  theme(strip.text.y.right = ggtext::element_textbox(orientation = 'right-rotated'),
         axis.text.x = element_text(angle = 60, hjust = 1)
         )
 fig4B_Nmonod <- readRDS("./figures/figure_pieces/fig4B.rds")
 
 fig4_Nmonod <- fig4B_Nmonod + labs(title = element_blank())
 
-Monod_patchwork <- (gr_PC_plot | fig4_Nmonod) + plot_annotation(tag_levels = "A") + plot_layout(guides = 'collect')
+Monod_patchwork <- ggarrange(ncol = 2, labels = c('[A]','[B]'), gr_PC_plot, fig4_Nmonod, font.label = list(size = 9.5))
 
-ggsave('./figures/Finalized Figs for Publication/figure4_final.png',Monod_patchwork,width = 180, height = 200, units = "mm", dpi = 600)
+ggsave('./figures/Finalized Figs for Publication/figure4_final.png',Monod_patchwork,width = 160, height = 160, units = "mm", dpi = 600)
 
 ```
 
 
-```{r growthrates side analysis}
-P_PC <- full_data |>
-  mutate(State = case_when(is.na(State) ~ "Axenic",
-         T ~ State),
-         P_ug_L = case_when(is.na(P_ug_L) ~ 0,
-                            T ~ P_ug_L)) %>%
-  filter(read_day %in% c(1:11)) %>%
-  all_easylinear(PC_150_true ~ read_timeDays | Well + Plate + State + P_ug_L + Culture, 
-                 data = ., h = 4, quota = 0.95)
-
-par(mfrow = c(2,3))
-plot(P_PC, log = 'y')
-
-results_P_full_PC <- summary(P_PC)
-
-results_P_PC <- results(P_PC) %>%
-  dplyr::rename(growthrate = mumax)
-
-std_error_P <- extract_dfs(results_P_full_PC) |>
-  separate(col = sample, c("Well","Plate","State","P_ug_L","Culture"), sep = ":", convert = FALSE) |>
-  mutate(yplus = growthrate + std_error,
-         yminus = growthrate - std_error,
-         P_ug_L = as.double(P_ug_L),
-         Plate = as.integer(Plate)) %>%
-  dplyr::select(-growthrate) 
-
-#Add standard error to the dataframe
-grs_PC <- inner_join(results_P_PC, std_error_P, by = c("Well","Plate","State","P_ug_L","Culture")) |>
-  #left_join(., low_P_120721_ttests,by = c("Well","Plate","State","P_ug_L","Culture"), copy = TRUE) %>%
-  mutate(growthrate_corrected = case_when(r2 <= max(r2[Culture == "Media_CTRL"]) ~ 0, 
-                                          lag >= median(lag[Culture == "Media_CTRL"]) ~ 0, #This metric didn't work as well here
-                                          T ~ growthrate)) |>
-  dplyr::select(Well, Plate, State,
-         P_ug_L,lag, growthrate_corrected,
-         growthrate, Culture,
-         r2, std_error)
-
-gr_PC_plot <- ggplot(data = filter(grs_PC,growthrate_corrected > 0), aes(x = P_ug_L, y = growthrate)) +
-   geom_point(color = "orange",
-              size = 2) +
-   ylab("μ (1/day)") +
-   xlab("Phosphorus (μg/L)") +
-   coord_cartesian(ylim = c(0.0,1.0)) +
-   facet_grid(factor(Culture, 
-                     levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
-                     labels = c("PCC 7806 ΔmcyB", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
-   stat_smooth(color = "black", 
-               size = 0.7,
-               method = "nls",
-               se = FALSE,
-               method.args = list(
-                 formula = y~mumax*x/(x + ks),
-                 start = list(mumax = 0.6, ks = 2)
-               )) +
-  geom_errorbar(mapping = aes(ymin = growthrate_corrected - std_error,
-                              ymax = growthrate_corrected + std_error)) +
-  theme_pubr(border = T, base_size = 14) +
-  theme(strip.text = element_text(size = 12),
-        axis.text.x = element_text(angle = 60, hjust = 1)
-        )
+```{r Exploratory Analysis not used in Final Synthesis, eval=FALSE, include=FALSE}
+#### EXPLORATORY ANALYSIS NOT USED IN FINAL PRODUCT. NO VALUES FROM BELOW ARE REPORTED IN THE MANUSCRIPT
+# P_PC <- full_data |>
+#   mutate(State = case_when(is.na(State) ~ "Axenic",
+#          T ~ State),
+#          P_ug_L = case_when(is.na(P_ug_L) ~ 0,
+#                             T ~ P_ug_L)) %>%
+#   filter(read_day %in% c(1:11)) %>%
+#   all_easylinear(PC_150_true ~ read_timeDays | Well + Plate + State + P_ug_L + Culture, 
+#                  data = ., h = 4, quota = 0.95)
+# 
+# par(mfrow = c(2,3))
+# plot(P_PC, log = 'y')
+# 
+# blank_plot <- filter(full_data, Culture == "Media_CTRL") |>
+#   group_by(read_day) |>
+#   dplyr::reframe(across(c(PC_150_true),
+#                    list(avg = mean, sd = sd, se = ~(sd(.x)/sqrt(n()))),
+#                    .names = "{.fn}_{.col}"))|>
+#   ggplot(aes(x = read_day, y = avg_PC_150_true)) +
+#   geom_point() +
+#   theme_pubr() +
+#   geom_errorbar(aes(ymin = avg_PC_150_true - se_PC_150_true,
+#                       ymax = avg_PC_150_true + se_PC_150_true))
+# 
+# results_P_full_PC <- summary(P_PC)
+# 
+# results_P_PC <- results(P_PC) %>%
+#   dplyr::rename(growthrate = mumax)
+# 
+# std_error_P <- extract_dfs(results_P_full_PC) |>
+#   separate(col = sample, c("Well","Plate","State","P_ug_L","Culture"), sep = ":", convert = FALSE) |>
+#   mutate(yplus = growthrate + std_error,
+#          yminus = growthrate - std_error,
+#          P_ug_L = as.double(P_ug_L),
+#          Plate = as.integer(Plate)) %>%
+#   dplyr::select(-growthrate) 
+# 
+# #Add standard error to the dataframe
+# grs_PC <- inner_join(results_P_PC, std_error_P, by = c("Well","Plate","State","P_ug_L","Culture")) |>
+#   #left_join(., low_P_120721_ttests,by = c("Well","Plate","State","P_ug_L","Culture"), copy = TRUE) %>%
+#   mutate(growthrate_corrected = case_when(P_ug_L > 1.1 ~ growthrate,
+#                                           r2 <= max(r2[Culture == "Media_CTRL"]) ~ 0, 
+#                                           #lag >= median(lag[Culture == "Media_CTRL"]) ~ 0, #This metric didn't work as well here
+#                                           T ~ growthrate)) |>
+#   dplyr::select(Well, Plate, State,
+#          P_ug_L,lag, growthrate_corrected,
+#          growthrate, Culture,
+#          r2, std_error)
+# 
+# gr_PC_plot <- ggplot(data = filter(grs_PC, !Culture == "Media_CTRL"), aes(x = P_ug_L, y = growthrate)) +
+#    geom_point(color = "orange",
+#               size = 2) +
+#    ylab("μ (1/day)") +
+#    xlab("Phosphorus (μg/L)") +
+#    coord_cartesian(ylim = c(0.0,1.0)) +
+#    facet_grid(factor(Culture, 
+#                      levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
+#                      labels = c("PCC 7806 Δ*mcyB*", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
+#    stat_smooth(color = "black", 
+#                size = 0.7,
+#                method = "nls",
+#                se = FALSE,
+#                method.args = list(
+#                  formula = y~mumax*x/(x + ks),
+#                  start = list(mumax = 0.6, ks = 2)
+#                )) +
+#   geom_errorbar(mapping = aes(ymin = growthrate_corrected - std_error,
+#                               ymax = growthrate_corrected + std_error)) +
+#   theme_pubr(border = T, base_size = 8) +
+#   theme(strip.text.y.right = ggtext::element_textbox(orientation = 'right-rotated'),
+#         axis.text.x = element_text(angle = 60, hjust = 1)
+#         )
 
 ```
 

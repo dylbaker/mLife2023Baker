@@ -97,26 +97,27 @@ sample_facets <- subset(facet_data, Culture != "Media_CTRL") |>
 all_facets <- merge(blank_facets, data.frame(unique(sample_facets[c("facet1","facet2")])))
 
 plot_data <- rbind(all_facets, sample_facets)|>
-  filter(facet1 != "883 μg/L N")
+  filter(facet1 != "883 μg/L N") |>
+  dplyr::mutate(Culture = factor(Culture, levels = c("MUT_7806","WT_7806","PCC_9701", "NIES_843","Media_CTRL")))
 
 PC_plot_N <- ggplot(data = plot_data, aes(x = read_timeDays, y = log10(PC_100_true), color = Culture)) +
    geom_point(size = 1.5, shape = 21) +
-   scale_color_manual(values = c("NIES_843" = "cyan3",
-                                 "PCC_9701" = "darkgoldenrod2",
-                                "WT_7806" =  "firebrick3",
+   scale_color_manual(values = c("WT_7806" =  "firebrick3",
                                 "MUT_7806" = "chartreuse2",
+                                "NIES_843" = "cyan3",
+                                "PCC_9701" = "darkgoldenrod2",
                                 "Media_CTRL" = "gray"),
                       labels = c("NIES_843" = "NIES-843", 
                                  "PCC_9701" = "PCC 9701",
                                  "WT_7806" = "PCC 7806",
-                                 "MUT_7806" = "PCC 7806 ΔmcyB", 
+                                 "MUT_7806" = "PCC 7806 Δ*mcyB*", 
                                 "Media_CTRL" = "Media Control")
                       ) +
    geom_line(aes(group = p_well)) +
    ylab("Log 10, Phycocyanin Fluorescence") +
    xlab("Time (days)") +
-   xlim(0, 19) +
-   coord_cartesian(ylim = c(0,3.5), expand = F) +
+   xlim(0, 17) +
+   coord_cartesian(ylim = c(0,3.4), expand = T) +
    facet_wrap(~factor(facet1, 
                        levels = c("8 μg/L N","40.5 μg/L N",
                                   "87 μg/L N"
@@ -124,17 +125,17 @@ PC_plot_N <- ggplot(data = plot_data, aes(x = read_timeDays, y = log10(PC_100_tr
                                     "2760 μg/L N"
                                    ,"14150 μg/L N", "30500 μg/L N"
                                   )) + facet2, nrow = 4) +
-  theme_pubr(border = T, base_size = 14) +
-  theme(strip.text = element_text(size = 12),
+  theme_pubr(border = T, base_family = 'arial',base_size = 8) +
+  theme(strip.text = element_text(size = 8),
+        legend.text = element_markdown(),
         legend.direction = "vertical") 
 
 
 png(filename = "./figures/Finalized Figs for Publication/figure2_final.png",
     res = 600,
-    type = "cairo",
     units = "mm",
-    width = 180,
-    height = 250)
+    width = 160,
+    height = 160)
 
 grid.draw(shift_legend(PC_plot_N))
 
@@ -231,7 +232,7 @@ gr_PC_plot <- ggplot(data = filter(gr_PC, !N_ug_L == 883), aes(x = N_ug_L, y = g
    coord_cartesian(ylim = c(0.0,1.0)) +
    facet_grid(factor(Culture, 
                      levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
-                     labels = c("PCC 7806 ΔmcyB", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
+                     labels = c("PCC 7806 Δ*mcyB*", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
    stat_smooth(color = "black", 
                size = 0.7,
                method = "nls",
@@ -242,8 +243,8 @@ gr_PC_plot <- ggplot(data = filter(gr_PC, !N_ug_L == 883), aes(x = N_ug_L, y = g
                )) +
   geom_errorbar(mapping = aes(ymin = growthrate_corrected - gr_pc_se_corrected,
                               ymax = growthrate_corrected + gr_pc_se_corrected), width = 400) +
-  theme_pubr(border = T, base_size = 14) +
-  theme(strip.text = element_text(size = 12),
+  theme_pubr(border = T,base_family = 'arial', base_size = 8) +
+  theme(strip.text.y.right = ggtext::element_textbox(orientation = 'right-rotated'),
         axis.text.x = element_text(angle = 60, hjust = 1)
         )
 
@@ -251,7 +252,7 @@ gr_PC_plot <- ggplot(data = filter(gr_PC, !N_ug_L == 883), aes(x = N_ug_L, y = g
 png(file = "./figures/figure_pieces/Figure4B.png",
     type = "cairo",
     units = "mm",
-    res = 600, width = 180, height = 180)
+    res = 600, width = 160, height = 160)
 
 gr_PC_plot
 
@@ -287,7 +288,7 @@ gr_chlA_plot <- ggplot(data = gr_chlA, aes(x = N_ug_L, y = growthrate_corrected)
    xlab("Nitrogen (μg/L)") +
    facet_grid(factor(Culture, 
                      levels = c("MUT_7806", "WT_7806", "PCC_9701", "NIES_843"), 
-                     labels = c("PCC 7806 ΔmcyB", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
+                     labels = c("PCC 7806 Δ*mcyB*", "PCC 7806", "PCC 9701", "NIES-843")  )  ~ State) +
    geom_smooth(color = "black", 
                size = 0.7,
                method = "nls",
@@ -299,15 +300,14 @@ gr_chlA_plot <- ggplot(data = gr_chlA, aes(x = N_ug_L, y = growthrate_corrected)
                )) +
   geom_errorbar(mapping = aes(ymin = growthrate_corrected - gr_chlA_se_corrected,
                               ymax = growthrate_corrected + gr_chlA_se_corrected), width = 250) +
-  #labs(title = "Chlorophyll-A Manual") +
    ylim(0,1) +
-  theme_pubr(border = T, base_size = 14) +
-  theme(strip.text = element_text( size = 12),
+  theme_pubr(border = T, base_family = 'arial',base_size = 8) +
+  theme(strip.text.y.right = ggtext::element_textbox(orientation = 'right-rotated'),
         axis.text.x = element_text(angle = 60, hjust = 0.4, vjust = 0.5)
         ) 
-fig_S1 <- ggarrange(common.legend = T, nrow = 1, labels = "AUTO", gr_PC_plot, gr_chlA_plot)
+fig_S1 <- ggarrange(ncol = 2, labels = c('[A]','[B]'), gr_PC_plot, gr_chlA_plot,font.label = list(size = 9.5))
 
-ggsave('./figures/Finalized Figs for Publication/FigureS1_final.png',fig_S1,width = 180, height = 200, units = "mm", dpi = 600)
+ggsave('./figures/Finalized Figs for Publication/FigureS1_final.png',fig_S1,width = 160, height = 160, units = "mm", dpi = 600)
 
 ```
 

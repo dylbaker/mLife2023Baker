@@ -77,15 +77,13 @@ P <- grs |>
 
 ```{r NLS}
 #Non-linear least squares regression of the monod function fitted to the Nitrogen and Phosphorus experimental datapoints. See functions.R for full implementation
-gnls_N <- get_nls_N(N)
-gnls_P <- get_nls_P(P)
+gnls_N <- get_nls_N(N) |>
+  mutate(element = "N")
+gnls_P <- get_nls_P(P) |>
+  mutate(element = "P")
 
-P_full <- nls_table(P, growthrate_corrected ~ mumax*P_ug_L/(P_ug_L + ks),
-                 mod_start = c(mumax = 1, ks = 3),
-                 .groups = c("Culture","State"))
-N_full <- nls_table(N, growthrate_corrected ~ mumax*N_ug_L/(N_ug_L + ks),
-                 mod_start = c(mumax = 1, ks = 100),
-                 .groups = c("Culture","State"))
+sig_results <- rbind(gnls_N, gnls_P) |> 
+  filter(str_detect(psig.adj, "\\*"), !str_detect(term, "Intercept"))
 
 #Get all of the contrasts for μmax and ks across strain, grouped by Xenic or Axenic status
 pccax <- pccax(P)
@@ -98,15 +96,13 @@ summary_stats <- rbind(pccax,pccx,nccax,nccx) |>
                 "Difference" = Estimate,
                 "Significance" = psig.adj,
                 "(SE)" = SE) |>
-  mutate(Parameter = case_when(str_detect(Contrast, "ks") ~ "Ks",
-                               T ~ "μmax")) |>
+  mutate(Parameter = case_when(str_detect(Contrast, "ks") ~ "*K*<sub>s</sub>",
+                               T ~ "*μ*<sub>max</sub>")) |>
   ddply(.(Parameter, Element, State), summarise,
               mean_abs_diff = mean(abs(Difference)),
               n = 4,
               abs_sd = sd(abs(Difference)))
 
-t_tests <- summary_stats |>
-  tidy(t.test())
 
 contrasts_barplot <- ggplot(data = summary_stats, aes(x = State, y = mean_abs_diff)) +
   geom_bar(stat = 'identity', aes(fill = State)) +
@@ -115,14 +111,15 @@ contrasts_barplot <- ggplot(data = summary_stats, aes(x = State, y = mean_abs_di
   scale_fill_manual(values = c("Axenic" = "gray45",
                                "Xenic" = "gray85")) +
   ylab("Mean |Difference|") +
-  theme_pubr(base_size = 14, margin = F) +
-  theme(legend.position = "right"
+  theme_pubr(base_size = 8, base_family = 'arial',border = T, margin = F) +
+  theme(legend.position = "right",
+        strip.text = element_markdown()
         )
 
-png(file = "./figures/Finalized Figs for Publication/FigureS2.png", 
+png(file = "./figures/Finalized Figs for Publication/FigureS2_final.png", 
     type = "cairo",
     units = "mm",
-    res = 600, width = 180, height = 100)
+    res = 600, width = 160, height = 100)
 
 contrasts_barplot
 

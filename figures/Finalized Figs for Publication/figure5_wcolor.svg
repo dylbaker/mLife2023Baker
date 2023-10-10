@@ -1,501 +1,761 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='510.24pt' height='850.39pt' viewBox='0 0 510.24 850.39'>
-<defs>
-  <style type='text/css'><![CDATA[
-    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
-      fill: none;
-      stroke: #000000;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-miterlimit: 10.00;
-    }
-    .svglite text {
-      white-space: pre;
-    }
-  ]]></style>
-</defs>
-<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
-<defs>
-  <clipPath id='cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk='>
-    <rect x='0.00' y='0.00' width='510.24' height='850.39' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 453.5 708.7" style="enable-background:new 0 0 453.5 708.7;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{clip-path:url(#SVGID_00000136409125603334900060000013342777833771723194_);}
+	.st2{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:0.78;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st3{clip-path:url(#SVGID_00000100344226118665168800000013745148247721754303_);}
+	.st4{fill:#FFFFFF;}
+	.st5{fill:#C1FFC1;}
+	.st6{fill:#228B22;}
+	.st7{font-family:'ArialMT';}
+	.st8{font-size:22.76px;}
+	.st9{fill:none;stroke:#000000;stroke-width:1.07;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st10{fill:none;stroke:#000000;stroke-width:1.49;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st11{clip-path:url(#SVGID_00000011015186263260785140000013575582654522199688_);}
+	.st12{font-size:8px;}
+	.st13{fill:none;stroke:#333333;stroke-width:0.78;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st14{font-family:'Arial-ItalicMT';}
+	.st15{font-size:5.6px;}
+	.st16{font-family:'Symbol';}
+	.st17{font-size:10px;}
+	.st18{font-family:'Arial-BoldMT';}
+	.st19{font-size:9.5px;}
+	.st20{clip-path:url(#SVGID_00000057851881457682479400000004008652066452360597_);}
+	.st21{clip-path:url(#SVGID_00000034788678321979629650000011181612742801382565_);}
+	.st22{clip-path:url(#SVGID_00000088111736145821443910000012287761056695624880_);}
+	.st23{clip-path:url(#SVGID_00000021819394577193391330000008739660764563336606_);}
+	.st24{clip-path:url(#SVGID_00000023274673009721974470000001815543583525421978_);}
+	.st25{clip-path:url(#SVGID_00000093895184513421420400000001708096928894128259_);}
+	.st26{clip-path:url(#SVGID_00000046341013203529088130000013813740356515010491_);}
+	.st27{clip-path:url(#SVGID_00000085229858522800274900000008997746173295479956_);}
+	.st28{clip-path:url(#SVGID_00000057855340024953632210000002081082061272537250_);}
+	.st29{clip-path:url(#SVGID_00000056400742236741347460000003484880277974201473_);}
+	.st30{clip-path:url(#SVGID_00000126292824706369308020000015786632950484669609_);}
+	.st31{clip-path:url(#SVGID_00000160873342577735069460000010275229331286892935_);}
+	.st32{clip-path:url(#SVGID_00000153691563685758094440000011428316604380090797_);}
+	.st33{clip-path:url(#SVGID_00000082351293446293378520000012924797597677818532_);}
+	.st34{clip-path:url(#SVGID_00000148635022381002856900000016203479330835314598_);}
+	.st35{font-size:6.4px;}
+	.st36{font-size:12px;}
+</style>
+<rect y="0" class="st0" width="453.5" height="708.7"/>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_1_" y="0" width="151.2" height="341.7"/>
+		</defs>
+		<clipPath id="SVGID_00000064337529675410534120000007470236899762423722_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000064337529675410534120000007470236899762423722_);">
+			<rect y="0" class="st2" width="151.2" height="341.7"/>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpMC4wMHw1MTAuMjR8MC4wMHw4MTcuMTc='>
-    <rect x='0.00' y='0.00000000000011' width='510.24' height='817.17' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4MTcuMTc=)'>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000004545396459479982380000008442461088825797259_" x="29.7" y="1.4" width="120.6" height="280.8"/>
+		</defs>
+		<clipPath id="SVGID_00000077307113038139220540000006982281386199269289_">
+			<use xlink:href="#SVGID_00000004545396459479982380000008442461088825797259_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000077307113038139220540000006982281386199269289_);">
+			<rect x="29.7" y="1.4" class="st4" width="120.6" height="280.8"/>
+			<rect x="29.7" y="118.7" class="st5" width="13.9" height="163.5"/>
+			<rect x="43.6" y="244.7" class="st6" width="13.9" height="37.6"/>
+			<rect x="60.6" y="151" class="st5" width="13.9" height="131.2"/>
+			<rect x="74.6" y="246.6" class="st6" width="13.9" height="35.6"/>
+			<rect x="91.6" y="89.7" class="st5" width="13.9" height="192.5"/>
+			<rect x="105.5" y="207" class="st6" width="13.9" height="75.2"/>
+			<rect x="122.5" y="73" class="st5" width="13.9" height="209.2"/>
+			<rect x="136.4" y="213.9" class="st6" width="13.9" height="68.3"/>
+			<rect x="47.2" y="215.5" class="st0" width="8.9" height="26.9"/>
+			<text transform="matrix(1 0 0 1 47.2352 234.9969)" class="st7 st8">*</text>
+			<rect x="140" y="179.5" class="st0" width="8.9" height="26.9"/>
+			<text transform="matrix(1 0 0 1 139.9977 199.0186)" class="st7 st8">*</text>
+			<line class="st9" x1="33.6" y1="62.4" x2="39.8" y2="62.4"/>
+			<line class="st9" x1="36.7" y1="62.4" x2="36.7" y2="175.1"/>
+			<line class="st9" x1="33.6" y1="175.1" x2="39.8" y2="175.1"/>
+			<line class="st9" x1="47.5" y1="230.4" x2="53.7" y2="230.4"/>
+			<line class="st9" x1="50.6" y1="230.4" x2="50.6" y2="258.9"/>
+			<line class="st9" x1="47.5" y1="258.9" x2="53.7" y2="258.9"/>
+			<line class="st9" x1="64.5" y1="103.8" x2="70.7" y2="103.8"/>
+			<line class="st9" x1="67.6" y1="103.8" x2="67.6" y2="198.3"/>
+			<line class="st9" x1="64.5" y1="198.3" x2="70.7" y2="198.3"/>
+			<line class="st9" x1="78.4" y1="231" x2="84.6" y2="231"/>
+			<line class="st9" x1="81.5" y1="231" x2="81.5" y2="262.3"/>
+			<line class="st9" x1="78.4" y1="262.3" x2="84.6" y2="262.3"/>
+			<line class="st9" x1="95.4" y1="26.3" x2="101.6" y2="26.3"/>
+			<line class="st9" x1="98.5" y1="26.3" x2="98.5" y2="153.1"/>
+			<line class="st9" x1="95.4" y1="153.1" x2="101.6" y2="153.1"/>
+			<line class="st9" x1="109.3" y1="184.9" x2="115.5" y2="184.9"/>
+			<line class="st9" x1="112.4" y1="184.9" x2="112.4" y2="229.1"/>
+			<line class="st9" x1="109.3" y1="229.1" x2="115.5" y2="229.1"/>
+			<line class="st9" x1="126.4" y1="20.7" x2="132.6" y2="20.7"/>
+			<line class="st9" x1="129.4" y1="20.7" x2="129.4" y2="125.3"/>
+			<line class="st9" x1="126.4" y1="125.3" x2="132.6" y2="125.3"/>
+			<line class="st9" x1="140.3" y1="197.1" x2="146.5" y2="197.1"/>
+			<line class="st9" x1="143.4" y1="197.1" x2="143.4" y2="230.7"/>
+			<line class="st9" x1="140.3" y1="230.7" x2="146.5" y2="230.7"/>
+			<rect x="29.7" y="1.4" class="st10" width="120.6" height="280.8"/>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000129905002430460930010000009498092425259089307_" y="0" width="453.5" height="708.7"/>
+		</defs>
+		<clipPath id="SVGID_00000167393137891099442110000005617948197927194042_">
+			<use xlink:href="#SVGID_00000129905002430460930010000009498092425259089307_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000167393137891099442110000005617948197927194042_);">
+			<rect x="21.7" y="278.2" class="st0" width="4.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 21.6709 285.0998)" class="st7 st12">0</text>
+			<rect x="12.8" y="222" class="st0" width="13.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 12.7725 228.8298)" class="st7 st12">100</text>
+			<rect x="12.8" y="165.7" class="st0" width="13.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 12.7725 172.55)" class="st7 st12">200</text>
+			<rect x="12.8" y="109.4" class="st0" width="13.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 12.7725 116.2702)" class="st7 st12">300</text>
+			<rect x="12.8" y="53.1" class="st0" width="13.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 12.7725 60.0002)" class="st7 st12">400</text>
+			<line class="st13" x1="27.7" y1="282.2" x2="29.7" y2="282.2"/>
+			<line class="st13" x1="27.7" y1="226" x2="29.7" y2="226"/>
+			<line class="st13" x1="27.7" y1="169.7" x2="29.7" y2="169.7"/>
+			<line class="st13" x1="27.7" y1="113.4" x2="29.7" y2="113.4"/>
+			<line class="st13" x1="27.7" y1="57.1" x2="29.7" y2="57.1"/>
+			<line class="st13" x1="43.6" y1="284.2" x2="43.6" y2="282.2"/>
+			<line class="st13" x1="74.6" y1="284.2" x2="74.6" y2="282.2"/>
+			<line class="st13" x1="105.5" y1="284.2" x2="105.5" y2="282.2"/>
+			<line class="st13" x1="136.4" y1="284.2" x2="136.4" y2="282.2"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 31.09 340.8593)" class="st7 st12">PCC</text>
+			
+				<rect x="28.7" y="312" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -272.8757 243.7467)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 36.5593 325.8192)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 43.4001 307.0292)" class="st7 st12">Δ</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 44.77 303.2694)" class="st14 st12">mcyB</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 70.2302 318.2997)" class="st7 st12">PCC</text>
+			
+				<rect x="67.8" y="289.5" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -225.9929 265.6452)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 75.6999 303.2684)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 101.1501 318.2997)" class="st7 st12">PCC</text>
+			
+				<rect x="98.8" y="289.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -205.5648 294.6886)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 106.6293 303.2694)" class="st7 st12">9701</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 132.0798 318.2997)" class="st7 st12">NIES-843</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.81 160.5002)" class="st14 st12">K</text>
+			<rect x="5.5" y="151.5" class="st0" width="6.6" height="2.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 10.2695 154.3098)" class="st7 st15">s</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.81 149.5099)" class="st16 st17">(</text>
+			<rect x="1.9" y="141.6" class="st0" width="9.5" height="4.6"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.8086 146.1701)" class="st7 st12">μ</text>
+			<rect x="1.9" y="137.1" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.8086 141.5598)" class="st7 st12">g</text>
+			<rect x="1.5" y="132.9" class="st0" width="10.1" height="4.2"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 4.87 132.6603)" class="st16 st15">−</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 4.87 129.5998)" class="st7 st15">1</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.81 126.4904)" class="st16 st17">)</text>
+			<text transform="matrix(1 0 0 1 0 10.25)" class="st18 st19">[A]</text>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpMC4wMHwxNzAuMDh8MC4wMHw0MDguNTk='>
-    <rect x='0.00' y='0.00' width='170.08' height='408.59' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMC4wMHwxNzAuMDh8MC4wMHw0MDguNTk=)'>
-<rect x='0.00' y='0.00' width='170.08' height='408.59' style='stroke-width: 1.55; stroke: #FFFFFF; fill: #FFFFFF;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000035530998096830198700000015988689329137147062_" x="151.2" y="0" width="151.2" height="341.7"/>
+		</defs>
+		<clipPath id="SVGID_00000148658001564229434960000000838485019697772199_">
+			<use xlink:href="#SVGID_00000035530998096830198700000015988689329137147062_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000148658001564229434960000000838485019697772199_);">
+			<rect x="151.2" y="0" class="st2" width="151.2" height="341.7"/>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000139996093288018467040000006375128570736810386_" x="178.7" y="1.4" width="122.9" height="280.8"/>
+		</defs>
+		<clipPath id="SVGID_00000092438167521814129800000008882295241808545166_">
+			<use xlink:href="#SVGID_00000139996093288018467040000006375128570736810386_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000092438167521814129800000008882295241808545166_);">
+			<rect x="178.7" y="1.4" class="st4" width="122.9" height="280.8"/>
+			<rect x="178.7" y="23.7" class="st5" width="14.2" height="258.6"/>
+			<rect x="192.8" y="77.7" class="st6" width="14.2" height="204.6"/>
+			<rect x="210.2" y="30.2" class="st5" width="14.2" height="252"/>
+			<rect x="224.3" y="98.2" class="st6" width="14.2" height="184.1"/>
+			<rect x="241.7" y="32.8" class="st5" width="14.2" height="249.5"/>
+			<rect x="255.8" y="31.9" class="st6" width="14.2" height="250.4"/>
+			<rect x="273.2" y="50.3" class="st5" width="14.2" height="231.9"/>
+			<rect x="287.3" y="75" class="st6" width="14.2" height="207.2"/>
+			<rect x="196" y="48.6" class="st0" width="8.9" height="26.9"/>
+			<text transform="matrix(1 0 0 1 196.0001 68.1003)" class="st7 st8">*</text>
+			<text transform="matrix(1 0 0 1 223.936 92.06)" class="st7 st8">**</text>
+			<line class="st9" x1="182.6" y1="6.4" x2="188.9" y2="6.4"/>
+			<line class="st9" x1="185.8" y1="6.4" x2="185.8" y2="40.9"/>
+			<line class="st9" x1="182.6" y1="40.9" x2="188.9" y2="40.9"/>
+			<line class="st9" x1="196.8" y1="64.7" x2="203.1" y2="64.7"/>
+			<line class="st9" x1="199.9" y1="64.7" x2="199.9" y2="90.6"/>
+			<line class="st9" x1="196.8" y1="90.6" x2="203.1" y2="90.6"/>
+			<line class="st9" x1="214.1" y1="12.9" x2="220.4" y2="12.9"/>
+			<line class="st9" x1="217.2" y1="12.9" x2="217.2" y2="47.5"/>
+			<line class="st9" x1="214.1" y1="47.5" x2="220.4" y2="47.5"/>
+			<line class="st9" x1="228.3" y1="85.2" x2="234.6" y2="85.2"/>
+			<line class="st9" x1="231.4" y1="85.2" x2="231.4" y2="111.1"/>
+			<line class="st9" x1="228.3" y1="111.1" x2="234.6" y2="111.1"/>
+			<line class="st9" x1="245.6" y1="19.8" x2="251.9" y2="19.8"/>
+			<line class="st9" x1="248.8" y1="19.8" x2="248.8" y2="45.7"/>
+			<line class="st9" x1="245.6" y1="45.7" x2="251.9" y2="45.7"/>
+			<line class="st9" x1="259.8" y1="18.9" x2="266.1" y2="18.9"/>
+			<line class="st9" x1="262.9" y1="18.9" x2="262.9" y2="44.8"/>
+			<line class="st9" x1="259.8" y1="44.8" x2="266.1" y2="44.8"/>
+			<line class="st9" x1="277.1" y1="37.4" x2="283.4" y2="37.4"/>
+			<line class="st9" x1="280.2" y1="37.4" x2="280.2" y2="63.3"/>
+			<line class="st9" x1="277.1" y1="63.3" x2="283.4" y2="63.3"/>
+			<line class="st9" x1="291.3" y1="66.4" x2="297.6" y2="66.4"/>
+			<line class="st9" x1="294.4" y1="66.4" x2="294.4" y2="83.7"/>
+			<line class="st9" x1="291.3" y1="83.7" x2="297.6" y2="83.7"/>
+			<rect x="178.7" y="1.4" class="st10" width="122.9" height="280.8"/>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpNjEuOTB8MTY5LjIzfDEuNDJ8MjczLjQ1'>
-    <rect x='61.90' y='1.42' width='107.33' height='272.03' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNjEuOTB8MTY5LjIzfDEuNDJ8MjczLjQ1)'>
-<rect x='61.90' y='1.42' width='107.33' height='272.03' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<rect x='61.90' y='115.04' width='12.38' height='158.41' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='74.29' y='237.05' width='12.38' height='36.39' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='89.42' y='146.36' width='12.38' height='127.09' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='101.81' y='238.95' width='12.38' height='34.50' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='116.94' y='86.95' width='12.38' height='186.49' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='129.33' y='200.59' width='12.38' height='72.85' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='144.46' y='70.77' width='12.38' height='202.67' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='156.84' y='207.24' width='12.38' height='66.20' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<polyline points='65.34,60.46 70.85,60.46 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='68.09,60.46 68.09,169.61 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='65.34,169.61 70.85,169.61 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='77.73,223.27 83.23,223.27 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='80.48,223.27 80.48,250.84 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='77.73,250.84 83.23,250.84 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='92.86,100.59 98.37,100.59 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='95.61,100.59 95.61,192.12 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='92.86,192.12 98.37,192.12 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='105.25,223.77 110.75,223.77 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='108.00,223.77 108.00,254.13 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='105.25,254.13 110.75,254.13 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='120.38,25.53 125.89,25.53 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='123.13,25.53 123.13,148.38 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='120.38,148.38 125.89,148.38 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='132.77,179.20 138.27,179.20 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='135.52,179.20 135.52,221.99 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='132.77,221.99 138.27,221.99 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='147.90,20.13 153.40,20.13 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='150.65,20.13 150.65,121.41 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='147.90,121.41 153.40,121.41 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='160.28,190.99 165.79,190.99 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='163.04,190.99 163.04,223.49 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='160.28,223.49 165.79,223.49 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='61.90' y='1.42' width='107.33' height='272.03' style='stroke-width: 1.49;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000145026525977678963560000004248888037821099948_" y="0" width="453.5" height="708.7"/>
+		</defs>
+		<clipPath id="SVGID_00000143596144154547783360000003143792406404754605_">
+			<use xlink:href="#SVGID_00000145026525977678963560000004248888037821099948_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000143596144154547783360000003143792406404754605_);">
+			<text transform="matrix(1 0 0 1 163.9589 285.1)" class="st7 st12">0.0</text>
+			<text transform="matrix(1 0 0 1 163.9589 198.7)" class="st7 st12">0.2</text>
+			<text transform="matrix(1 0 0 1 163.9589 112.29)" class="st7 st12">0.4</text>
+			<text transform="matrix(1 0 0 1 163.9589 25.88)" class="st7 st12">0.6</text>
+			<line class="st13" x1="176.7" y1="282.2" x2="178.7" y2="282.2"/>
+			<line class="st13" x1="176.7" y1="195.8" x2="178.7" y2="195.8"/>
+			<line class="st13" x1="176.7" y1="109.4" x2="178.7" y2="109.4"/>
+			<line class="st13" x1="176.7" y1="23" x2="178.7" y2="23"/>
+			<line class="st13" x1="192.8" y1="284.2" x2="192.8" y2="282.2"/>
+			<line class="st13" x1="224.3" y1="284.2" x2="224.3" y2="282.2"/>
+			<line class="st13" x1="255.8" y1="284.2" x2="255.8" y2="282.2"/>
+			<line class="st13" x1="287.3" y1="284.2" x2="287.3" y2="282.2"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 180.3 340.8593)" class="st7 st12">PCC</text>
+			
+				<rect x="177.9" y="312" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -174.7135 383.9587)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 185.7695 325.8192)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 192.61 307.0292)" class="st7 st12">Δ</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 193.9802 303.2694)" class="st14 st12">mcyB</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 220.0099 318.2997)" class="st7 st12">PCC</text>
+			
+				<rect x="217.6" y="289.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -127.4223 406.3839)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 225.4797 303.2684)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 251.5099 318.2997)" class="st7 st12">PCC</text>
+			
+				<rect x="249.1" y="289.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -106.6968 435.9837)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 256.9797 303.2694)" class="st7 st12">9701</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 283.0102 318.2997)" class="st7 st12">NIES-843</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 160 163.4904)" class="st14 st12">μ</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 161.45 158.4797)" class="st7 st15">m</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 161.45 153.8195)" class="st7 st15">a</text>
+			<rect x="156.6" y="147.9" class="st0" width="6.6" height="2.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 161.4502 150.7101)" class="st7 st15">x</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 160 145.9103)" class="st16 st17">(</text>
+			<rect x="153.1" y="138.1" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.999 142.5793)" class="st7 st12">d</text>
+			<rect x="153.1" y="133.7" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.999 138.1301)" class="st7 st12">a</text>
+			<rect x="153.1" y="129.7" class="st0" width="9.5" height="4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 160 133.6799)" class="st7 st12">y</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 156.05 129.6799)" class="st16 st15">−</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 156.05 126.6096)" class="st7 st15">1</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 160 123.5002)" class="st16 st17">)</text>
+			<text transform="matrix(1 0 0 1 151.18 10.25)" class="st18 st19">[B]</text>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-<text x='54.73' y='279.19' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='54.73' y='224.67' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text x='54.73' y='170.16' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>200</text>
-<text x='54.73' y='115.64' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>300</text>
-<text x='54.73' y='61.13' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>400</text>
-<polyline points='57.92,273.45 61.90,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='57.92,218.93 61.90,218.93 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='57.92,164.42 61.90,164.42 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='57.92,109.90 61.90,109.90 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='57.92,55.39 61.90,55.39 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='74.29,277.43 74.29,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='101.81,277.43 101.81,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='129.33,277.43 129.33,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='156.84,277.43 156.84,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(85.07,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='129.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806 ΔmcyB</text>
-<text transform='translate(112.59,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806</text>
-<text transform='translate(140.11,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 9701</text>
-<text transform='translate(167.63,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='69.36px' lengthAdjust='spacingAndGlyphs'>NIES-843</text>
-<text transform='translate(16.59,174.19) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='10.67px' lengthAdjust='spacingAndGlyphs'>K</text>
-<text transform='translate(19.52,163.52) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>s</text>
-<text transform='translate(16.59,157.93) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(16.59,153.92) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>(</text>
-<text transform='translate(16.59,147.26) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='9.77px' lengthAdjust='spacingAndGlyphs'>μ</text>
-<text transform='translate(16.59,137.49) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>g</text>
-<text transform='translate(16.59,128.59) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>L</text>
-<text transform='translate(8.64,119.69) rotate(-90)' style='font-size: 11.20px; font-family: "Symbol";' textLength='6.14px' lengthAdjust='spacingAndGlyphs'>−</text>
-<text transform='translate(8.64,113.55) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text transform='translate(16.59,107.33) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>)</text>
-<text x='5.05' y='15.11' style='font-size: 14.00px; font-weight: bold; font-family: "Arial";' textLength='10.11px' lengthAdjust='spacingAndGlyphs'>A</text>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000124144949044672781140000006936569821915420064_" x="302.4" y="0" width="151.2" height="341.7"/>
+		</defs>
+		<clipPath id="SVGID_00000036931842678878785640000017549053432170916003_">
+			<use xlink:href="#SVGID_00000124144949044672781140000006936569821915420064_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000036931842678878785640000017549053432170916003_);">
+			<rect x="302.4" y="0" class="st2" width="151.2" height="341.7"/>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpMTcwLjA4fDM0MC4xNnwwLjAwfDQwOC41OQ=='>
-    <rect x='170.08' y='0.00' width='170.08' height='408.59' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMTcwLjA4fDM0MC4xNnwwLjAwfDQwOC41OQ==)'>
-<rect x='170.08' y='0.00' width='170.08' height='408.59' style='stroke-width: 1.55; stroke: #FFFFFF; fill: #FFFFFF;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000102527712028155802980000014112172847982528163_" x="332.1" y="1.4" width="120.6" height="280.8"/>
+		</defs>
+		<clipPath id="SVGID_00000045588849908964512380000005883084196737828996_">
+			<use xlink:href="#SVGID_00000102527712028155802980000014112172847982528163_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000045588849908964512380000005883084196737828996_);">
+			<rect x="332.1" y="1.4" class="st4" width="120.6" height="280.8"/>
+			<rect x="332.1" y="233.1" class="st5" width="13.9" height="49.1"/>
+			<rect x="346" y="200.2" class="st6" width="13.9" height="82.1"/>
+			<rect x="363" y="200.4" class="st5" width="13.9" height="81.9"/>
+			<rect x="376.9" y="205.8" class="st6" width="13.9" height="76.4"/>
+			<rect x="393.9" y="122" class="st5" width="13.9" height="160.2"/>
+			<rect x="407.9" y="14.3" class="st6" width="13.9" height="268"/>
+			<rect x="424.9" y="191.5" class="st5" width="13.9" height="90.8"/>
+			<rect x="438.8" y="188.4" class="st6" width="13.9" height="93.8"/>
+			<rect x="332.1" y="1.4" class="st10" width="120.6" height="280.8"/>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000059306916796082333590000005077450255983601340_" y="0" width="453.5" height="708.7"/>
+		</defs>
+		<clipPath id="SVGID_00000007413064106704841300000016922089614569598341_">
+			<use xlink:href="#SVGID_00000059306916796082333590000005077450255983601340_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000007413064106704841300000016922089614569598341_);">
+			<rect x="324" y="278.2" class="st0" width="4.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 324.0312 285.0998)" class="st7 st12">0</text>
+			<rect x="319.6" y="210.2" class="st0" width="8.9" height="9.5"/>
+			<text transform="matrix(1 0 0 1 319.582 217.03)" class="st7 st12">40</text>
+			<rect x="319.6" y="142.1" class="st0" width="8.9" height="9.5"/>
+			<text transform="matrix(1 0 0 1 319.582 148.9499)" class="st7 st12">80</text>
+			<rect x="315.1" y="74" class="st0" width="13.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 315.1328 80.8698)" class="st7 st12">120</text>
+			<rect x="315.1" y="5.9" class="st0" width="13.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 315.1328 12.7902)" class="st7 st12">160</text>
+			<line class="st13" x1="330.1" y1="282.2" x2="332.1" y2="282.2"/>
+			<line class="st13" x1="330.1" y1="214.2" x2="332.1" y2="214.2"/>
+			<line class="st13" x1="330.1" y1="146.1" x2="332.1" y2="146.1"/>
+			<line class="st13" x1="330.1" y1="78" x2="332.1" y2="78"/>
+			<line class="st13" x1="330.1" y1="9.9" x2="332.1" y2="9.9"/>
+			<line class="st13" x1="346" y1="284.2" x2="346" y2="282.2"/>
+			<line class="st13" x1="376.9" y1="284.2" x2="376.9" y2="282.2"/>
+			<line class="st13" x1="407.9" y1="284.2" x2="407.9" y2="282.2"/>
+			<line class="st13" x1="438.8" y1="284.2" x2="438.8" y2="282.2"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 333.4501 340.8593)" class="st7 st12">PCC</text>
+			
+				<rect x="331.1" y="311.9" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -73.8924 527.8552)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 338.9196 325.8192)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 345.7602 307.0292)" class="st7 st12">Δ</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 347.1301 303.2694)" class="st14 st12">mcyB</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 372.59 318.2997)" class="st7 st12">PCC</text>
+			
+				<rect x="370.2" y="289.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -27.0094 549.7537)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 378.0593 303.2684)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 403.52 318.2997)" class="st7 st12">PCC</text>
+			
+				<rect x="401.1" y="289.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -6.6921 578.8267)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 408.9902 303.2684)" class="st7 st12">9701</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 434.4501 318.2997)" class="st7 st12">NIES-843</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 169.3801)" class="st14 st12">Q</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 312.63 162.2902)" class="st7 st15">N</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 156.2404)" class="st16 st17">(</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 152.9103)" class="st7 st12">f</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 150.6896)" class="st7 st12">m</text>
+			<rect x="304.3" y="139.6" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1787 144.0305)" class="st7 st12">o</text>
+			<rect x="304.3" y="137.8" class="st0" width="9.5" height="1.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1699 139.5793)" class="st7 st12">l</text>
+			<rect x="304.3" y="131.8" class="st0" width="9.5" height="4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 135.8)" class="st7 st12">c</text>
+			<rect x="304.3" y="127.3" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1787 131.7902)" class="st7 st12">e</text>
+			<rect x="304.3" y="125.6" class="st0" width="9.5" height="1.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1699 127.34)" class="st7 st12">l</text>
+			<rect x="304.3" y="123.8" class="st0" width="9.5" height="1.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1699 125.5695)" class="st7 st12">l</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 307.23 123.7902)" class="st16 st15">−</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 307.23 120.7199)" class="st7 st15">1</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 117.6096)" class="st16 st17">)</text>
+			<text transform="matrix(1 0 0 1 302.36 10.25)" class="st18 st19">[C]</text>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpMjI3LjUyfDMzOS4zMXwxLjQyfDI3My40NQ=='>
-    <rect x='227.52' y='1.42' width='111.78' height='272.03' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMjI3LjUyfDMzOS4zMXwxLjQyfDI3My40NQ==)'>
-<rect x='227.52' y='1.42' width='111.78' height='272.03' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<rect x='227.52' y='22.96' width='12.90' height='250.48' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='240.42' y='75.27' width='12.90' height='198.17' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='256.19' y='29.31' width='12.90' height='244.13' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='269.08' y='95.13' width='12.90' height='178.32' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='284.85' y='31.78' width='12.90' height='241.67' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='297.75' y='30.91' width='12.90' height='242.54' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='313.51' y='48.79' width='12.90' height='224.66' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='326.41' y='72.71' width='12.90' height='200.74' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<polyline points='231.11,6.22 236.84,6.22 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='233.97,6.22 233.97,39.71 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='231.11,39.71 236.84,39.71 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='244.01,62.72 249.74,62.72 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='246.87,62.72 246.87,87.83 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='244.01,87.83 249.74,87.83 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='259.77,12.57 265.50,12.57 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='262.64,12.57 262.64,46.05 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='259.77,46.05 265.50,46.05 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='272.67,82.58 278.40,82.58 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='275.53,82.58 275.53,107.69 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='272.67,107.69 278.40,107.69 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='288.43,19.22 294.16,19.22 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='291.30,19.22 291.30,44.33 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='288.43,44.33 294.16,44.33 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='301.33,18.35 307.06,18.35 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='304.20,18.35 304.20,43.46 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='301.33,43.46 307.06,43.46 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='317.09,36.23 322.83,36.23 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='319.96,36.23 319.96,61.34 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='317.09,61.34 322.83,61.34 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='329.99,64.34 335.72,64.34 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='332.86,64.34 332.86,81.08 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='329.99,81.08 335.72,81.08 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='227.52' y='1.42' width='111.78' height='272.03' style='stroke-width: 1.49;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000025433069758361659850000013577276464800154809_" y="341.7" width="151.2" height="341.7"/>
+		</defs>
+		<clipPath id="SVGID_00000057112289537146766820000003369916162260363434_">
+			<use xlink:href="#SVGID_00000025433069758361659850000013577276464800154809_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000057112289537146766820000003369916162260363434_);">
+			<rect y="341.7" class="st2" width="151.2" height="341.7"/>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-<text x='220.35' y='279.19' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='220.35' y='195.48' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='220.35' y='111.78' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='220.35' y='28.08' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<polyline points='223.54,273.45 227.52,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='223.54,189.75 227.52,189.75 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='223.54,106.04 227.52,106.04 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='223.54,22.34 227.52,22.34 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='240.42,277.43 240.42,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='269.08,277.43 269.08,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='297.75,277.43 297.75,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='326.41,277.43 326.41,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(251.21,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='129.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806 ΔmcyB</text>
-<text transform='translate(279.87,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806</text>
-<text transform='translate(308.53,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 9701</text>
-<text transform='translate(337.19,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='69.36px' lengthAdjust='spacingAndGlyphs'>NIES-843</text>
-<text transform='translate(186.67,180.62) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='9.77px' lengthAdjust='spacingAndGlyphs'>μ</text>
-<text transform='translate(189.60,170.85) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='9.32px' lengthAdjust='spacingAndGlyphs'>m</text>
-<text transform='translate(189.60,161.54) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(189.60,155.32) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>x</text>
-<text transform='translate(186.67,149.72) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(186.67,145.72) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>(</text>
-<text transform='translate(186.67,139.06) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>d</text>
-<text transform='translate(186.67,130.16) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(186.67,121.26) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>y</text>
-<text transform='translate(178.72,113.26) rotate(-90)' style='font-size: 11.20px; font-family: "Symbol";' textLength='6.14px' lengthAdjust='spacingAndGlyphs'>−</text>
-<text transform='translate(178.72,107.12) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text transform='translate(186.67,100.90) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>)</text>
-<text x='175.13' y='15.11' style='font-size: 14.00px; font-weight: bold; font-family: "Arial";' textLength='10.11px' lengthAdjust='spacingAndGlyphs'>B</text>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000000186145635835380100000005503708364301728384_" x="27.5" y="343.1" width="122.9" height="273.1"/>
+		</defs>
+		<clipPath id="SVGID_00000018204119777236970750000002736074737470563511_">
+			<use xlink:href="#SVGID_00000000186145635835380100000005503708364301728384_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000018204119777236970750000002736074737470563511_);">
+			<rect x="27.5" y="343.1" class="st4" width="122.9" height="273.1"/>
+			<rect x="27.5" y="507.4" class="st5" width="14.2" height="108.8"/>
+			<rect x="41.7" y="564.2" class="st6" width="14.2" height="52.1"/>
+			<rect x="59" y="588.3" class="st5" width="14.2" height="27.9"/>
+			<rect x="73.2" y="597.2" class="st6" width="14.2" height="19"/>
+			<rect x="90.5" y="453.8" class="st5" width="14.2" height="162.4"/>
+			<rect x="104.7" y="400.5" class="st6" width="14.2" height="215.7"/>
+			<rect x="122" y="494.5" class="st5" width="14.2" height="121.7"/>
+			<rect x="136.2" y="496.7" class="st6" width="14.2" height="119.5"/>
+			<line class="st9" x1="31.4" y1="484.7" x2="37.7" y2="484.7"/>
+			<line class="st9" x1="34.6" y1="484.7" x2="34.6" y2="530.2"/>
+			<line class="st9" x1="31.4" y1="530.2" x2="37.7" y2="530.2"/>
+			<line class="st9" x1="45.6" y1="551.4" x2="51.9" y2="551.4"/>
+			<line class="st9" x1="48.8" y1="551.4" x2="48.8" y2="576.9"/>
+			<line class="st9" x1="45.6" y1="576.9" x2="51.9" y2="576.9"/>
+			<line class="st9" x1="62.9" y1="583.5" x2="69.2" y2="583.5"/>
+			<line class="st9" x1="66.1" y1="583.5" x2="66.1" y2="593.2"/>
+			<line class="st9" x1="62.9" y1="593.2" x2="69.2" y2="593.2"/>
+			<line class="st9" x1="77.1" y1="593.5" x2="83.4" y2="593.5"/>
+			<line class="st9" x1="80.2" y1="593.5" x2="80.2" y2="600.8"/>
+			<line class="st9" x1="77.1" y1="600.8" x2="83.4" y2="600.8"/>
+			<line class="st9" x1="94.4" y1="413.2" x2="100.7" y2="413.2"/>
+			<line class="st9" x1="97.6" y1="413.2" x2="97.6" y2="494.5"/>
+			<line class="st9" x1="94.4" y1="494.5" x2="100.7" y2="494.5"/>
+			<line class="st9" x1="108.6" y1="355" x2="114.9" y2="355"/>
+			<line class="st9" x1="111.7" y1="355" x2="111.7" y2="446.1"/>
+			<line class="st9" x1="108.6" y1="446.1" x2="114.9" y2="446.1"/>
+			<line class="st9" x1="125.9" y1="467.2" x2="132.2" y2="467.2"/>
+			<line class="st9" x1="129.1" y1="467.2" x2="129.1" y2="521.9"/>
+			<line class="st9" x1="125.9" y1="521.9" x2="132.2" y2="521.9"/>
+			<line class="st9" x1="140.1" y1="470.3" x2="146.4" y2="470.3"/>
+			<line class="st9" x1="143.2" y1="470.3" x2="143.2" y2="523.1"/>
+			<line class="st9" x1="140.1" y1="523.1" x2="146.4" y2="523.1"/>
+			<rect x="27.5" y="343.1" class="st10" width="122.9" height="273.1"/>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpMzQwLjE2fDUxMC4yNHwwLjAwfDQwOC41OQ=='>
-    <rect x='340.16' y='0.00' width='170.08' height='408.59' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzQwLjE2fDUxMC4yNHwwLjAwfDQwOC41OQ==)'>
-<rect x='340.16' y='0.00' width='170.08' height='408.59' style='stroke-width: 1.55; stroke: #FFFFFF; fill: #FFFFFF;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000090990078616030837630000010914573938367758988_" y="0" width="453.5" height="708.7"/>
+		</defs>
+		<clipPath id="SVGID_00000096741321872288992100000005637363148090888116_">
+			<use xlink:href="#SVGID_00000090990078616030837630000010914573938367758988_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000096741321872288992100000005637363148090888116_);">
+			<text transform="matrix(1 0 0 1 12.7789 619.09)" class="st7 st12">0.0</text>
+			<text transform="matrix(1 0 0 1 12.7789 543.23)" class="st7 st12">2.5</text>
+			<text transform="matrix(1 0 0 1 12.7789 467.37)" class="st7 st12">5.0</text>
+			<text transform="matrix(1 0 0 1 12.7789 391.5)" class="st7 st12">7.5</text>
+			<line class="st13" x1="25.5" y1="616.2" x2="27.5" y2="616.2"/>
+			<line class="st13" x1="25.5" y1="540.4" x2="27.5" y2="540.4"/>
+			<line class="st13" x1="25.5" y1="464.5" x2="27.5" y2="464.5"/>
+			<line class="st13" x1="25.5" y1="388.6" x2="27.5" y2="388.6"/>
+			<line class="st13" x1="41.7" y1="618.2" x2="41.7" y2="616.2"/>
+			<line class="st13" x1="73.2" y1="618.2" x2="73.2" y2="616.2"/>
+			<line class="st13" x1="104.7" y1="618.2" x2="104.7" y2="616.2"/>
+			<line class="st13" x1="136.2" y1="618.2" x2="136.2" y2="616.2"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 29.1201 674.8397)" class="st7 st12">PCC</text>
+			
+				<rect x="26.8" y="646" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -588.032 461.6703)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 34.5893 659.7997)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 41.4301 641.0096)" class="st7 st12">Δ</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 42.8 637.2499)" class="st14 st12">mcyB</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 68.83 652.2792)" class="st7 st12">PCC</text>
+			
+				<rect x="66.4" y="623.5" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -540.741 484.0955)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 74.2993 637.2499)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 100.33 652.2792)" class="st7 st12">PCC</text>
+			
+				<rect x="97.9" y="623.5" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -520.0153 513.6954)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 105.7988 637.2489)" class="st7 st12">9701</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 131.8298 652.2792)" class="st7 st12">NIES-843</text>
+			<rect x="76" y="675.7" class="st0" width="25.8" height="9.5"/>
+			<text transform="matrix(1 0 0 1 76.0156 682.5598)" class="st7 st12">Culture</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.81 498.3498)" class="st14 st12">K</text>
+			<rect x="5.5" y="489.4" class="st0" width="6.6" height="2.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 10.2695 492.1496)" class="st7 st15">s</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.81 487.3498)" class="st16 st17">(</text>
+			<rect x="1.9" y="479.4" class="st0" width="9.5" height="4.6"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.8086 484.0197)" class="st7 st12">μ</text>
+			<rect x="1.9" y="475" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.8086 479.4103)" class="st7 st12">g</text>
+			<rect x="1.5" y="470.8" class="st0" width="10.1" height="4.2"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 4.87 470.5099)" class="st16 st15">−</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 4.87 467.4396)" class="st7 st15">1</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 8.81 464.3303)" class="st16 st17">)</text>
+			<text transform="matrix(1 0 0 1 0 351.95)" class="st18 st19">[D]</text>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000167392465475387902540000007084888551970166677_" x="151.2" y="341.7" width="151.2" height="341.7"/>
+		</defs>
+		<clipPath id="SVGID_00000179644707682589899170000006164876454124059298_">
+			<use xlink:href="#SVGID_00000167392465475387902540000007084888551970166677_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000179644707682589899170000006164876454124059298_);">
+			<rect x="151.2" y="341.7" class="st2" width="151.2" height="341.7"/>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpNDAyLjA2fDUwOS4zOXwxLjQyfDI3My40NQ=='>
-    <rect x='402.06' y='1.42' width='107.33' height='272.03' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNDAyLjA2fDUwOS4zOXwxLjQyfDI3My40NQ==)'>
-<rect x='402.06' y='1.42' width='107.33' height='272.03' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<rect x='402.06' y='225.87' width='12.38' height='47.58' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='414.44' y='193.95' width='12.38' height='79.50' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='429.58' y='194.15' width='12.38' height='79.30' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='441.96' y='199.44' width='12.38' height='74.01' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='457.10' y='118.21' width='12.38' height='155.23' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='469.48' y='13.89' width='12.38' height='259.56' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='484.62' y='185.52' width='12.38' height='87.92' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='497.00' y='182.57' width='12.38' height='90.88' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='402.06' y='1.42' width='107.33' height='272.03' style='stroke-width: 1.49;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000062182295459396386060000010900900644729793965_" x="180.3" y="343.1" width="121.2" height="264"/>
+		</defs>
+		<clipPath id="SVGID_00000135685764453466134370000005089838430908761271_">
+			<use xlink:href="#SVGID_00000062182295459396386060000010900900644729793965_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000135685764453466134370000005089838430908761271_);">
+			<rect x="180.3" y="343.1" class="st4" width="121.2" height="264"/>
+			<rect x="180.3" y="382.7" class="st5" width="14" height="224.5"/>
+			<rect x="194.3" y="406.7" class="st6" width="14" height="200.5"/>
+			<rect x="211.4" y="412.4" class="st5" width="14" height="194.8"/>
+			<rect x="225.4" y="417.3" class="st6" width="14" height="189.9"/>
+			<rect x="242.5" y="389.2" class="st5" width="14" height="218"/>
+			<rect x="256.5" y="369.6" class="st6" width="14" height="237.6"/>
+			<rect x="273.5" y="388" class="st5" width="14" height="219.2"/>
+			<rect x="287.5" y="384.6" class="st6" width="14" height="222.5"/>
+			<text transform="matrix(1 0 0 1 192.6404 406.3606)" class="st7 st8">**</text>
+			<line class="st9" x1="184.2" y1="378.6" x2="190.4" y2="378.6"/>
+			<line class="st9" x1="187.3" y1="378.6" x2="187.3" y2="386.8"/>
+			<line class="st9" x1="184.2" y1="386.8" x2="190.4" y2="386.8"/>
+			<line class="st9" x1="198.2" y1="402.6" x2="204.4" y2="402.6"/>
+			<line class="st9" x1="201.3" y1="402.6" x2="201.3" y2="410.7"/>
+			<line class="st9" x1="198.2" y1="410.7" x2="204.4" y2="410.7"/>
+			<line class="st9" x1="215.3" y1="408.4" x2="221.5" y2="408.4"/>
+			<line class="st9" x1="218.4" y1="408.4" x2="218.4" y2="416.5"/>
+			<line class="st9" x1="215.3" y1="416.5" x2="221.5" y2="416.5"/>
+			<line class="st9" x1="229.3" y1="413.2" x2="235.5" y2="413.2"/>
+			<line class="st9" x1="232.4" y1="413.2" x2="232.4" y2="421.4"/>
+			<line class="st9" x1="229.3" y1="421.4" x2="235.5" y2="421.4"/>
+			<line class="st9" x1="246.4" y1="381" x2="252.6" y2="381"/>
+			<line class="st9" x1="249.5" y1="381" x2="249.5" y2="397.3"/>
+			<line class="st9" x1="246.4" y1="397.3" x2="252.6" y2="397.3"/>
+			<line class="st9" x1="260.3" y1="361.5" x2="266.6" y2="361.5"/>
+			<line class="st9" x1="263.5" y1="361.5" x2="263.5" y2="377.7"/>
+			<line class="st9" x1="260.3" y1="377.7" x2="266.6" y2="377.7"/>
+			<line class="st9" x1="277.4" y1="383.9" x2="283.6" y2="383.9"/>
+			<line class="st9" x1="280.5" y1="383.9" x2="280.5" y2="392"/>
+			<line class="st9" x1="277.4" y1="392" x2="283.6" y2="392"/>
+			<line class="st9" x1="291.4" y1="380.6" x2="297.6" y2="380.6"/>
+			<line class="st9" x1="294.5" y1="380.6" x2="294.5" y2="388.7"/>
+			<line class="st9" x1="291.4" y1="388.7" x2="297.6" y2="388.7"/>
+			<rect x="180.3" y="343.1" class="st10" width="121.2" height="264"/>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-<text x='394.89' y='279.19' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='394.89' y='213.24' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='17.80px' lengthAdjust='spacingAndGlyphs'>40</text>
-<text x='394.89' y='147.29' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='17.80px' lengthAdjust='spacingAndGlyphs'>80</text>
-<text x='394.89' y='81.35' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>120</text>
-<text x='394.89' y='15.40' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>160</text>
-<polyline points='398.08,273.45 402.06,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='398.08,207.50 402.06,207.50 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='398.08,141.55 402.06,141.55 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='398.08,75.61 402.06,75.61 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='398.08,9.66 402.06,9.66 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='414.44,277.43 414.44,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='441.96,277.43 441.96,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='469.48,277.43 469.48,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='497.00,277.43 497.00,273.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(425.23,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='129.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806 ΔmcyB</text>
-<text transform='translate(452.75,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806</text>
-<text transform='translate(480.27,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 9701</text>
-<text transform='translate(507.79,284.55) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='69.36px' lengthAdjust='spacingAndGlyphs'>NIES-843</text>
-<text transform='translate(356.75,203.19) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='12.45px' lengthAdjust='spacingAndGlyphs'>Q</text>
-<text transform='translate(356.75,190.74) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>u</text>
-<text transform='translate(356.75,181.84) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>o</text>
-<text transform='translate(356.75,172.94) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='4.44px' lengthAdjust='spacingAndGlyphs'>t</text>
-<text transform='translate(356.75,168.50) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(356.75,159.60) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(356.75,155.60) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>(</text>
-<text transform='translate(356.75,148.94) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='4.44px' lengthAdjust='spacingAndGlyphs'>f</text>
-<text transform='translate(356.75,144.50) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='13.33px' lengthAdjust='spacingAndGlyphs'>m</text>
-<text transform='translate(356.75,131.17) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>o</text>
-<text transform='translate(356.75,122.27) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='3.56px' lengthAdjust='spacingAndGlyphs'>l</text>
-<text transform='translate(356.75,118.71) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(356.75,114.71) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>c</text>
-<text transform='translate(356.75,106.71) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>e</text>
-<text transform='translate(356.75,97.81) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='3.56px' lengthAdjust='spacingAndGlyphs'>l</text>
-<text transform='translate(356.75,94.25) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='3.56px' lengthAdjust='spacingAndGlyphs'>l</text>
-<text transform='translate(348.80,90.70) rotate(-90)' style='font-size: 11.20px; font-family: "Symbol";' textLength='6.14px' lengthAdjust='spacingAndGlyphs'>−</text>
-<text transform='translate(348.80,84.56) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text transform='translate(356.75,78.33) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>)</text>
-<text x='345.21' y='15.11' style='font-size: 14.00px; font-weight: bold; font-family: "Arial";' textLength='10.11px' lengthAdjust='spacingAndGlyphs'>C</text>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000014603310984547590560000008555602238392231854_" y="0" width="453.5" height="708.7"/>
+		</defs>
+		<clipPath id="SVGID_00000016768816295315595210000003243495845642027186_">
+			<use xlink:href="#SVGID_00000014603310984547590560000008555602238392231854_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000016768816295315595210000003243495845642027186_);">
+			<text transform="matrix(1 0 0 1 165.6289 610.04)" class="st7 st12">0.0</text>
+			<text transform="matrix(1 0 0 1 165.6289 528.8)" class="st7 st12">0.2</text>
+			<text transform="matrix(1 0 0 1 165.6289 447.55)" class="st7 st12">0.4</text>
+			<text transform="matrix(1 0 0 1 165.6289 366.3)" class="st7 st12">0.6</text>
+			<line class="st13" x1="178.3" y1="607.2" x2="180.3" y2="607.2"/>
+			<line class="st13" x1="178.3" y1="525.9" x2="180.3" y2="525.9"/>
+			<line class="st13" x1="178.3" y1="444.7" x2="180.3" y2="444.7"/>
+			<line class="st13" x1="178.3" y1="363.4" x2="180.3" y2="363.4"/>
+			<line class="st13" x1="194.3" y1="609.2" x2="194.3" y2="607.2"/>
+			<line class="st13" x1="225.4" y1="609.2" x2="225.4" y2="607.2"/>
+			<line class="st13" x1="256.5" y1="609.2" x2="256.5" y2="607.2"/>
+			<line class="st13" x1="287.5" y1="609.2" x2="287.5" y2="607.2"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 177.9702 672.4696)" class="st7 st12">PCC</text>
+			
+				<rect x="176.7" y="640.7" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -484.4457 599.0607)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 184.5095 654.5087)" class="st7 st12">7806</text>
+			<polygon class="st0" points="184.4,633.4 186.4,628.3 195.9,631.6 194,636.6 			"/>
+			
+				<rect x="184.4" y="616.7" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -456.0587 591.4973)" class="st0" width="20" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 192.8791 631.5184)" class="st14 st12">mcyB</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 218.1601 647.3993)" class="st7 st12">PCC</text>
+			
+				<rect x="216.8" y="615.7" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -434.455 620.2906)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 224.6996 629.4481)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 249.2402 647.3993)" class="st7 st12">PCC</text>
+			
+				<rect x="247.9" y="615.6" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -413.9792 649.4775)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 255.7697 629.4481)" class="st7 st12">9701</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 280.3801 647.2001)" class="st7 st12">NIES-843</text>
+			<rect x="228" y="673.9" class="st0" width="25.8" height="9.5"/>
+			<text transform="matrix(1 0 0 1 228.0254 680.8)" class="st7 st12">Culture</text>
+			<rect x="152.6" y="492.6" class="st0" width="10.1" height="4.6"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.4512 497.1525)" class="st14 st12">μ</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 161.37 491.55)" class="st7 st15">m</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 161.37 486.8898)" class="st7 st15">a</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 161.37 483.7805)" class="st7 st15">x</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.91 478.9797)" class="st16 st17">(</text>
+			<rect x="153" y="471.2" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.9082 475.6496)" class="st7 st12">d</text>
+			<rect x="153" y="466.8" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.9082 471.2004)" class="st7 st12">a</text>
+			<rect x="153" y="462.8" class="st0" width="9.5" height="4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.91 466.7502)" class="st7 st12">y</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 155.93 462.7502)" class="st16 st15">−</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 155.93 459.6799)" class="st7 st15">1</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 159.91 456.5695)" class="st16 st17">)</text>
+			<text transform="matrix(1 0 0 1 151.18 351.95)" class="st18 st19">[E]</text>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpMC4wMHwxNzAuMDh8NDA4LjU5fDgxNy4xNw=='>
-    <rect x='0.00' y='408.59' width='170.08' height='408.59' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMC4wMHwxNzAuMDh8NDA4LjU5fDgxNy4xNw==)'>
-<rect x='0.00' y='408.59' width='170.08' height='408.59' style='stroke-width: 1.55; stroke: #FFFFFF; fill: #FFFFFF;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000002375434480547163390000007946778644514027394_" x="302.4" y="341.7" width="151.2" height="341.7"/>
+		</defs>
+		<clipPath id="SVGID_00000005959339447332310330000010890834630110782903_">
+			<use xlink:href="#SVGID_00000002375434480547163390000007946778644514027394_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000005959339447332310330000010890834630110782903_);">
+			<rect x="302.4" y="341.7" class="st2" width="151.2" height="341.7"/>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000111878015333294404710000001853243502341983130_" x="323.2" y="343.1" width="129.5" height="273.1"/>
+		</defs>
+		<clipPath id="SVGID_00000054960305954869902790000006353581859519813563_">
+			<use xlink:href="#SVGID_00000111878015333294404710000001853243502341983130_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000054960305954869902790000006353581859519813563_);">
+			<rect x="323.2" y="343.1" class="st4" width="129.5" height="273.1"/>
+			<rect x="323.2" y="517.1" class="st5" width="14.9" height="99.1"/>
+			<rect x="338.1" y="549.9" class="st6" width="14.9" height="66.3"/>
+			<rect x="356.4" y="547.9" class="st5" width="14.9" height="68.3"/>
+			<rect x="371.3" y="560.4" class="st6" width="14.9" height="55.8"/>
+			<rect x="389.6" y="468.7" class="st5" width="14.9" height="147.5"/>
+			<rect x="404.5" y="349.8" class="st6" width="14.9" height="266.4"/>
+			<rect x="422.8" y="363.6" class="st5" width="14.9" height="252.6"/>
+			<rect x="437.8" y="412.5" class="st6" width="14.9" height="203.7"/>
+			<rect x="323.2" y="343.1" class="st10" width="129.5" height="273.1"/>
+		</g>
+	</g>
 </g>
-<defs>
-  <clipPath id='cpNTcuNDV8MTY5LjIzfDQxMC4wMHw2NjMuMDU='>
-    <rect x='57.45' y='410.00' width='111.78' height='253.05' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNTcuNDV8MTY5LjIzfDQxMC4wMHw2NjMuMDU=)'>
-<rect x='57.45' y='410.00' width='111.78' height='253.05' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<rect x='57.45' y='562.25' width='12.90' height='100.80' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='70.34' y='614.82' width='12.90' height='48.23' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='86.11' y='637.22' width='12.90' height='25.83' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='99.01' y='645.41' width='12.90' height='17.64' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='114.77' y='512.59' width='12.90' height='150.46' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='127.67' y='463.21' width='12.90' height='199.84' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='143.43' y='550.32' width='12.90' height='112.74' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='156.33' y='552.33' width='12.90' height='110.72' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<polyline points='61.03,541.17 66.76,541.17 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='63.90,541.17 63.90,583.34 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='61.03,583.34 66.76,583.34 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='73.93,603.01 79.66,603.01 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.79,603.01 76.79,626.63 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='73.93,626.63 79.66,626.63 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='89.69,632.72 95.42,632.72 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='92.56,632.72 92.56,641.72 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='89.69,641.72 95.42,641.72 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='102.59,642.04 108.32,642.04 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='105.46,642.04 105.46,648.79 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='102.59,648.79 108.32,648.79 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='118.35,474.92 124.09,474.92 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='121.22,474.92 121.22,550.27 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='118.35,550.27 124.09,550.27 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='131.25,421.04 136.98,421.04 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='134.12,421.04 134.12,505.39 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='131.25,505.39 136.98,505.39 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='147.02,525.01 152.75,525.01 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='149.88,525.01 149.88,575.62 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='147.02,575.62 152.75,575.62 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='159.91,527.87 165.65,527.87 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='162.78,527.87 162.78,576.80 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='159.91,576.80 165.65,576.80 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='57.45' y='410.00' width='111.78' height='253.05' style='stroke-width: 1.49;' />
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_00000127014866040144881440000011271938081134315954_" y="0" width="453.5" height="708.7"/>
+		</defs>
+		<clipPath id="SVGID_00000049181631920139064440000007712656276025494427_">
+			<use xlink:href="#SVGID_00000127014866040144881440000011271938081134315954_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_00000049181631920139064440000007712656276025494427_);">
+			<rect x="315.1" y="612.2" class="st0" width="4.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 315.1309 619.09)" class="st7 st12">0</text>
+			<rect x="315.1" y="534.2" class="st0" width="4.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 315.1309 541.0598)" class="st7 st12">1</text>
+			<rect x="315.1" y="456.2" class="st0" width="4.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 315.1309 463.0305)" class="st7 st12">2</text>
+			<rect x="315.1" y="378.1" class="st0" width="4.4" height="9.5"/>
+			<text transform="matrix(1 0 0 1 315.1309 385.0002)" class="st7 st12">3</text>
+			<line class="st13" x1="321.2" y1="616.2" x2="323.2" y2="616.2"/>
+			<line class="st13" x1="321.2" y1="538.2" x2="323.2" y2="538.2"/>
+			<line class="st13" x1="321.2" y1="460.2" x2="323.2" y2="460.2"/>
+			<line class="st13" x1="321.2" y1="382.1" x2="323.2" y2="382.1"/>
+			<line class="st13" x1="338.1" y1="618.2" x2="338.1" y2="616.2"/>
+			<line class="st13" x1="371.3" y1="618.2" x2="371.3" y2="616.2"/>
+			<line class="st13" x1="404.5" y1="618.2" x2="404.5" y2="616.2"/>
+			<line class="st13" x1="437.8" y1="618.2" x2="437.8" y2="616.2"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 325.58 674.8397)" class="st7 st12">PCC</text>
+			
+				<rect x="323.3" y="646" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -392.9305 740.2346)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 331.0493 659.7987)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 337.8901 641.0096)" class="st7 st12">Δ</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 339.2602 637.2499)" class="st14 st12">mcyB</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 367.0002 652.2792)" class="st7 st12">PCC</text>
+			
+				<rect x="364.6" y="623.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -344.5253 764.2696)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 372.4687 637.2489)" class="st7 st12">7806</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 400.2101 652.2792)" class="st7 st12">PCC</text>
+			
+				<rect x="397.8" y="623.4" transform="matrix(0.3421 -0.9397 0.9397 0.3421 -322.6858 795.4792)" class="st0" width="17.8" height="9.5"/>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 405.6784 637.2489)" class="st7 st12">9701</text>
+			<text transform="matrix(0.342 -0.9397 0.9397 0.342 433.4201 652.2792)" class="st7 st12">NIES-843</text>
+			<rect x="375" y="675.7" class="st0" width="25.8" height="9.5"/>
+			<text transform="matrix(1 0 0 1 375.0352 682.5598)" class="st7 st12">Culture</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 507.0695)" class="st14 st12">Q</text>
+			<rect x="307.7" y="496.3" class="st0" width="6.8" height="3.6"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 494.2404)" class="st16 st17">(</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 490.9103)" class="st7 st12">f</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 488.6799)" class="st7 st12">m</text>
+			<rect x="304.3" y="477.6" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1787 482.0197)" class="st7 st12">o</text>
+			<rect x="304.3" y="475.8" class="st0" width="9.5" height="1.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1699 477.5803)" class="st7 st12">l</text>
+			<rect x="304.3" y="469.8" class="st0" width="9.5" height="4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 473.8)" class="st7 st12">c</text>
+			<rect x="304.3" y="465.3" class="st0" width="9.5" height="4.4"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1787 469.7902)" class="st7 st12">e</text>
+			<rect x="304.3" y="463.6" class="st0" width="9.5" height="1.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1699 465.34)" class="st7 st12">l</text>
+			<rect x="304.3" y="461.8" class="st0" width="9.5" height="1.8"/>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.1699 463.5598)" class="st7 st12">l</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 307.23 461.7902)" class="st16 st15">−</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 307.23 458.7199)" class="st7 st15">1</text>
+			<text transform="matrix(6.123234e-17 -1 1 6.123234e-17 311.18 455.6096)" class="st16 st17">)</text>
+			<text transform="matrix(1 0 0 1 302.36 351.95)" class="st18 st19">[F]</text>
+			<rect x="171" y="683.4" class="st4" width="111.5" height="25.2"/>
+			<rect x="175" y="692" class="st0" width="18.7" height="9.5"/>
+			<text transform="matrix(1 0 0 1 175.02 698.8996)" class="st7 st12">State</text>
+			<rect x="199.7" y="688.1" class="st5" width="15.9" height="15.9"/>
+			<rect x="243" y="688.1" class="st6" width="15.9" height="15.9"/>
+			<text transform="matrix(1 0 0 1 220.27 698.33)" class="st7 st35">Axenic</text>
+			<text transform="matrix(1 0 0 1 263.52 698.33)" class="st7 st35">Xenic</text>
+		</g>
+	</g>
 </g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-<text x='50.27' y='668.79' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='50.27' y='598.50' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>2.5</text>
-<text x='50.27' y='528.21' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>5.0</text>
-<text x='50.27' y='457.92' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>7.5</text>
-<polyline points='53.46,663.05 57.45,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='53.46,592.76 57.45,592.76 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='53.46,522.47 57.45,522.47 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='53.46,452.18 57.45,452.18 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='70.34,667.04 70.34,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='99.01,667.04 99.01,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='127.67,667.04 127.67,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='156.33,667.04 156.33,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(81.13,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='129.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806 ΔmcyB</text>
-<text transform='translate(109.79,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806</text>
-<text transform='translate(138.45,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 9701</text>
-<text transform='translate(167.12,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='69.36px' lengthAdjust='spacingAndGlyphs'>NIES-843</text>
-<text x='113.34' y='812.80' text-anchor='middle' style='font-size: 16.00px; font-family: "Arial";' textLength='51.58px' lengthAdjust='spacingAndGlyphs'>Culture</text>
-<text transform='translate(16.59,573.29) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='10.67px' lengthAdjust='spacingAndGlyphs'>K</text>
-<text transform='translate(19.52,562.62) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>s</text>
-<text transform='translate(16.59,557.02) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(16.59,553.02) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>(</text>
-<text transform='translate(16.59,546.36) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='9.77px' lengthAdjust='spacingAndGlyphs'>μ</text>
-<text transform='translate(16.59,536.59) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>g</text>
-<text transform='translate(16.59,527.69) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>L</text>
-<text transform='translate(8.64,518.79) rotate(-90)' style='font-size: 11.20px; font-family: "Symbol";' textLength='6.14px' lengthAdjust='spacingAndGlyphs'>−</text>
-<text transform='translate(8.64,512.65) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text transform='translate(16.59,506.43) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>)</text>
-<text x='5.05' y='423.70' style='font-size: 14.00px; font-weight: bold; font-family: "Arial";' textLength='10.11px' lengthAdjust='spacingAndGlyphs'>D</text>
-</g>
-<defs>
-  <clipPath id='cpMTcwLjA4fDM0MC4xNnw0MDguNTl8ODE3LjE3'>
-    <rect x='170.08' y='408.59' width='170.08' height='408.59' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMTcwLjA4fDM0MC4xNnw0MDguNTl8ODE3LjE3)'>
-<rect x='170.08' y='408.59' width='170.08' height='408.59' style='stroke-width: 1.55; stroke: #FFFFFF; fill: #FFFFFF;' />
-</g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-</g>
-<defs>
-  <clipPath id='cpMjI3LjUyfDMzOS4zMXw0MTAuMDB8NjYzLjA1'>
-    <rect x='227.52' y='410.00' width='111.78' height='253.05' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMjI3LjUyfDMzOS4zMXw0MTAuMDB8NjYzLjA1)'>
-<rect x='227.52' y='410.00' width='111.78' height='253.05' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<rect x='227.52' y='447.92' width='12.90' height='215.13' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='240.42' y='470.91' width='12.90' height='192.14' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='256.19' y='476.42' width='12.90' height='186.64' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='269.08' y='481.08' width='12.90' height='181.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='284.85' y='454.13' width='12.90' height='208.92' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='297.75' y='435.39' width='12.90' height='227.67' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='313.51' y='452.97' width='12.90' height='210.08' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='326.41' y='449.80' width='12.90' height='213.25' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<polyline points='231.11,444.02 236.84,444.02 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='233.97,444.02 233.97,451.81 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='231.11,451.81 236.84,451.81 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='244.01,467.02 249.74,467.02 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='246.87,467.02 246.87,474.81 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='244.01,474.81 249.74,474.81 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='259.77,472.52 265.50,472.52 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='262.64,472.52 262.64,480.31 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='259.77,480.31 265.50,480.31 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='272.67,477.18 278.40,477.18 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='275.53,477.18 275.53,484.97 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='272.67,484.97 278.40,484.97 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='288.43,446.34 294.16,446.34 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='291.30,446.34 291.30,461.92 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='288.43,461.92 294.16,461.92 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='301.33,427.60 307.06,427.60 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='304.20,427.60 304.20,443.17 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='301.33,443.17 307.06,443.17 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='317.09,449.07 322.83,449.07 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='319.96,449.07 319.96,456.86 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='317.09,456.86 322.83,456.86 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='329.99,445.90 335.72,445.90 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='332.86,445.90 332.86,453.69 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='329.99,453.69 335.72,453.69 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<rect x='227.52' y='410.00' width='111.78' height='253.05' style='stroke-width: 1.49;' />
-</g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-<text x='220.35' y='668.79' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='220.35' y='590.93' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='220.35' y='513.07' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='220.35' y='435.21' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<polyline points='223.54,663.05 227.52,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='223.54,585.19 227.52,585.19 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='223.54,507.33 227.52,507.33 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='223.54,429.47 227.52,429.47 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='240.42,667.04 240.42,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='269.08,667.04 269.08,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='297.75,667.04 297.75,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='326.41,667.04 326.41,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(251.21,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='129.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806 ΔmcyB</text>
-<text transform='translate(279.87,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806</text>
-<text transform='translate(308.53,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 9701</text>
-<text transform='translate(337.19,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='69.36px' lengthAdjust='spacingAndGlyphs'>NIES-843</text>
-<text x='283.42' y='812.80' text-anchor='middle' style='font-size: 16.00px; font-family: "Arial";' textLength='51.58px' lengthAdjust='spacingAndGlyphs'>Culture</text>
-<text transform='translate(186.67,579.72) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='9.77px' lengthAdjust='spacingAndGlyphs'>μ</text>
-<text transform='translate(189.60,569.95) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='9.32px' lengthAdjust='spacingAndGlyphs'>m</text>
-<text transform='translate(189.60,560.63) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(189.60,554.41) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>x</text>
-<text transform='translate(186.67,548.82) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(186.67,544.82) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>(</text>
-<text transform='translate(186.67,538.16) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>d</text>
-<text transform='translate(186.67,529.26) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(186.67,520.36) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>y</text>
-<text transform='translate(178.72,512.36) rotate(-90)' style='font-size: 11.20px; font-family: "Symbol";' textLength='6.14px' lengthAdjust='spacingAndGlyphs'>−</text>
-<text transform='translate(178.72,506.22) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text transform='translate(186.67,500.00) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>)</text>
-<text x='174.75' y='423.70' style='font-size: 14.00px; font-weight: bold; font-family: "Arial";' textLength='9.34px' lengthAdjust='spacingAndGlyphs'>E</text>
-</g>
-<defs>
-  <clipPath id='cpMzQwLjE2fDUxMC4yNHw0MDguNTl8ODE3LjE3'>
-    <rect x='340.16' y='408.59' width='170.08' height='408.59' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzQwLjE2fDUxMC4yNHw0MDguNTl8ODE3LjE3)'>
-<rect x='340.16' y='408.59' width='170.08' height='408.59' style='stroke-width: 1.55; stroke: #FFFFFF; fill: #FFFFFF;' />
-</g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-</g>
-<defs>
-  <clipPath id='cpMzg0LjI2fDUwOS4zOXw0MTAuMDB8NjYzLjA1'>
-    <rect x='384.26' y='410.00' width='125.12' height='253.05' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzg0LjI2fDUwOS4zOXw0MTAuMDB8NjYzLjA1)'>
-<rect x='384.26' y='410.00' width='125.12' height='253.05' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<rect x='384.26' y='571.24' width='14.44' height='91.81' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='398.70' y='601.58' width='14.44' height='61.47' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='416.35' y='599.77' width='14.44' height='63.28' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='430.78' y='611.31' width='14.44' height='51.74' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='448.43' y='526.38' width='14.44' height='136.67' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='462.87' y='416.23' width='14.44' height='246.83' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='480.51' y='428.98' width='14.44' height='234.07' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='494.95' y='474.27' width='14.44' height='188.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<rect x='384.26' y='410.00' width='125.12' height='253.05' style='stroke-width: 1.49;' />
-</g>
-<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw4NTAuMzk=)'>
-<text x='377.09' y='668.79' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='377.09' y='596.49' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='377.09' y='524.19' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='377.09' y='451.89' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>3</text>
-<polyline points='380.28,663.05 384.26,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='380.28,590.75 384.26,590.75 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='380.28,518.45 384.26,518.45 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='380.28,446.15 384.26,446.15 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='398.70,667.04 398.70,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='430.78,667.04 430.78,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='462.87,667.04 462.87,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='494.95,667.04 494.95,663.05 ' style='stroke-width: 1.55; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(409.48,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='129.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806 ΔmcyB</text>
-<text transform='translate(441.57,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 7806</text>
-<text transform='translate(473.65,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='73.82px' lengthAdjust='spacingAndGlyphs'>PCC 9701</text>
-<text transform='translate(505.73,674.15) rotate(-70)' text-anchor='end' style='font-size: 16.00px; font-family: "Arial";' textLength='69.36px' lengthAdjust='spacingAndGlyphs'>NIES-843</text>
-<text x='446.82' y='812.80' text-anchor='middle' style='font-size: 16.00px; font-family: "Arial";' textLength='51.58px' lengthAdjust='spacingAndGlyphs'>Culture</text>
-<text transform='translate(356.75,602.29) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='12.45px' lengthAdjust='spacingAndGlyphs'>Q</text>
-<text transform='translate(356.75,589.84) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>u</text>
-<text transform='translate(356.75,580.94) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>o</text>
-<text transform='translate(356.75,572.04) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='4.44px' lengthAdjust='spacingAndGlyphs'>t</text>
-<text transform='translate(356.75,567.60) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(356.75,558.70) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(356.75,554.69) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>(</text>
-<text transform='translate(356.75,548.03) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='4.44px' lengthAdjust='spacingAndGlyphs'>f</text>
-<text transform='translate(356.75,543.59) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='13.33px' lengthAdjust='spacingAndGlyphs'>m</text>
-<text transform='translate(356.75,530.26) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>o</text>
-<text transform='translate(356.75,521.36) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='3.56px' lengthAdjust='spacingAndGlyphs'>l</text>
-<text transform='translate(356.75,517.81) rotate(-90)' style='font-size: 16.00px; font-family: "Symbol";' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text>
-<text transform='translate(356.75,513.80) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>c</text>
-<text transform='translate(356.75,505.81) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='8.90px' lengthAdjust='spacingAndGlyphs'>e</text>
-<text transform='translate(356.75,496.91) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='3.56px' lengthAdjust='spacingAndGlyphs'>l</text>
-<text transform='translate(356.75,493.35) rotate(-90)' style='font-size: 16.00px; font-family: "Arial";' textLength='3.56px' lengthAdjust='spacingAndGlyphs'>l</text>
-<text transform='translate(348.80,489.79) rotate(-90)' style='font-size: 11.20px; font-family: "Symbol";' textLength='6.14px' lengthAdjust='spacingAndGlyphs'>−</text>
-<text transform='translate(348.80,483.65) rotate(-90)' style='font-size: 11.20px; font-family: "Arial";' textLength='6.22px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text transform='translate(356.75,477.43) rotate(-90)' style='font-size: 20.00px; font-family: "Symbol";' textLength='6.66px' lengthAdjust='spacingAndGlyphs'>)</text>
-<text x='344.43' y='423.70' style='font-size: 14.00px; font-weight: bold; font-family: "Arial";' textLength='8.55px' lengthAdjust='spacingAndGlyphs'>F</text>
-<rect x='159.68' y='817.17' width='190.88' height='33.22' style='stroke-width: 1.55; stroke: none; fill: #FFFFFF;' />
-<text x='167.65' y='839.52' style='font-size: 16.00px; font-family: "Arial";' textLength='37.35px' lengthAdjust='spacingAndGlyphs'>State</text>
-<rect x='213.69' y='825.85' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C1FFC1;' />
-<rect x='285.53' y='825.85' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #228B22;' />
-<text x='238.23' y='838.37' style='font-size: 12.80px; font-family: "Arial";' textLength='38.40px' lengthAdjust='spacingAndGlyphs'>Axenic</text>
-<text x='310.07' y='838.37' style='font-size: 12.80px; font-family: "Arial";' textLength='32.00px' lengthAdjust='spacingAndGlyphs'>Xenic</text>
-</g>
+<text transform="matrix(1 0 0 1 33.2831 211.278)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 63.569 211.2779)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 95.0418 211.4097)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 127.5827 211.5414)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 214.0869 211.2779)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 183.3164 211.2779)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 245.3103 211.2779)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 277.0325 211.2779)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 31.151 610.04)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 62.5689 610.0401)" class="st7 st36">b</text>
+<text transform="matrix(1 0 0 1 95.0421 610.0401)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 125.3342 610.0401)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 184.4001 537.4779)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 245.3102 537.6096)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 277.0324 537.7413)" class="st7 st36">a</text>
+<text transform="matrix(1 0 0 1 214.0868 537.7413)" class="st7 st36">b</text>
+<text transform="matrix(1 0 0 1 46.2354 274.6227)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 77.4151 274.6229)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 108.6683 274.6227)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 139.0157 274.6228)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 227.77 189.8806)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 196.0183 189.8807)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 196.0183 204.2807)" class="st4 st7 st36">C</text>
+<text transform="matrix(1 0 0 1 290.2652 189.8808)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 290.2652 204.2808)" class="st4 st7 st36">C</text>
+<text transform="matrix(1 0 0 1 258.6186 189.8807)" class="st4 st7 st36">B</text>
+<text transform="matrix(1 0 0 1 258.6186 204.2807)" class="st4 st7 st36">C</text>
+<text transform="matrix(1 0 0 1 44.9306 613.3374)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 76.4153 613.3368)" class="st4 st7 st36">B</text>
+<text transform="matrix(1 0 0 1 107.6683 613.3372)" class="st4 st7 st36">C</text>
+<text transform="matrix(1 0 0 1 138.5109 613.3365)" class="st4 st7 st36">D</text>
+<text transform="matrix(1 0 0 1 196.7981 523.0481)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 228.4256 523.0477)" class="st4 st7 st36">A</text>
+<text transform="matrix(1 0 0 1 259.5792 523.0473)" class="st4 st7 st36">B</text>
+<text transform="matrix(1 0 0 1 290.2652 523.0476)" class="st4 st7 st36">B</text>
 </svg>
