@@ -175,14 +175,13 @@ r <- ggtree(tree, layout = "rectangular", ladderize = T) %<+% rel_abund_combined
               align= F,
               color = "black",
               linesize=0.3
-              ) 
-
+              )
 
 abund_matrix <- rel_abund_combined |>
   dplyr::select(-c(taxonomy:Species)) |>
   column_to_rownames("ASV") 
 
-final_tree <- gheatmap(r, abund_matrix, offset =0.3, width = 2, color = "gray70",
+final_tree <- gheatmap(r, abund_matrix, offset =0.3, width = 2.5, color = "gray70",
          colnames = F, legend_title = "Relative Abundance \n(within column)",low = "white", high = "chartreuse3",family = 'arial', font.size = 8) +
   xlab("Branch Length") +
   theme_pubr(base_family = 'arial', margin = F, border = F, base_size = 8) +
@@ -200,14 +199,14 @@ fig_1 <- ggarrange(ncol = 2, labels = c("[A]","[B]"),final_tree, nmds_bray, widt
                    font.label = list(size = 9.5, color = "black"))
 
 fig_1B <- nmds_bray + plot_annotation(tag_prefix = '[', tag_suffix = ']',tag_levels = "A") &
-  theme(plot.tag = element_text(face = 'bold', size = 9.5, family = 'arial'))
-showtext_opts(dpi = 600)
-ggsave('./figures/figure_pieces/figure1.png',combo_plot,width = 180, height = 152, units = "mm", dpi = 600)
+  theme(plot.tag = element_text(size = 9.5, family = 'arial'))
+#showtext_opts(dpi = 600)
+ggsave('./figures/figure_pieces/figure1.png',combo_plot,width = 160, height = 152, units = "mm", dpi = 600)
 ggsave('./figures/figure_pieces/figure1.svg',device = svglite::svglite, combo_plot,width = 180, height = 152, units = "mm", dpi = 600)
-ggsave('./figures/figure_pieces/figure1A.png',fig_1A,width = 180, height = 100, units = "mm", dpi = 600)
-ggsave('./figures/figure_pieces/figure1A.svg',device = svglite::svglite,final_tree,width = 180, height = 100, units = "mm", dpi = 600)
-ggsave('./figures/figure_pieces/figure1B.png',fig_1B,width = 180, height = 80, units = "mm", dpi = 600)
-ggsave('./figures/figure_pieces/figure1B.svg',device = svglite::svglite,fig_1B,width = 180, height = 100, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1A.png',fig_1A,width = 160, height = 100, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1A.svg',device = svglite::svglite,final_tree,width = 160, height = 100, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1B.png',fig_1B,width = 160, height = 80, units = "mm", dpi = 600)
+ggsave('./figures/figure_pieces/figure1B.svg',device = svglite::svglite,fig_1B,width = 160, height = 100, units = "mm", dpi = 600)
 
 ```
 

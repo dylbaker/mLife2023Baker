@@ -200,9 +200,9 @@ kable(CNP_Quotas,escape = F, digits = 4, align = c("l") ,col.names = c("Culture"
                                                                                                             "N<sup>*</sup>, d = 0.2 day<sup>-1</sup>",
                                                                                                             "<i>Q</i><sub>C</sub> (SD) fmol • cell<sup>-1</sup>",
                                                                                                             "N:P","C:N","C:P" ))  %>%
-  kable_styling(html_font = 'arial',"striped", full_width = T) %>%
+  kable_styling("striped", full_width = T) %>%
   column_spec(c(4,9),width_min = "1in") %>%
-  add_header_above(c("", "Phosphorus" = 5, "Nitrogen" = 5, "Carbon" = 1, "Elemental Ratios" = 3)) %>% save_kable(density = 600, file = "./tables/table1_final.doc", zoom = 1.5) 
+  add_header_above(c("", "Phosphorus" = 5, "Nitrogen" = 5, "Carbon" = 1, "Elemental Ratios" = 3)) %>% save_kable(file = "./tables/table1_final.doc", zoom = 1.5) 
 
   
 

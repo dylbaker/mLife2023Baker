@@ -113,7 +113,7 @@ blank_facets <- subset(facet_data, Culture == "Media_CTRL") |>
 sample_facets <- subset(facet_data, Culture != "Media_CTRL") |>
   dplyr::mutate(facet1 = P_level, 
          facet2 = State,
-         Culture = factor(Culture, levels = c("NIES_843","PCC_9701","WT_7806","MUT_7806", "Media_CTRL")))
+         Culture = factor(Culture, levels = c("MUT_7806","WT_7806","PCC_9701", "NIES_843", "Media_CTRL")))
 
 all_blank_facets <- merge(blank_facets, data.frame(unique(sample_facets[c("facet1","facet2")])))
 
